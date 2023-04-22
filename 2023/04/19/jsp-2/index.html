@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/codelogo.png">
+  <link rel="icon" href="/img/codelogo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Cjzk">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 JSP页面的基本结构 普通的HTML标记和JavaScript标记 JSP标记，如指令标记、动作标记 变量和方法的声明 Java 程序片 Java 表达式  2 声明变量和定义方法声明变量格式:&lt;%!变量%&gt;    声明的变量在整个JSP页面内都有效  定于方法格式:&lt;%!方法or类%&gt;    可以在Java程序片中调用该方法或使用该类创造对象  3 Java程序片格式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSP语法">
+<meta property="og:url" content="https://cjzk236.github.io/2023/04/19/jsp-2/index.html">
+<meta property="og:site_name" content="此间之客">
+<meta property="og:description" content="1 JSP页面的基本结构 普通的HTML标记和JavaScript标记 JSP标记，如指令标记、动作标记 变量和方法的声明 Java 程序片 Java 表达式  2 声明变量和定义方法声明变量格式:&lt;%!变量%&gt;    声明的变量在整个JSP页面内都有效  定于方法格式:&lt;%!方法or类%&gt;    可以在Java程序片中调用该方法或使用该类创造对象  3 Java程序片格式">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-19T15:00:11.000Z">
+<meta property="article:modified_time" content="2023-04-20T05:10:32.297Z">
+<meta property="article:author" content="Cjzk">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>JSP语法 - 此间之客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"cjzk236.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>此间之客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/gladenlight.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JSP语法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-04-19 23:00" pubdate>
+          2023年4月19日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JSP语法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="1-JSP页面的基本结构"><a href="#1-JSP页面的基本结构" class="headerlink" title="1 JSP页面的基本结构"></a>1 JSP页面的基本结构</h1><ul>
+<li>普通的HTML标记和JavaScript标记</li>
+<li>JSP标记，如指令标记、动作标记</li>
+<li>变量和方法的声明</li>
+<li>Java 程序片</li>
+<li>Java 表达式</li>
+</ul>
+<h1 id="2-声明变量和定义方法"><a href="#2-声明变量和定义方法" class="headerlink" title="2 声明变量和定义方法"></a>2 声明变量和定义方法</h1><h2 id="声明变量"><a href="#声明变量" class="headerlink" title="声明变量"></a>声明变量</h2><p>格式:<code>&lt;%!变量%&gt;</code>  </p>
+<ul>
+<li>声明的变量在整个JSP页面内都有效</li>
+</ul>
+<h2 id="定于方法"><a href="#定于方法" class="headerlink" title="定于方法"></a>定于方法</h2><p>格式:<code>&lt;%!方法or类%&gt;</code>  </p>
+<ul>
+<li>可以在Java程序片中调用该方法或使用该类创造对象</li>
+</ul>
+<h1 id="3-Java程序片"><a href="#3-Java程序片" class="headerlink" title="3 Java程序片"></a>3 Java程序片</h1><p>格式:<code>&lt;%所插入的java程序片%&gt;</code></p>
+<ul>
+<li>在程序片中声明的变量称作JSP页面的局部变量。局部变量的有效范围与其声明的位置有关，即局部变量在JSP页面后继的所有程序片以及表达式部分内都有效。</li>
+</ul>
+<h1 id="4-Java表达式"><a href="#4-Java表达式" class="headerlink" title="4 Java表达式"></a>4 Java表达式</h1><p>格式:<code>&lt;%=可求值得表达式%&gt;</code></p>
+<ul>
+<li>注意:<code>&lt;%</code>和<code>=</code>之间不能有空格</li>
+</ul>
+<h1 id="5-JSP中的注释"><a href="#5-JSP中的注释" class="headerlink" title="5 JSP中的注释"></a>5 JSP中的注释</h1><h2 id="HTML注释"><a href="#HTML注释" class="headerlink" title="HTML注释"></a>HTML注释</h2><p>格式:<code>&lt;!-----注释内容------&gt;</code></p>
+<ul>
+<li>JSP会把HTML注释交给用户,因此用户可在查看页面源码时看到HTML注释</li>
+</ul>
+<h2 id="JSP注释"><a href="#JSP注释" class="headerlink" title="JSP注释"></a>JSP注释</h2><p>格式:<code>&lt;% ----注释内容----%&gt;</code></p>
+<ul>
+<li>在编译JSP页面时会忽略JSP注释</li>
+</ul>
+<h1 id="6-JSP指令标记"><a href="#6-JSP指令标记" class="headerlink" title="6 JSP指令标记"></a>6 JSP指令标记</h1><h2 id="page指令标记"><a href="#page指令标记" class="headerlink" title="page指令标记"></a>page指令标记</h2><p>page 指令用来定义整个JSP页面的一些属性和这些属性的值。<br>可以使用多个page指令分别为每个属性指定值:  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;%@ page   属性<span class="hljs-number">1</span>=<span class="hljs-string">&quot;属性1的值&quot;</span>  %&gt;<br>&lt;%@ page   属性<span class="hljs-number">2</span>=<span class="hljs-string">&quot;属性2的值&quot;</span>  %&gt;<br>… …<br>&lt;%@ page   属性n=<span class="hljs-string">&quot;属性n的值&quot;</span>  %&gt;<br></code></pre></td></tr></table></figure>
+<p>也可以用一个page指令指定多个属性的值:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;%@ page 属性<span class="hljs-number">1</span>=<span class="hljs-string">&quot;属性1的值&quot;</span> 属性<span class="hljs-number">2</span>=<span class="hljs-string">&quot;属性2的值&quot;</span> ...%&gt;<br></code></pre></td></tr></table></figure>
+<h3 id="page指令标记可以指定的属性"><a href="#page指令标记可以指定的属性" class="headerlink" title="page指令标记可以指定的属性"></a>page指令标记可以指定的属性</h3><h4 id="contentType属性"><a href="#contentType属性" class="headerlink" title="contentType属性"></a>contentType属性</h4><p>contentType属性值确定JSP页面响应的MIME类型。属性值的一般形式是： “MIME类型”<br>例如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html &quot;</span> %&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>page指令只能为contentType指定一个值，不允许两次使用page指令给contentType属性指定不同的属性值。</li>
+</ul>
+<h4 id="pageEncoding-属性"><a href="#pageEncoding-属性" class="headerlink" title="pageEncoding 属性"></a>pageEncoding 属性</h4><p>用于保存JSP页面编码<br>例如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;%@ page pageEncoding = <span class="hljs-string">&quot;utf-8&quot;</span> %&gt;    <br></code></pre></td></tr></table></figure>
+<ul>
+<li>只能为pageEncoding指定一个值，不允许两次使用page指令给pageEncoding属性指定不同的或相同的属性值。</li>
+</ul>
+<h4 id="language属性"><a href="#language属性" class="headerlink" title="language属性"></a>language属性</h4><p>language属性定义JSP页面使用的脚本语言，该属性的值目前只能取”java”</p>
+<ul>
+<li>未指定,默认java</li>
+</ul>
+<h4 id="import-属性"><a href="#import-属性" class="headerlink" title="import 属性"></a>import 属性</h4><p>该属性的作用是为JSP页面引入Java运行环境提供的包中的类。<br>例如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;%@ page  <span class="hljs-keyword">import</span>=<span class="hljs-string">&quot;java.io.*&quot;</span>, <span class="hljs-string">&quot;java.time.LocalDate&quot;</span> %&gt;<br></code></pre></td></tr></table></figure>
+<h4 id="session属性"><a href="#session属性" class="headerlink" title="session属性"></a>session属性</h4><p>session 属性用于设置是否需要使用内置的session对象。session的属性值可以是true或false。session属性默认的属性值是true</p>
+<h4 id="buffer属性"><a href="#buffer属性" class="headerlink" title="buffer属性"></a>buffer属性</h4><p>内置输出流对象out负责将服务器的某些信息或运行结果发送到用户端显示。buffer属性用来指定out设置的缓冲区的大小或不使用缓冲区 </p>
+<ul>
+<li>默认时8kb<br>例如:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;%@ page buffer= <span class="hljs-string">&quot;24kb&quot;</span> %&gt;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="autoFlush属性"><a href="#autoFlush属性" class="headerlink" title="autoFlush属性"></a>autoFlush属性</h4><p>autoFlush属性指定out的缓冲区被填满时，缓冲区是否会自动刷新。</p>
+<ul>
+<li>默认是true</li>
+</ul>
+<h4 id="isThreadSafe属性"><a href="#isThreadSafe属性" class="headerlink" title="isThreadSafe属性"></a>isThreadSafe属性</h4><p>isThreadSafe属性用来设置访问JSP页面是否是线程安全的</p>
+<ul>
+<li>默认是true 指CPU的使用权在各个线程间快速切换</li>
+<li>可设置为false 指该JSP页面同一时刻只能响应一个用户的请求，其他用户须排队等待</li>
+</ul>
+<h4 id="info-属性"><a href="#info-属性" class="headerlink" title="info 属性"></a>info 属性</h4><p>info属性的属性值是一个字符串，其目的时为JSP页面准备一个常用但可能要经常修改的字符串。</p>
+<h2 id="include指令标记"><a href="#include指令标记" class="headerlink" title="include指令标记"></a>include指令标记</h2><p>include可以在JSP页面内某处静态整体嵌入一个文件,该文件的编码必须和当前JSP页面一致</p>
+<h1 id="7-JSP动作标记"><a href="#7-JSP动作标记" class="headerlink" title="7 JSP动作标记"></a>7 JSP动作标记</h1><p>动作标记时一种特殊的标记，它影响JSP运行时的功能。</p>
+<h2 id="include动作标记"><a href="#include动作标记" class="headerlink" title="include动作标记"></a>include动作标记</h2><p>格式:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;<span class="hljs-attr">jsp</span>:include page= <span class="hljs-string">&quot;文件的URL&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;<span class="hljs-attr">jsp</span>:include page= <span class="hljs-string">&quot;文件的URL&quot;</span> &gt;<br>   param子标记<br>&lt;/<span class="hljs-attr">jsp</span>:include&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="param动作标记"><a href="#param动作标记" class="headerlink" title="param动作标记"></a>param动作标记</h2><p>param标记以<code>名字—值</code>对的形式为其他标记提供附加信息。<br>格式:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;<span class="hljs-attr">jsp</span>:param  name= <span class="hljs-string">&quot;参数&quot;</span>  value= <span class="hljs-string">&quot; 参数的值&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+<h2 id="forward-动作标记"><a href="#forward-动作标记" class="headerlink" title="forward 动作标记"></a>forward 动作标记</h2><p>作用是从该指令处停止当前页面的执行，而转向执行page属性指定的JSP页面。<br>格式:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;<span class="hljs-attr">jsp</span>:forward page=<span class="hljs-string">&quot;要转向的页面&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;<span class="hljs-attr">jsp</span>:forward page=<span class="hljs-string">&quot;要转向的页面&quot;</span> &gt;<br>   param子标记<br>&lt;/<span class="hljs-attr">jsp</span>:forward&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>浏览器地址栏中显示的仍然是转向前的JSP页面的URL地址</li>
+</ul>
+<h2 id="useBean动作标记"><a href="#useBean动作标记" class="headerlink" title="useBean动作标记"></a>useBean动作标记</h2><p>useBean标记时用来创建并使用一个JavaBean，见后续章节</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/JSP/" class="category-chain-item">JSP</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/JSP/%E7%AC%AC%E4%BA%8C%E7%AB%A0/" class="category-chain-item">第二章</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>JSP语法</div>
+      <div>https://cjzk236.github.io/2023/04/19/jsp-2/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Cjzk</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年4月19日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/22/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-1-%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%EF%BC%88%E4%BA%8C%EF%BC%89/" title="算法基础-1-基础算法（二）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">算法基础-1-基础算法（二）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/17/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-1-%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89/" title="算法基础-1-基础算法（一）">
+                        <span class="hidden-mobile">算法基础-1-基础算法（一）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
