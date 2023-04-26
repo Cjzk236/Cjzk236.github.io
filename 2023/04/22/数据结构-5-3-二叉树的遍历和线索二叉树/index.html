@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cjzk236.github.io/2023/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-5-3-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%92%8C%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/2023-04-26-21-29-14.png">
 <meta property="article:published_time" content="2023-04-22T15:25:33.000Z">
-<meta property="article:modified_time" content="2023-04-26T13:45:47.216Z">
+<meta property="article:modified_time" content="2023-04-26T13:49:26.917Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cjzk236.github.io/2023/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-5-3-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%92%8C%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/2023-04-26-21-29-14.png">
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          2.5k 字
         
       </span>
     
@@ -300,10 +300,20 @@
 <p>代码实现：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">DispalyTree_back_unrec</span><span class="hljs-params">(Bitree T)</span>&#123;<br>    LinkStack s;<br>    InitLStack(&amp;s);<br>    BitreeNode *p=T;<br>    BitreeNode *r=<span class="hljs-literal">NULL</span>;                 <span class="hljs-comment">//用于指向上一个输出的节点</span><br>    <span class="hljs-keyword">while</span>(p|| EmptyStack(s))&#123;<br>        <span class="hljs-keyword">if</span>(p)&#123;                          <span class="hljs-comment">//沿着左节点依次向下，全部入栈，直到为空</span><br>            PushStack(&amp;s,p);<br>            p=p-&gt;lchild;<br>        &#125; <span class="hljs-keyword">else</span>&#123;<br>            p=GetTop(s);                        <span class="hljs-comment">//读取栈顶元素</span><br>            <span class="hljs-keyword">if</span>(p-&gt;rchild&amp;&amp;p-&gt;rchild!=r)         <span class="hljs-comment">//若栈顶元素右结点存在，且未被输出</span><br>                p=p-&gt;rchild;                    <span class="hljs-comment">//转向结点</span><br>            <span class="hljs-keyword">else</span>&#123;                               <span class="hljs-comment">//否则,出栈并输出</span><br>                p=PopStack(&amp;s);<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\t&quot;</span>,p-&gt;data);<br>                r=p;                            <span class="hljs-comment">//用于记录最后一个被输出的结点</span><br>                p=<span class="hljs-literal">NULL</span>;                         <span class="hljs-comment">//p置空,进入下一次循环</span><br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h1 id="二叉树的线索化"><a href="#二叉树的线索化" class="headerlink" title="二叉树的线索化"></a>二叉树的线索化</h1><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><h2 id="线索二叉树是一种物理结构-二叉树是一种逻辑结构，而线索二叉树明确指明了在存储过程中的数据存放方式，就是物理结构了。（物理结构-x3D-存储结构）-若即指明了存储结构，又指明了逻辑结构的情况就是单独的“物理结构”，所以说线索二叉树是一种逻辑和存储结构是错误的，没有这种说法"><a href="#线索二叉树是一种物理结构-二叉树是一种逻辑结构，而线索二叉树明确指明了在存储过程中的数据存放方式，就是物理结构了。（物理结构-x3D-存储结构）-若即指明了存储结构，又指明了逻辑结构的情况就是单独的“物理结构”，所以说线索二叉树是一种逻辑和存储结构是错误的，没有这种说法" class="headerlink" title="线索二叉树是一种物理结构  - 二叉树是一种逻辑结构，而线索二叉树明确指明了在存储过程中的数据存放方式，就是物理结构了。（物理结构&#x3D;存储结构）  - 若即指明了存储结构，又指明了逻辑结构的情况就是单独的“物理结构”，所以说线索二叉树是一种逻辑和存储结构是错误的，没有这种说法"></a><strong>线索二叉树是一种物理结构</strong><br>  - 二叉树是一种逻辑结构，而线索二叉树明确指明了在存储过程中的数据存放方式，就是物理结构了。（物理结构&#x3D;存储结构）<br>  - 若即指明了存储结构，又指明了逻辑结构的情况就是单独的“物理结构”，所以说线索二叉树是一种逻辑和存储结构是错误的，没有这种说法</h2><p>在二叉树的前序序列、中序序列和后序序列中，所有<strong>叶子结点</strong>的前后顺序完全相同</p>
-<hr>
-<p>在中序线索树中，若某结点有左孩子，则其前驱结点是它左子树的最右下结点；若某结点有右孩子，则其后继结点时它右子树的最左下结点。</p>
-<hr>
+<h1 id="二叉树的线索化"><a href="#二叉树的线索化" class="headerlink" title="二叉树的线索化"></a>二叉树的线索化</h1><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><ul>
+<li><p>在二叉树的前序序列、中序序列和后序序列中，所有<strong>叶子结点</strong>的前后顺序完全相同</p>
+</li>
+<li><p><strong>线索二叉树是一种物理结构</strong></p>
+<ul>
+<li>二叉树是一种逻辑结构，而线索二叉树明确指明了在存储过程中的数据存放方式，就是物理结构了。（物理结构&#x3D;存储结构）</li>
+<li>若即指明了存储结构，又指明了逻辑结构的情况就是单独的“物理结构”，所以说线索二叉树是一种逻辑和存储结构是错误的，没有这种说法</li>
+</ul>
+</li>
+<li><p>在中序线索树中，若某结点有左孩子，则其前驱结点是它左子树的最右下结点；若某结点有右孩子，则其后继结点时它右子树的最左下结点。</p>
+</li>
+<li><p>线索二叉树找前驱后继问题</p>
+</li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -327,13 +337,14 @@
 </tr>
 </tbody></table>
 <p>除非用三叉链表，或者用土方法从根开始遍历</p>
-<hr>
-<p>后序线索树的遍历仍需要栈的支持  </p>
+<ul>
+<li>后序线索树的遍历仍需要栈的支持</li>
+</ul>
 <p>二叉树线索化后，对于遍历我们仅需要关注非叶节点，在前序和中序的非叶节点中我们都能通过其孩子的指针找到其遍历后续，而后续的非叶节点不一定能确保能找到遍历后续</p>
 <p><img src="/2023/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-5-3-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%92%8C%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/2023-04-26-21-29-14.png" srcset="/img/loading.gif" lazyload></p>
-<hr>
-<p>前序遍历序列和后序遍历序列不能确定一棵树，但是能确定结点的父子关系<br>如：<br>    前序：根左右：根左，根右，左右<br>    后续：左右根：左根，右根，左右<br>可以得出：<br><strong>两个结点，在前序和后续中的前后关系不同，证明二者是父子关系，如果相同，二者是兄弟关系</strong><br>例题见2011计算机408统考第5题</p>
-<hr>
+<ul>
+<li>前序遍历序列和后序遍历序列不能确定一棵树，但是能确定结点的父子关系<br>如：<br>  前序：根左右：根左，根右，左右<br>  后续：左右根：左根，右根，左右<br>可以得出：<br><strong>两个结点，在前序和后续中的前后关系不同，证明二者是父子关系，如果相同，二者是兄弟关系</strong><br>例题见2011计算机408统考第5题</li>
+</ul>
 
                 
               </div>
