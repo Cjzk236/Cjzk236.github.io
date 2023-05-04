@@ -16,15 +16,15 @@
   <meta name="author" content="Cjzk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="树与森林的遍历和二叉树遍历的对应关系    树 森林 二叉树    先根遍历 先序遍历 先序遍历   后根遍历 中序遍历 中序遍历   举例判断即可">
+    <meta name="description" content="目录  tag文件 tag文件的结构 tag文件的保存 tag文件所在的目录 tag文件的编码     tag标记 tag标记与tag文件 tag标记的使用 tag标记的运行原理   tag文件的常用指令 tag指令 include指令 attribute指令 variable指令 taglib指令    tag文件tag文件的结构Tag文件是扩展名为.tag的文本文件，其结构与jsp文件类似包含">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构-5-4-树、森林">
-<meta property="og:url" content="https://cjzk236.github.io/2023/04/23/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-5-4-%E6%A0%91%E3%80%81%E6%A3%AE%E6%9E%97/index.html">
+<meta property="og:title" content="jsp-3">
+<meta property="og:url" content="https://cjzk236.github.io/2023/05/04/jsp-3/index.html">
 <meta property="og:site_name" content="此间之客">
-<meta property="og:description" content="树与森林的遍历和二叉树遍历的对应关系    树 森林 二叉树    先根遍历 先序遍历 先序遍历   后根遍历 中序遍历 中序遍历   举例判断即可">
+<meta property="og:description" content="目录  tag文件 tag文件的结构 tag文件的保存 tag文件所在的目录 tag文件的编码     tag标记 tag标记与tag文件 tag标记的使用 tag标记的运行原理   tag文件的常用指令 tag指令 include指令 attribute指令 variable指令 taglib指令    tag文件tag文件的结构Tag文件是扩展名为.tag的文本文件，其结构与jsp文件类似包含">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-23T02:27:41.000Z">
-<meta property="article:modified_time" content="2023-05-03T14:05:02.590Z">
+<meta property="article:published_time" content="2023-05-04T02:44:34.000Z">
+<meta property="article:modified_time" content="2023-05-04T04:08:28.173Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -32,7 +32,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>数据结构-5-4-树、森林 - 此间之客</title>
+  <title>jsp-3 - 此间之客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="数据结构-5-4-树、森林"></span>
+            <span id="subtitle" data-typed-text="jsp-3"></span>
           
         </div>
 
@@ -221,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-23 10:27" pubdate>
-          2023年4月23日 上午
+        <time datetime="2023-05-04 10:44" pubdate>
+          2023年5月4日 上午
         </time>
       </span>
     
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          54 字
+          2.8k 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          1 分钟
+          24 分钟
         
       </span>
     
@@ -282,32 +282,109 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">数据结构-5-4-树、森林</h1>
+            <h1 style="display: none">jsp-3</h1>
             
             
               <div class="markdown-body">
                 
-                <p>树与森林的遍历和二叉树遍历的对应关系</p>
-<table>
-<thead>
-<tr>
-<th align="center">树</th>
-<th align="center">森林</th>
-<th align="center">二叉树</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">先根遍历</td>
-<td align="center">先序遍历</td>
-<td align="center">先序遍历</td>
-</tr>
-<tr>
-<td align="center">后根遍历</td>
-<td align="center">中序遍历</td>
-<td align="center">中序遍历</td>
-</tr>
-</tbody></table>
-<p>举例判断即可</p>
+                <p><font size=6><strong>目录</strong></font></p>
+<ul>
+<li><a href="#tag%E6%96%87%E4%BB%B6">tag文件</a><ul>
+<li><a href="#tag%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%93%E6%9E%84">tag文件的结构</a></li>
+<li><a href="#tag%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%9D%E5%AD%98">tag文件的保存</a><ul>
+<li><a href="#tag%E6%96%87%E4%BB%B6%E6%89%80%E5%9C%A8%E7%9A%84%E7%9B%AE%E5%BD%95">tag文件所在的目录</a></li>
+<li><a href="#tag%E6%96%87%E4%BB%B6%E7%9A%84%E7%BC%96%E7%A0%81">tag文件的编码</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#tag%E6%A0%87%E8%AE%B0">tag标记</a><ul>
+<li><a href="#tag%E6%A0%87%E8%AE%B0%E4%B8%8Etag%E6%96%87%E4%BB%B6">tag标记与tag文件</a></li>
+<li><a href="#tag%E6%A0%87%E8%AE%B0%E7%9A%84%E4%BD%BF%E7%94%A8">tag标记的使用</a></li>
+<li><a href="#tag%E6%A0%87%E8%AE%B0%E7%9A%84%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86">tag标记的运行原理</a></li>
+</ul>
+</li>
+<li><a href="#tag%E6%96%87%E4%BB%B6%E7%9A%84%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4">tag文件的常用指令</a><ul>
+<li><a href="#tag%E6%8C%87%E4%BB%A4">tag指令</a></li>
+<li><a href="#include%E6%8C%87%E4%BB%A4">include指令</a></li>
+<li><a href="#attribute%E6%8C%87%E4%BB%A4">attribute指令</a></li>
+<li><a href="#variable%E6%8C%87%E4%BB%A4">variable指令</a></li>
+<li><a href="#taglib%E6%8C%87%E4%BB%A4">taglib指令</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="tag文件"><a href="#tag文件" class="headerlink" title="tag文件"></a>tag文件</h1><h2 id="tag文件的结构"><a href="#tag文件的结构" class="headerlink" title="tag文件的结构"></a>tag文件的结构</h2><p>Tag文件是扩展名为.tag的文本文件，其结构与jsp文件类似<br>包含:  </p>
+<ul>
+<li>HTML标记符</li>
+<li>特殊的指令标记</li>
+<li>成员变量和方法的定义</li>
+<li>Java程序片和Java表达式</li>
+</ul>
+<h2 id="tag文件的保存"><a href="#tag文件的保存" class="headerlink" title="tag文件的保存"></a>tag文件的保存</h2><h3 id="tag文件所在的目录"><a href="#tag文件所在的目录" class="headerlink" title="tag文件所在的目录"></a>tag文件所在的目录</h3><p>建立目录结构</p>
+<p><code>Web服务目录\WEB-INF\tags</code></p>
+<ul>
+<li>其中的WEB-INF（字母大写）和tags都是固定的目录名称，而tags下的子目录的名称可由用户给定。</li>
+<li>一个Tag文件必须保存到tags目录或其下的子目录中。</li>
+</ul>
+<h3 id="tag文件的编码"><a href="#tag文件的编码" class="headerlink" title="tag文件的编码"></a>tag文件的编码</h3><p>Tag文件指定的编码是utf-8<br>通过在 JSP 标签文件的开始标记 <code>&lt;%@ tag %&gt;</code> 中添加 <code>charset</code> 属性。<br><code>&lt;%@ tag pageEncoding=&quot;utf-8&quot;%&gt;</code>  </p>
+<h1 id="tag标记"><a href="#tag标记" class="headerlink" title="tag标记"></a>tag标记</h1><h2 id="tag标记与tag文件"><a href="#tag标记与tag文件" class="headerlink" title="tag标记与tag文件"></a>tag标记与tag文件</h2><p>Tag标记的名字和Tag文件的名字一致，也就是说，当我们编写了一个Tag文件并保存到特定目录中后,也就给出了一个Tag标记，tag格式为:<br><code>&lt;Tag文件的名字/&gt;</code><br>或者<br><code>&lt;Tag文件的名字&gt;其他内容（称为标体内容）&lt;/Tag文件的名字&gt;</code></p>
+<ul>
+<li>一个Tag文件对应一个Tag标记，把全体Tag标记称为一个自定义标记库或简称为标记库</li>
+</ul>
+<h2 id="tag标记的使用"><a href="#tag标记的使用" class="headerlink" title="tag标记的使用"></a>tag标记的使用</h2><p>一个jsp页面通过使用tag标记来调用一个Tag文件。Web服务目录下的一个jsp页面使用tag标记调用文件之前，必须首先使用taglib指令标记引入该web服务目录下的标记库，只有这样jsp才能调用相应的tag文件</p>
+<p>taglib指令的格式如下:</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%<span class="hljs-meta">@taglib</span> tagdir=<span class="hljs-string">&#x27;标记库的位置&#x27;</span> prefix=<span class="hljs-string">&#x27;前缀&#x27;</span>&gt;<br></code></pre></td></tr></table></figure>
+<p>例如:</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%<span class="hljs-meta">@taglib</span> tagdir=<span class="hljs-string">&#x27;/WEB-INF/tags&#x27;</span> prefix=<span class="hljs-string">&#x27;computer&#x27;</span>%&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>引入标记库后，JSP页面就可以使用带前缀的Tag标记调用相应的Tag文件，其中的前缀由<code>&lt;taglib&gt;</code>指令中的<code>prefix</code>属性指定。</li>
+</ul>
+<h2 id="tag标记的运行原理"><a href="#tag标记的运行原理" class="headerlink" title="tag标记的运行原理"></a>tag标记的运行原理</h2><ol>
+<li>如果该Tag标记对应的Tag文件是首次被JSP页面调用，那么Tomcat服务器会将Tag文件转译成一个java文件，并编译这个java文件生成字节码文件，然后执行这个字节码文件（这和执行JSP页面的原理类似）。</li>
+<li>如果该Tag文件已经被转编译为字节码文件，Tomcat服务器将直接执行这个字节码文件。</li>
+<li>如果对Tag文件进行了修改，那么Tomcat服务器会重新将Tag文件转译成一个java文件，并编译这个java文件生成字节码文件，然后执行这个字节码文件。</li>
+</ol>
+<h1 id="tag文件的常用指令"><a href="#tag文件的常用指令" class="headerlink" title="tag文件的常用指令"></a>tag文件的常用指令</h1><h2 id="tag指令"><a href="#tag指令" class="headerlink" title="tag指令"></a>tag指令</h2><p>类似于JSP文件中的page指令。Tag文件通过使用tag指令可以指定某些属性的值<br>Tag指令的语法如下:</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ tag 属性<span class="hljs-number">1</span>=<span class="hljs-string">&#x27;属性值&#x27;</span> 属性<span class="hljs-number">2</span>=<span class="hljs-string">&#x27;属性值&#x27;</span>---属性n=<span class="hljs-string">&#x27;属性值&#x27;</span>% &gt;<br></code></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ tag 属性<span class="hljs-number">1</span>=<span class="hljs-string">&#x27;属性值&#x27;</span> % &gt;<br>&lt;%@ tag 属性<span class="hljs-number">2</span>=<span class="hljs-string">&#x27;属性值&#x27;</span> % &gt;<br>&lt;%@ tag 属性<span class="hljs-number">3</span>=<span class="hljs-string">&#x27;属性值&#x27;</span> % &gt;<br>······<br>&lt;%@ tag 属性n=<span class="hljs-string">&#x27;属性值&#x27;</span> % &gt;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>language属性<br>只能取值<code>java</code>，其默认值就是<code>java</code>，没有必要使用tag指令指定language属性的值。</p>
+</li>
+<li><p>import属性<br>import属性的作用是为Tag文件引入包中的类import属性默认已经有如下值：<code>java.lang.*</code>、 <code>javax.servlet.*</code>、<code>javax.servlet.jsp.*</code>、<code>javax.servlet.http.*</code>。</p>
+</li>
+</ul>
+<p>c.pageEncording<br>该属性指定Tag文件的字符编码，其默认值是<code>ISO-8859-1</code>。目前，为了避免显示信息出现乱码现象，Tag文件需要将该属性值设置为<code>utf-8</code>。</p>
+<h2 id="include指令"><a href="#include指令" class="headerlink" title="include指令"></a>include指令</h2><p>Tag文件中也有和JSP文件类似的include指令标记，其使用方法和作用与JSP文件中的include指令标记类似。</p>
+<h2 id="attribute指令"><a href="#attribute指令" class="headerlink" title="attribute指令"></a>attribute指令</h2><ul>
+<li>在tag文件中通过attribute指令让使用它的jsp页面向该页面tag文件传递需要的数据。<br>方式如下：  <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ attribute name=<span class="hljs-string">&quot;对象名字&quot;</span> required=<span class="hljs-string">&quot;ture&quot;</span>|<span class="hljs-string">&quot;false&quot;</span> type =<span class="hljs-string">&quot;对象的类型&quot;</span>%&gt;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p>例如:<code>&lt;%@ attribute name=&quot;reuslt&quot; required=&quot;ture&quot; type=&quot;java.lang.Double&quot;%&gt;</code><br>相当于tag文件中有了一个名字是result的对象，但Tag文件不需要创建该对象result，<br>而是等待JSP页面将一个Double型的对象的引用传递给result。</p>
+<ul>
+<li>JSP页面使用Tag文件所调用的Tag文件中name指定的对象传递一个引用，方式如下：<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;前缀:Tag文件名字 对象名字=<span class="hljs-string">&quot;对象的引用&quot;</span>/&gt;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="variable指令"><a href="#variable指令" class="headerlink" title="variable指令"></a>variable指令</h2><p>Tag文件通过使用variable指令可以将Tag文件中的对象返回给调用该Tag文件的JSP页面，格式如下：  </p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ variable name-given=<span class="hljs-string">&quot;对象名&quot;</span> variable-class=<span class="hljs-string">&quot;对象类型&quot;</span> scope=<span class="hljs-string">&quot;有效范围&quot;</span>&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><p>name-givenTag<br>返回给jsp页面的对象，由字母，数字，下画线和美元符号组成</p>
+</li>
+<li><p>variable-class<br>返回的对象的类型，必须要完整包名，默认为java.lang.String类型</p>
+</li>
+<li><p>scope<br>  可以取：AT_BEGIN、NESTED和AT_END。</p>
+<ul>
+<li>AT_BEGIN：一开始使用Tag标记，就得到了返回的对象</li>
+<li>NESTED：只可以在Tag标记的标记体中使用返回的对象</li>
+<li>AT_END：在Tag标记结束后，才能返回对象</li>
+</ul>
+</li>
+</ul>
+<h2 id="taglib指令"><a href="#taglib指令" class="headerlink" title="taglib指令"></a>taglib指令</h2><p>引入标记库，格式如下</p>
+<pre><code class="jsp">&lt;%@ taglib tagdir=&quot;自定义标记库的位置&quot; prefix=&quot;前缀&quot;&gt;
+```jsp
+- JSP页面或Tag文件都可以使用taglib指令使用标记库
+————————————————
+</code></pre>
 
                 
               </div>
@@ -315,6 +392,34 @@
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/JSP/" class="category-chain-item">JSP</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/JSP/%E7%AC%AC%E4%B8%89%E7%AB%A0/" class="category-chain-item">第三章</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -325,8 +430,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>数据结构-5-4-树、森林</div>
-      <div>https://cjzk236.github.io/2023/04/23/数据结构-5-4-树、森林/</div>
+      <div>jsp-3</div>
+      <div>https://cjzk236.github.io/2023/05/04/jsp-3/</div>
     </div>
     <div class="license-meta">
       
@@ -338,7 +443,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月23日</div>
+          <div>2023年5月4日</div>
         </div>
       
       
@@ -365,6 +470,23 @@
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-5-3-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86%E5%92%8C%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/" title="二叉树的遍历和线索二叉树">
+                        <span class="hidden-mobile">二叉树的遍历和线索二叉树</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
