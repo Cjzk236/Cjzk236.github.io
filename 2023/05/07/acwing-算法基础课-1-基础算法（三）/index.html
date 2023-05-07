@@ -16,21 +16,25 @@
   <meta name="author" content="Cjzk">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="acwing-算法基础课-1-基础算法(三)">
+    <meta name="description" content="双指针算法算法思想 先想朴素(暴力)算法  通过i与j的规律 将朴素算法O($n^{2} $) 优化到O(n)  算法模板123456789for (int i &#x3D; 0, j &#x3D; 0; i &lt; n; i ++ )&amp;#123;    while (j &lt; i &amp;&amp; check(i, j)) j ++ ;    &#x2F;&#x2F; 具体问题的逻辑&amp;#125;常见问题分类：    (1)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法基础-1-基础算法(三)">
 <meta property="og:url" content="https://cjzk236.github.io/2023/05/07/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-1-%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="此间之客">
+<meta property="og:description" content="双指针算法算法思想 先想朴素(暴力)算法  通过i与j的规律 将朴素算法O($n^{2} $) 优化到O(n)  算法模板123456789for (int i &#x3D; 0, j &#x3D; 0; i &lt; n; i ++ )&amp;#123;    while (j &lt; i &amp;&amp; check(i, j)) j ++ ;    &#x2F;&#x2F; 具体问题的逻辑&amp;#125;常见问题分类：    (1)">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/07/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-1-%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/2023-05-07-14-42-25.png">
 <meta property="article:published_time" content="2023-05-07T06:08:08.000Z">
-<meta property="article:modified_time" content="2023-05-07T06:08:08.117Z">
+<meta property="article:modified_time" content="2023-05-07T08:15:20.146Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cjzk236.github.io/2023/05/07/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-1-%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/2023-05-07-14-42-25.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>acwing-算法基础课-1-基础算法(三) - 此间之客</title>
+  <title>算法基础-1-基础算法(三) - 此间之客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -208,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="acwing-算法基础课-1-基础算法(三)"></span>
+            <span id="subtitle" data-typed-text="算法基础-1-基础算法(三)"></span>
           
         </div>
 
@@ -231,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.1k 字
         
       </span>
     
@@ -242,7 +246,7 @@
         
         
         
-          1 分钟
+          10 分钟
         
       </span>
     
@@ -280,18 +284,64 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">acwing-算法基础课-1-基础算法(三)</h1>
+            <h1 style="display: none">算法基础-1-基础算法(三)</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h1 id="双指针算法"><a href="#双指针算法" class="headerlink" title="双指针算法"></a>双指针算法</h1><h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><ol>
+<li>先想朴素(暴力)算法 </li>
+<li>通过i与j的规律 将朴素算法O($n^{2} $) 优化到O(n)</li>
+</ol>
+<h2 id="算法模板"><a href="#算法模板" class="headerlink" title="算法模板"></a>算法模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>; i &lt; n; i ++ )<br>&#123;<br>    <span class="hljs-keyword">while</span> (j &lt; i &amp;&amp; <span class="hljs-built_in">check</span>(i, j)) j ++ ;<br><br>    <span class="hljs-comment">// 具体问题的逻辑</span><br>&#125;<br>常见问题分类：<br>    (<span class="hljs-number">1</span>) 对于一个序列，用两个指针维护一段区间<br>    (<span class="hljs-number">2</span>) 对于两个序列，维护某种次序，比如归并排序中合并两个有序序列的操作<br></code></pre></td></tr></table></figure>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><p>(简单)一段话按单词输出</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> str[<span class="hljs-number">1000</span>];<br>    <span class="hljs-built_in">gets</span>(str);<br>    <span class="hljs-type">int</span> n = <span class="hljs-built_in">strlen</span>(str);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i&lt;n ;i++)&#123;<br>        <span class="hljs-type">int</span> j=i;<br>        <span class="hljs-keyword">while</span>(j&lt;n&amp;&amp;str[j]!=<span class="hljs-string">&#x27; &#x27;</span>) j++;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> k=i;k&lt;j;k++)    cout&lt;&lt;str[k];<br>        cout&lt;&lt;endl;<br>        i=j;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="最长连续不重复子序列"><a href="#最长连续不重复子序列" class="headerlink" title="最长连续不重复子序列"></a>最长连续不重复子序列</h3><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/801/">最长连续不重复子序列</a><br><img src="/2023/05/07/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-1-%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%89%EF%BC%89/2023-05-07-14-42-25.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N =<span class="hljs-number">100010</span>;<br><span class="hljs-type">int</span> n,res,a[N],s[N];<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a[i]);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>,j=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>        s[a[i]]++;<br>        <span class="hljs-keyword">while</span>(s[a[i]]&gt;<span class="hljs-number">1</span>)        <span class="hljs-comment">//不用判断i&lt;j,因为在该题中一定成立</span><br>            s[a[j]]--,j++;<br>        res = <span class="hljs-built_in">max</span>(res,i-j+<span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,res);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="解题思想"><a href="#解题思想" class="headerlink" title="解题思想"></a>解题思想</h4><ul>
+<li><p><code>i</code>:枚举  <code>j</code>:往左最远能到什么地方<br><code>j</code>有单调性 随着<code>i</code>向右走 <code>j</code>只会向右走or不走</p>
+</li>
+<li><p>检验子序列是否出现重复数 可用一个数组<code>s</code>,<code>i</code>每次右移 子序列加入一个数<code>a[i]</code> 数组对应数<code>s[a[i]]+1</code> ;<code>j</code>每次右移 子序列失去一个数<code>a[j]</code> 数组对应数<code>s[a[j]]-1</code>  </p>
+<ul>
+<li>若<code>i</code>右移 加入的数<code>a[i]</code>使得子序列出现重复数 重复的数一定是刚加入的数<code>a[i]</code> 此时<code>s[a[i]]&gt;1</code> 所有应该让<code>j</code>右移动 直到<code>s[a[i]]=1</code> 使得子序列无重复数</li>
+</ul>
+</li>
+</ul>
+<h3 id="数组元素的目标和"><a href="#数组元素的目标和" class="headerlink" title="数组元素的目标和"></a>数组元素的目标和</h3><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h1 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h1><h1 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h1><h1 id="区间合并"><a href="#区间合并" class="headerlink" title="区间合并"></a>区间合并</h1>
                 
               </div>
             
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/" class="category-chain-item">算法基础</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="category-chain-item">第一章</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -302,7 +352,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>acwing-算法基础课-1-基础算法(三)</div>
+      <div>算法基础-1-基础算法(三)</div>
       <div>https://cjzk236.github.io/2023/05/07/acwing-算法基础课-1-基础算法（三）/</div>
     </div>
     <div class="license-meta">
@@ -409,6 +459,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -627,6 +683,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

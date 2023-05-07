@@ -16,15 +16,21 @@
   <meta name="author" content="Cjzk">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
+    <meta name="description" content="快速选择快排的拓展 第k个数  算法思想在快排的基础上 每次只需要判断k在左区间还是右区间，一直递归排序k所在区间即可 完整代码12345678910111213141516171819202122#include&lt;iostream&gt;using namespace std;const int N&#x3D;1e5+10;int n,k,q[N];void sort(int q[],int l,i">
+<meta property="og:type" content="article">
 <meta property="og:title" content="习题-week1">
 <meta property="og:url" content="https://cjzk236.github.io/2023/05/05/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E4%B9%A0%E9%A2%98%E8%AF%BE-week1/index.html">
 <meta property="og:site_name" content="此间之客">
+<meta property="og:description" content="快速选择快排的拓展 第k个数  算法思想在快排的基础上 每次只需要判断k在左区间还是右区间，一直递归排序k所在区间即可 完整代码12345678910111213141516171819202122#include&lt;iostream&gt;using namespace std;const int N&#x3D;1e5+10;int n,k,q[N];void sort(int q[],int l,i">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/05/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E4%B9%A0%E9%A2%98%E8%AF%BE-week1/2023-05-07-12-02-54.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/05/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E4%B9%A0%E9%A2%98%E8%AF%BE-week1/2023-05-07-13-05-07.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/05/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E4%B9%A0%E9%A2%98%E8%AF%BE-week1/2023-05-07-13-47-57.png">
 <meta property="article:published_time" content="2023-05-05T03:21:27.000Z">
-<meta property="article:modified_time" content="2023-05-05T03:22:28.980Z">
+<meta property="article:modified_time" content="2023-05-07T06:25:57.734Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cjzk236.github.io/2023/05/05/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E4%B9%A0%E9%A2%98%E8%AF%BE-week1/2023-05-07-12-02-54.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -231,7 +237,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.4k 字
         
       </span>
     
@@ -242,7 +248,7 @@
         
         
         
-          1 分钟
+          12 分钟
         
       </span>
     
@@ -285,7 +291,28 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="快速选择"><a href="#快速选择" class="headerlink" title="快速选择"></a>快速选择</h1><p><code>快排</code>的拓展</p>
+<p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/788/">第k个数</a></p>
+<p><img src="/2023/05/05/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E4%B9%A0%E9%A2%98%E8%AF%BE-week1/2023-05-07-12-02-54.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h2><p>在<code>快排</code>的基础上 每次只需要判断k在左区间还是右区间，一直递归排序k所在区间即可</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">1e5</span>+<span class="hljs-number">10</span>;<br><span class="hljs-type">int</span> n,k,q[N];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">sort</span><span class="hljs-params">(<span class="hljs-type">int</span> q[],<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r,<span class="hljs-type">int</span> k)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(l&gt;=r)    <span class="hljs-keyword">return</span>;<br>    <span class="hljs-type">int</span> i=l<span class="hljs-number">-1</span>,j=r+<span class="hljs-number">1</span>,x=q[l+r&gt;&gt;<span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">while</span>(i&lt;j)&#123;<br>        <span class="hljs-keyword">do</span> i++;<span class="hljs-keyword">while</span>(q[i]&lt;x);<br>        <span class="hljs-keyword">do</span> j--;<span class="hljs-keyword">while</span>(q[j]&gt;x);<br>        <span class="hljs-keyword">if</span>(i&lt;j) <span class="hljs-built_in">swap</span>(q[i],q[j]);<br>    &#125;<br>    <span class="hljs-keyword">if</span>(k&lt;=j) <span class="hljs-built_in">sort</span>(q,l,j,k);<br>    <span class="hljs-keyword">else</span>    <span class="hljs-built_in">sort</span>(q,j+<span class="hljs-number">1</span>,r,k);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;k);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;q[i]);<br>    <span class="hljs-built_in">sort</span>(q,<span class="hljs-number">0</span>,n<span class="hljs-number">-1</span>,k<span class="hljs-number">-1</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,q[k<span class="hljs-number">-1</span>]);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>快排时间复杂度O(nlogn) 快选时间复杂度O(n) <ul>
+<li>n+n&#x2F;2+n&#x2F;4+…</li>
+</ul>
+</li>
+</ul>
+<h1 id="逆序对的数量"><a href="#逆序对的数量" class="headerlink" title="逆序对的数量"></a>逆序对的数量</h1><p><code>归并</code>的拓展<br><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/790/">逆序对的数量</a></p>
+<p><img src="/2023/05/05/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E4%B9%A0%E9%A2%98%E8%AF%BE-week1/2023-05-07-13-05-07.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="算法思想-1"><a href="#算法思想-1" class="headerlink" title="算法思想"></a>算法思想</h2><p><img src="/2023/05/05/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E4%B9%A0%E9%A2%98%E8%AF%BE-week1/2023-05-07-13-47-57.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="完整代码-1"><a href="#完整代码-1" class="headerlink" title="完整代码"></a>完整代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> LL;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1e6</span>+<span class="hljs-number">10</span>;<br><span class="hljs-type">int</span> q[N],temp[N];<br><span class="hljs-type">int</span> n;<br><span class="hljs-function">LL <span class="hljs-title">MergeSort</span><span class="hljs-params">(<span class="hljs-type">int</span> q[],<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(l&gt;=r) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> mid=l+r&gt;&gt;<span class="hljs-number">1</span>;<br>    LL res = <span class="hljs-built_in">MergeSort</span>(q,l,mid)+<span class="hljs-built_in">MergeSort</span>(q,mid+<span class="hljs-number">1</span>,r);<br>    <span class="hljs-type">int</span> k=<span class="hljs-number">0</span>,i=l,j=mid+<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span>(i&lt;=mid &amp;&amp; j&lt;=r)<br>        <span class="hljs-keyword">if</span>(q[i]&lt;=q[j]) temp[k++]=q[i++];<br>        <span class="hljs-keyword">else</span> temp[k++]=q[j++],res += mid - i +<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span>(i&lt;=mid)   temp[k++]=q[i++];<br>    <span class="hljs-keyword">while</span>(j&lt;=r)     temp[k++]=q[j++];<br>    <span class="hljs-keyword">for</span>(i =l,j=<span class="hljs-number">0</span>;i&lt;=r;i++,j++)  q[i]=temp[j];<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d &quot;</span>,&amp;n);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;q[i]);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld&quot;</span>,<span class="hljs-built_in">MergeSort</span>(q,<span class="hljs-number">0</span>,n<span class="hljs-number">-1</span>));<br>    <span class="hljs-keyword">return</span>  <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h2><ul>
+<li>逆序对数量的最大值<ul>
+<li>如果数组是倒序,逆序对数量能取得最大值  $\frac{n(n-1)}{2} $ &gt; int</li>
+</ul>
+</li>
+</ul>
+
                 
               </div>
             
@@ -443,6 +470,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -661,6 +694,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
