@@ -24,7 +24,7 @@
 <meta property="og:description" content="SQLSQL 分类    分类 全称    DDL Data Definition Language   DML Data Manipulation   DQL Data Query Language   DCL Data Control Language   DLL数据库操作1234567891011121314-- 查询所有数据库show databases;-- 查询当前数据库select">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-06T01:09:01.000Z">
-<meta property="article:modified_time" content="2023-05-07T15:29:45.202Z">
+<meta property="article:modified_time" content="2023-05-08T10:32:45.689Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          19k 字
+          25k 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          159 分钟
+          206 分钟
         
       </span>
     
@@ -556,8 +556,11 @@
 
 <h2 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h2><p>用来让两张表的数据之间建立连接，从而保证数据的一致性和完整性<br>表(子表)的外键是关联另一张表(父表)的主键</p>
 <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><ol>
-<li>添加外键<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> 表名(<br>    字段名 数据类型,<br>    ...<br>    [<span class="hljs-keyword">CONSTRAINT</span>] [外键名称] <span class="hljs-keyword">FOREIGN</span> KEY (外键字段名) <span class="hljs-keyword">REFERENCES</span> 主表 (主表列名)<br>);<br></code></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> 外键名称 <span class="hljs-keyword">FOREIGN</span> KEY (外键字段名) <span class="hljs-keyword">REFERENCES</span> 主表 (主表列名) ;<br>```  <br><br>案例:<br>```<span class="hljs-keyword">sql</span><br><span class="hljs-comment">-- 案例：为emp表的dept_id字段添加外键约束,关联dept表的主键id。</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> emp <span class="hljs-keyword">add</span> <span class="hljs-keyword">constraint</span> fk_emp_dept_id <span class="hljs-keyword">foreign</span> key (dept_id) <span class="hljs-keyword">references</span> dept(id);<br></code></pre></td></tr></table></figure></li>
+<li>添加外键<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> 表名(<br>    字段名 数据类型,<br>    ...<br>    [<span class="hljs-keyword">CONSTRAINT</span>] [外键名称] <span class="hljs-keyword">FOREIGN</span> KEY (外键字段名) <span class="hljs-keyword">REFERENCES</span> 主表 (主表列名)<br>);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 <span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> 外键名称 <span class="hljs-keyword">FOREIGN</span> KEY (外键字段名) <span class="hljs-keyword">REFERENCES</span> 主表 (主表列名) ;<br>```  <br><br>案例:<br>```<span class="hljs-keyword">sql</span><br><span class="hljs-comment">-- 案例：为emp表的dept_id字段添加外键约束,关联dept表的主键id。</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> emp <span class="hljs-keyword">add</span> <span class="hljs-keyword">constraint</span> fk_emp_dept_id <span class="hljs-keyword">foreign</span> key (dept_id) <span class="hljs-keyword">references</span> dept(id);<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
 <li>删除外键<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> 表名 <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">FOREIGN</span> KEY 外键名称;<br></code></pre></td></tr></table></figure></li>
 </ol>
 <p>案例:</p>
@@ -649,7 +652,161 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> d.<span class="hljs-operator">*</span>, e.<span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp e <span class="hljs-keyword">right</span> <span class="hljs-keyword">outer</span> <span class="hljs-keyword">join</span> dept d <span class="hljs-keyword">on</span> e.dept_id <span class="hljs-operator">=</span> d.id;<br><span class="hljs-keyword">select</span> d.<span class="hljs-operator">*</span>, e.<span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> dept d <span class="hljs-keyword">left</span> <span class="hljs-keyword">outer</span> <span class="hljs-keyword">join</span> emp e <span class="hljs-keyword">on</span> e.dept_id <span class="hljs-operator">=</span> d.id;<br></code></pre></td></tr></table></figure>
 
 
-<h2 id="自连接"><a href="#自连接" class="headerlink" title="自连接"></a>自连接</h2><h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2>
+<h2 id="自连接"><a href="#自连接" class="headerlink" title="自连接"></a>自连接</h2><h3 id="自连接查询"><a href="#自连接查询" class="headerlink" title="自连接查询"></a>自连接查询</h3><h4 id="语法-3"><a href="#语法-3" class="headerlink" title="语法"></a>语法</h4><p>自连接查询，顾名思义，就是自己连接自己，也就是把一张表连接查询多次。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> 字段列表 <span class="hljs-keyword">FROM</span> 表A 别名A <span class="hljs-keyword">JOIN</span> 表A 别名B <span class="hljs-keyword">ON</span> 条件 ... ;<br></code></pre></td></tr></table></figure>
+<h4 id="案例-3"><a href="#案例-3" class="headerlink" title="案例"></a>案例</h4><ol>
+<li>查询员工 及其 所属领导的名字<br> 表结构: emp</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> a.name , b.name <span class="hljs-keyword">from</span> emp a , emp b <span class="hljs-keyword">where</span> a.managerid <span class="hljs-operator">=</span> b.id;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查询所有员工 emp 及其领导的名字 emp , 如果员工没有领导, 也需要查询出来<br> 表结构: emp a , emp b</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> a.name <span class="hljs-string">&#x27;员工&#x27;</span>, b.name <span class="hljs-string">&#x27;领导&#x27;</span> <span class="hljs-keyword">from</span> emp a <span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> emp b <span class="hljs-keyword">on</span> a.managerid <span class="hljs-operator">=</span> b.id;<br></code></pre></td></tr></table></figure>
+<h3 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h3><p>对于union查询，就是把多次查询的结果合并起来，形成一个新的查询结果集。</p>
+<h4 id="语法-4"><a href="#语法-4" class="headerlink" title="语法"></a>语法</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> 字段列表 <span class="hljs-keyword">FROM</span> 表A ...<br><span class="hljs-keyword">UNION</span> [ <span class="hljs-keyword">ALL</span> ]<br><span class="hljs-keyword">SELECT</span> 字段列表 <span class="hljs-keyword">FROM</span> 表B ....;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>对于联合查询的多张表的列数必须保持一致，字段类型也需要保持一致。</strong></li>
+<li><code>union all</code> 会将全部的数据直接<strong>合并在一起</strong>，<code>union</code> 会对合并之后的<strong>数据去重</strong>。</li>
+</ul>
+<h4 id="案例-4"><a href="#案例-4" class="headerlink" title="案例"></a>案例</h4><ol>
+<li>将薪资低于 5000 的员工 , 和 年龄大于 50 岁的员工全部查询出来.<br>当前对于这个需求，我们可以直接使用多条件查询，使用逻辑运算符 or 连接即可。 那这里呢，我们也可以通过union&#x2F;union all来联合查询.</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> salary <span class="hljs-operator">&lt;</span> <span class="hljs-number">5000</span><br><span class="hljs-keyword">union</span> <span class="hljs-keyword">all</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> age <span class="hljs-operator">&gt;</span> <span class="hljs-number">50</span>;<br><span class="hljs-comment">-- union all查询出来的结果，仅仅进行简单的合并，并未去重。</span><br><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> salary <span class="hljs-operator">&lt;</span> <span class="hljs-number">5000</span><br><span class="hljs-keyword">union</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> age <span class="hljs-operator">&gt;</span> <span class="hljs-number">50</span>;<br><span class="hljs-comment">-- union 联合查询，会对查询出来的结果进行去重处理。</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h2><p>SQL语句中嵌套SELECT语句，称为嵌套查询，又称子查询。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> t1 <span class="hljs-keyword">WHERE</span> column1 <span class="hljs-operator">=</span> ( <span class="hljs-keyword">SELECT</span> column1 <span class="hljs-keyword">FROM</span> t2 );<br></code></pre></td></tr></table></figure>
+<p>子查询外部的语句可以是<code>INSERT</code>  <code>UPDATE</code>  <code>DELETE</code>  <code>SELECT</code> 的任何一个。</p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>根据子查询结果不同，分为：</p>
+<ul>
+<li>标量子查询（子查询结果为单个值）</li>
+<li>列子查询(子查询结果为一列)</li>
+<li>行子查询(子查询结果为一行)</li>
+<li>表子查询(子查询结果为多行多列)</li>
+</ul>
+<p>根据子查询位置，分为：</p>
+<ul>
+<li>WHERE之后</li>
+<li>FROM之后</li>
+<li>SELECT之后</li>
+</ul>
+<h3 id="标量子查询"><a href="#标量子查询" class="headerlink" title="标量子查询"></a>标量子查询</h3><p>子查询返回的结果是单个值（数字、字符串、日期等），最简单的形式，这种子查询称为标量子查询。<br>常用的操作符：<code>=</code> <code>&lt;&gt;</code> <code>&gt;</code> <code>&gt;=</code> <code>&lt;</code> <code>&lt;=</code></p>
+<h4 id="案例-5"><a href="#案例-5" class="headerlink" title="案例"></a>案例</h4><ul>
+<li>查询 “销售部” 的所有员工信息</li>
+</ul>
+<p>完成这个需求时，我们可以将需求分解为两步：</p>
+<ol>
+<li>查询 “销售部” 部门ID</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> dept <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;销售部&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>根据 “销售部” 部门ID, 查询员工信息</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> dept_id <span class="hljs-operator">=</span> (<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> dept <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;销售部&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>查询在 “方东白” 入职之后的员工信息</li>
+</ul>
+<p>完成这个需求时，我们可以将需求分解为两步：</p>
+<ol>
+<li>查询 方东白 的入职日期</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> entrydate <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;方东白&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>查询指定入职日期之后入职的员工信息</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> entrydate <span class="hljs-operator">&gt;</span> (<span class="hljs-keyword">select</span> entrydate <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;方东白&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="列子查询"><a href="#列子查询" class="headerlink" title="列子查询"></a>列子查询</h3><p>子查询返回的结果是一列（可以是多行），这种子查询称为列子查询。<br>常用的操作符：<code>IN</code> 、<code>NOT IN</code> 、 <code>ANY</code> 、<code>SOME</code> 、 <code>ALL</code>  </p>
+<table>
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">IN</td>
+<td align="center">在指定的集合范围之内，多选一</td>
+</tr>
+<tr>
+<td align="center">NOT IN</td>
+<td align="center">不在指定的集合范围之内</td>
+</tr>
+<tr>
+<td align="center">ANY</td>
+<td align="center">子查询返回列表中，有任意一个满足即可</td>
+</tr>
+<tr>
+<td align="center">SOME</td>
+<td align="center">与ANY等同，使用SOME的地方都可以使用ANY</td>
+</tr>
+<tr>
+<td align="center">ALL</td>
+<td align="center">子查询返回列表的所有值都必须满足</td>
+</tr>
+</tbody></table>
+<h4 id="案例-6"><a href="#案例-6" class="headerlink" title="案例"></a>案例</h4><ul>
+<li>查询 “销售部” 和 “市场部” 的所有员工信息<br>分解为以下两步:</li>
+</ul>
+<ol>
+<li>查询 “销售部” 和 “市场部” 的部门ID<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> dept <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;销售部&#x27;</span> <span class="hljs-keyword">or</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;市场部&#x27;</span>;<br></code></pre></td></tr></table></figure></li>
+<li>根据部门ID, 查询员工信息<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> dept_id <span class="hljs-keyword">in</span> (<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> dept <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;销售部&#x27;</span> <span class="hljs-keyword">or</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;市场部&#x27;</span>);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>查询比 财务部 所有人工资都高的员工信息<br>分解为以下两步:</li>
+</ul>
+<ol>
+<li>查询所有 财务部 人员工资<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> dept <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;财务部&#x27;</span>;<br><span class="hljs-keyword">select</span> salary <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> dept_id <span class="hljs-operator">=</span> (<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> dept <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;财务部&#x27;</span>);<br></code></pre></td></tr></table></figure></li>
+<li>比 财务部 所有人工资都高的员工信息<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> salary <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">all</span> ( <span class="hljs-keyword">select</span> salary <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> dept_id <span class="hljs-operator">=</span> (<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> dept <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;财务部&#x27;</span>) );<br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>查询比研发部其中任意一人工资高的员工信息<br>分解为以下两步:</li>
+</ul>
+<ol>
+<li>查询研发部所有人工资<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> salary <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> dept_id <span class="hljs-operator">=</span> (<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> dept <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;研发部&#x27;</span>);<br></code></pre></td></tr></table></figure></li>
+<li>比研发部其中任意一人工资高的员工信息<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> salary <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">any</span> ( <span class="hljs-keyword">select</span> salary <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> dept_id <span class="hljs-operator">=</span> (<span class="hljs-keyword">select</span> id <span class="hljs-keyword">from</span> dept <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;研发部&#x27;</span>) );<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="行子查询"><a href="#行子查询" class="headerlink" title="行子查询"></a>行子查询</h3><p>子查询返回的结果是一行（可以是多列），这种子查询称为行子查询。<br>常用的操作符：<code>=</code>、<code>&lt;&gt;</code> 、<code>IN</code> 、<code>NOT IN</code></p>
+<h4 id="案例-7"><a href="#案例-7" class="headerlink" title="案例"></a>案例</h4><ul>
+<li>查询与 “张无忌” 的薪资及直属领导相同的员工信息 ;<br>这个需求同样可以拆解为两步进行:</li>
+</ul>
+<ol>
+<li><p>查询 “张无忌” 的薪资及直属领导</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> salary, managerid <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;张无忌&#x27;</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询与 “张无忌” 的薪资及直属领导相同的员工信息 ;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> (salary,managerid) <span class="hljs-operator">=</span> (<span class="hljs-keyword">select</span> salary, managerid <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;张无忌&#x27;</span>);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="表子查询"><a href="#表子查询" class="headerlink" title="表子查询"></a>表子查询</h3><p>子查询返回的结果是多行多列，这种子查询称为表子查询。<br>常用的操作符：<code>IN</code></p>
+<h4 id="案例-8"><a href="#案例-8" class="headerlink" title="案例"></a>案例</h4><ul>
+<li>查询与 “鹿杖客” , “宋远桥” 的职位和薪资相同的员工信息<br>分解为两步执行:</li>
+</ul>
+<ol>
+<li><p>查询 “鹿杖客” , “宋远桥” 的职位和薪资</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> job, salary <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;鹿杖客&#x27;</span> <span class="hljs-keyword">or</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;宋远桥&#x27;</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询与 “鹿杖客” , “宋远桥” 的职位和薪资相同的员工信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> (job,salary) <span class="hljs-keyword">in</span> ( <span class="hljs-keyword">select</span> job, salary <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;鹿杖客&#x27;</span> <span class="hljs-keyword">or</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;宋远桥&#x27;</span> );<br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>查询入职日期是 “2006-01-01” 之后的员工信息 , 及其部门信息<br>分解为两步执行:</li>
+</ul>
+<ol>
+<li><p>入职日期是 “2006-01-01” 之后的员工信息</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> entrydate <span class="hljs-operator">&gt;</span> <span class="hljs-string">&#x27;2006-01-01&#x27;</span>;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>查询这部分员工, 对应的部门信息;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> e.<span class="hljs-operator">*</span>, d.<span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> entrydate <span class="hljs-operator">&gt;</span> <span class="hljs-string">&#x27;2006-01-01&#x27;</span>) e <span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> dept d <span class="hljs-keyword">on</span> e.dept_id <span class="hljs-operator">=</span> d.id ;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="多表查询案例"><a href="#多表查询案例" class="headerlink" title="多表查询案例"></a>多表查询案例</h2><p>数据环境准备:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> salgrade(<br>    grade <span class="hljs-type">int</span>,<br>    losal <span class="hljs-type">int</span>,<br>    hisal <span class="hljs-type">int</span><br>) comment <span class="hljs-string">&#x27;薪资等级表&#x27;</span>;<br><br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> salgrade <span class="hljs-keyword">values</span> (<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">3000</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> salgrade <span class="hljs-keyword">values</span> (<span class="hljs-number">2</span>,<span class="hljs-number">3001</span>,<span class="hljs-number">5000</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> salgrade <span class="hljs-keyword">values</span> (<span class="hljs-number">3</span>,<span class="hljs-number">5001</span>,<span class="hljs-number">8000</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> salgrade <span class="hljs-keyword">values</span> (<span class="hljs-number">4</span>,<span class="hljs-number">8001</span>,<span class="hljs-number">10000</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> salgrade <span class="hljs-keyword">values</span> (<span class="hljs-number">5</span>,<span class="hljs-number">10001</span>,<span class="hljs-number">15000</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> salgrade <span class="hljs-keyword">values</span> (<span class="hljs-number">6</span>,<span class="hljs-number">15001</span>,<span class="hljs-number">20000</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> salgrade <span class="hljs-keyword">values</span> (<span class="hljs-number">7</span>,<span class="hljs-number">20001</span>,<span class="hljs-number">25000</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> salgrade <span class="hljs-keyword">values</span> (<span class="hljs-number">8</span>,<span class="hljs-number">25001</span>,<span class="hljs-number">30000</span>);<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">1</span>). 查询员工的姓名、年龄、职位、部门信息 （隐式内连接）<br>表: emp , dept<br>连接条件: emp.dept_id <span class="hljs-operator">=</span> dept.id<br><span class="hljs-keyword">select</span> e.name , e.age , e.job , d.name <span class="hljs-keyword">from</span> emp e , dept d <span class="hljs-keyword">where</span> e.dept_id <span class="hljs-operator">=</span> d.id;<br><br><br><span class="hljs-number">2</span>). 查询年龄小于<span class="hljs-number">30</span>岁的员工的姓名、年龄、职位、部门信息（显式内连接）<br>表: emp , dept<br>连接条件: emp.dept_id <span class="hljs-operator">=</span> dept.id<br><span class="hljs-keyword">select</span> e.name , e.age , e.job , d.name <span class="hljs-keyword">from</span> emp e <span class="hljs-keyword">inner</span> <span class="hljs-keyword">join</span> dept d <span class="hljs-keyword">on</span> e.dept_id <span class="hljs-operator">=</span> d.id <span class="hljs-keyword">where</span> e.age <span class="hljs-operator">&lt;</span> <span class="hljs-number">30</span>;<br><br><br><span class="hljs-number">3</span>). 查询拥有员工的部门ID、部门名称<br>表: emp , dept<br>连接条件: emp.dept_id <span class="hljs-operator">=</span> dept.id<br><span class="hljs-keyword">select</span> <span class="hljs-keyword">distinct</span> d.id , d.name <span class="hljs-keyword">from</span> emp e , dept d <span class="hljs-keyword">where</span> e.dept_id <span class="hljs-operator">=</span> d.id;<br><br><br><span class="hljs-number">4</span>). 查询所有年龄大于<span class="hljs-number">40</span>岁的员工, 及其归属的部门名称; 如果员工没有分配部门, 也需要展示出来(外连接)<br>表: emp , dept<br>连接条件: emp.dept_id <span class="hljs-operator">=</span> dept.id<br><span class="hljs-keyword">select</span> e.<span class="hljs-operator">*</span>, d.name <span class="hljs-keyword">from</span> emp e <span class="hljs-keyword">left</span> <span class="hljs-keyword">join</span> dept d <span class="hljs-keyword">on</span> e.dept_id <span class="hljs-operator">=</span> d.id <span class="hljs-keyword">where</span> e.age <span class="hljs-operator">&gt;</span> <span class="hljs-number">40</span> ;<br><br><br><span class="hljs-number">5</span>). 查询所有员工的工资等级<br>表: emp , salgrade<br>连接条件 : emp.salary <span class="hljs-operator">&gt;=</span> salgrade.losal <span class="hljs-keyword">and</span> emp.salary <span class="hljs-operator">&lt;=</span> salgrade.hisal<br><span class="hljs-comment">-- 方式一</span><br><span class="hljs-keyword">select</span> e.<span class="hljs-operator">*</span> , s.grade , s.losal, s.hisal <span class="hljs-keyword">from</span> emp e , salgrade s <span class="hljs-keyword">where</span> e.salary <span class="hljs-operator">&gt;=</span> s.losal <span class="hljs-keyword">and</span> e.salary <span class="hljs-operator">&lt;=</span> s.hisal;<br><span class="hljs-comment">-- 方式二</span><br><span class="hljs-keyword">select</span> e.<span class="hljs-operator">*</span> , s.grade , s.losal, s.hisal <span class="hljs-keyword">from</span> emp e , salgrade s <span class="hljs-keyword">where</span> e.salary <span class="hljs-keyword">between</span> s.losal <span class="hljs-keyword">and</span> s.hisal;<br><br><br><span class="hljs-number">6</span>). 查询 &quot;研发部&quot; 所有员工的信息及 工资等级<br>表: emp , salgrade , dept<br>连接条件 : emp.salary <span class="hljs-keyword">between</span> salgrade.losal <span class="hljs-keyword">and</span> salgrade.hisal ,<br>emp.dept_id <span class="hljs-operator">=</span> dept.id<br>查询条件 : dept.name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;研发部&#x27;</span><br><span class="hljs-keyword">select</span> e.<span class="hljs-operator">*</span> , s.grade <span class="hljs-keyword">from</span> emp e , dept d , salgrade s <span class="hljs-keyword">where</span> e.dept_id <span class="hljs-operator">=</span> d.id <span class="hljs-keyword">and</span> (e.salary <span class="hljs-keyword">between</span> s.losal <span class="hljs-keyword">and</span> s.hisal ) <span class="hljs-keyword">and</span> d.name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;研发部&#x27;</span>;<br><br><br><span class="hljs-number">7</span>). 查询 &quot;研发部&quot; 员工的平均工资<br>表: emp , dept<br>连接条件 : emp.dept_id <span class="hljs-operator">=</span> dept.id<br><span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span>(e.salary) <span class="hljs-keyword">from</span> emp e, dept d <span class="hljs-keyword">where</span> e.dept_id <span class="hljs-operator">=</span> d.id <span class="hljs-keyword">and</span> d.name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;研发部&#x27;</span>;<br><br><br><span class="hljs-number">8</span>). 查询工资比 &quot;灭绝&quot; 高的员工信息。<br>①. 查询 &quot;灭绝&quot; 的薪资<br><span class="hljs-keyword">select</span> salary <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;灭绝&#x27;</span>;<br>②. 查询比她工资高的员工数据<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> salary <span class="hljs-operator">&gt;</span> ( <span class="hljs-keyword">select</span> salary <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> name <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;灭绝&#x27;</span> );<br><br><br><span class="hljs-number">9</span>). 查询比平均薪资高的员工信息<br>①. 查询员工的平均薪资<br><span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span>(salary) <span class="hljs-keyword">from</span> emp;<br>②. 查询比平均薪资高的员工信息<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp <span class="hljs-keyword">where</span> salary <span class="hljs-operator">&gt;</span> ( <span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span>(salary) <span class="hljs-keyword">from</span> emp );<br><br><br><span class="hljs-number">10</span>). 查询低于本部门平均工资的员工信息<br>①. 查询指定部门平均薪资<br><span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span>(e1.salary) <span class="hljs-keyword">from</span> emp e1 <span class="hljs-keyword">where</span> e1.dept_id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span>(e1.salary) <span class="hljs-keyword">from</span> emp e1 <span class="hljs-keyword">where</span> e1.dept_id <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;<br>②. 查询低于本部门平均工资的员工信息<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> emp e2 <span class="hljs-keyword">where</span> e2.salary <span class="hljs-operator">&lt;</span> ( <span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span>(e1.salary) <span class="hljs-keyword">from</span> emp e1 <span class="hljs-keyword">where</span> e1.dept_id <span class="hljs-operator">=</span> e2.dept_id );<br><br><br><span class="hljs-number">11</span>). 查询所有的部门信息, 并统计部门的员工人数<br><span class="hljs-keyword">select</span> d.id, d.name , ( <span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">from</span> emp e <span class="hljs-keyword">where</span> e.dept_id <span class="hljs-operator">=</span> d.id ) <span class="hljs-string">&#x27;人数&#x27;</span> <span class="hljs-keyword">from</span> dept d;<br><br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -742,8 +899,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/05/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-%E4%B9%A0%E9%A2%98%E8%AF%BE-week1/" title="习题-week1">
-                        <span class="hidden-mobile">习题-week1</span>
+                      <a href="/2023/05/04/jsp-3/" title="Tag文件与Tag标记">
+                        <span class="hidden-mobile">Tag文件与Tag标记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
