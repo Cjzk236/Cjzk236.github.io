@@ -18,14 +18,14 @@
   
     <meta name="description" content="二叉树的遍历递归遍历三种方式都比较简单 原理相同 递归先序12345678void DisplayTree_front(Bitree T)&amp;#123;    if(!T)&amp;#123;        return;    &amp;#125;    printf(&quot;%c\t&quot;,T-&gt;data);    DisplayTree_front(T-&gt;lchild);    Disp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二叉树的遍历和线索二叉树">
+<meta property="og:title" content="树与二叉树">
 <meta property="og:url" content="https://cjzk236.github.io/2023/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-5-%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/index.html">
 <meta property="og:site_name" content="此间之客">
 <meta property="og:description" content="二叉树的遍历递归遍历三种方式都比较简单 原理相同 递归先序12345678void DisplayTree_front(Bitree T)&amp;#123;    if(!T)&amp;#123;        return;    &amp;#125;    printf(&quot;%c\t&quot;,T-&gt;data);    DisplayTree_front(T-&gt;lchild);    Disp">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cjzk236.github.io/2023/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-5-%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/2023-04-26-21-29-14.png">
 <meta property="article:published_time" content="2023-04-22T15:25:33.000Z">
-<meta property="article:modified_time" content="2023-05-04T02:44:43.699Z">
+<meta property="article:modified_time" content="2023-05-09T14:52:47.372Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cjzk236.github.io/2023/04/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-5-%E6%A0%91%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91/2023-04-26-21-29-14.png">
@@ -34,7 +34,7 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>二叉树的遍历和线索二叉树 - 此间之客</title>
+  <title>树与二叉树 - 此间之客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="二叉树的遍历和线索二叉树"></span>
+            <span id="subtitle" data-typed-text="树与二叉树"></span>
           
         </div>
 
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          2.7k 字
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          22 分钟
+          23 分钟
         
       </span>
     
@@ -284,23 +284,23 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">二叉树的遍历和线索二叉树</h1>
+            <h1 style="display: none">树与二叉树</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h1><h2 id="递归遍历"><a href="#递归遍历" class="headerlink" title="递归遍历"></a>递归遍历</h2><p>三种方式都比较简单 原理相同</p>
-<h3 id="递归先序"><a href="#递归先序" class="headerlink" title="递归先序"></a>递归先序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">DisplayTree_front</span><span class="hljs-params">(Bitree T)</span>&#123;<br>    <span class="hljs-keyword">if</span>(!T)&#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\t&quot;</span>,T-&gt;data);<br>    DisplayTree_front(T-&gt;lchild);<br>    DisplayTree_front(T-&gt;rchild);<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="递归中序"><a href="#递归中序" class="headerlink" title="递归中序"></a>递归中序</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">DisplayTree_middle</span><span class="hljs-params">(Bitree T)</span>&#123;t<br>    <span class="hljs-title function_">if</span><span class="hljs-params">(!T)</span><br>        <span class="hljs-keyword">return</span>;<br>    DisplayTree_middle(T-&gt;lchild);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\t&quot;</span>,T-&gt;data);<br>    DisplayTree_middle(T-&gt;rchild);<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="递归后续"><a href="#递归后续" class="headerlink" title="递归后续"></a>递归后续</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">DisplayTree_back</span><span class="hljs-params">(Bitree T)</span>&#123;<br>    <span class="hljs-keyword">if</span>(!T)&#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    DisplayTree_back(T-&gt;lchild);<br>    DisplayTree_back(T-&gt;rchild);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\t&quot;</span>,T-&gt;data);<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="非递归遍历"><a href="#非递归遍历" class="headerlink" title="非递归遍历"></a>非递归遍历</h2><p>非递归先序遍历与非递归中序遍历原理相同 且比较简单</p>
-<h3 id="非递归先序遍历"><a href="#非递归先序遍历" class="headerlink" title="非递归先序遍历"></a>非递归先序遍历</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">DisplayTree_front_unrec</span><span class="hljs-params">(Bitree T)</span>&#123;<br>    LinkStack s;<br>    InitLStack(&amp;s);<br>    BitreeNode *p=T;<br>    <span class="hljs-keyword">while</span>(p|| EmptyStack(s))&#123;<br>        <span class="hljs-keyword">if</span>(p)&#123;<br>            PushStack(&amp;s,p);<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\t&quot;</span>,p-&gt;data);<br>            p=p-&gt;lchild;<br>        &#125; <span class="hljs-keyword">else</span>&#123;<br>            p= PopStack(&amp;s);<br>            p=p-&gt;rchild;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="非递归中序遍历"><a href="#非递归中序遍历" class="headerlink" title="非递归中序遍历"></a>非递归中序遍历</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">DisplayTree_In_unrec</span><span class="hljs-params">(Bitree T)</span>&#123;<br>    LinkStack s;<br>    InitLStack(&amp;s);<br>    BitreeNode *p=T;<br>    <span class="hljs-keyword">while</span>(p|| EmptyStack(s))&#123;<br>        <span class="hljs-keyword">if</span>(p)&#123;<br>            PushStack(&amp;s,p);<br>            p=p-&gt;lchild;<br>        &#125; <span class="hljs-keyword">else</span>&#123;<br>            p= PopStack(&amp;s);<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\t&quot;</span>,p-&gt;data);<br>            p=p-&gt;rchild;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="非递归后续遍历"><a href="#非递归后续遍历" class="headerlink" title="非递归后续遍历"></a>非递归后续遍历</h3><p>与前两者不同，后续遍历中，要保证左孩子和右孩子都已被访问并且先访问左孩子后访问右孩子才能访问根节点。<br>算法思想：<br>    1. 从根节点开始，沿着左结点依次向下搜索，直到没有左结点的节点，全部按顺序依次入栈<br>    2. <strong>读取栈顶元素</strong>，判断其是否有右节点且是否被输出过，若有右结点且右结点没别访问过，则指针转向右结点，并执行 1 ；若没有右结点<strong>或者</strong>右节点已经被输出了，则出栈顶元素并输出该结点。<br>    3. 需要一个指针用于记录上一个输出的结点， 若一个结点的右孩子等于r，即该结点右节点已被输出，说明该结点所有子节点都被输出完了，该输出它自己了</p>
+                <h2 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h2><h3 id="递归遍历"><a href="#递归遍历" class="headerlink" title="递归遍历"></a>递归遍历</h3><p>三种方式都比较简单 原理相同</p>
+<h4 id="递归先序"><a href="#递归先序" class="headerlink" title="递归先序"></a>递归先序</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">DisplayTree_front</span><span class="hljs-params">(Bitree T)</span>&#123;<br>    <span class="hljs-keyword">if</span>(!T)&#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\t&quot;</span>,T-&gt;data);<br>    DisplayTree_front(T-&gt;lchild);<br>    DisplayTree_front(T-&gt;rchild);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="递归中序"><a href="#递归中序" class="headerlink" title="递归中序"></a>递归中序</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">DisplayTree_middle</span><span class="hljs-params">(Bitree T)</span>&#123;t<br>    <span class="hljs-title function_">if</span><span class="hljs-params">(!T)</span><br>        <span class="hljs-keyword">return</span>;<br>    DisplayTree_middle(T-&gt;lchild);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\t&quot;</span>,T-&gt;data);<br>    DisplayTree_middle(T-&gt;rchild);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="递归后续"><a href="#递归后续" class="headerlink" title="递归后续"></a>递归后续</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">DisplayTree_back</span><span class="hljs-params">(Bitree T)</span>&#123;<br>    <span class="hljs-keyword">if</span>(!T)&#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    DisplayTree_back(T-&gt;lchild);<br>    DisplayTree_back(T-&gt;rchild);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\t&quot;</span>,T-&gt;data);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="非递归遍历"><a href="#非递归遍历" class="headerlink" title="非递归遍历"></a>非递归遍历</h3><p>非递归先序遍历与非递归中序遍历原理相同 且比较简单</p>
+<h4 id="非递归先序遍历"><a href="#非递归先序遍历" class="headerlink" title="非递归先序遍历"></a>非递归先序遍历</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">DisplayTree_front_unrec</span><span class="hljs-params">(Bitree T)</span>&#123;<br>    LinkStack s;<br>    InitLStack(&amp;s);<br>    BitreeNode *p=T;<br>    <span class="hljs-keyword">while</span>(p|| EmptyStack(s))&#123;<br>        <span class="hljs-keyword">if</span>(p)&#123;<br>            PushStack(&amp;s,p);<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\t&quot;</span>,p-&gt;data);<br>            p=p-&gt;lchild;<br>        &#125; <span class="hljs-keyword">else</span>&#123;<br>            p= PopStack(&amp;s);<br>            p=p-&gt;rchild;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="非递归中序遍历"><a href="#非递归中序遍历" class="headerlink" title="非递归中序遍历"></a>非递归中序遍历</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">DisplayTree_In_unrec</span><span class="hljs-params">(Bitree T)</span>&#123;<br>    LinkStack s;<br>    InitLStack(&amp;s);<br>    BitreeNode *p=T;<br>    <span class="hljs-keyword">while</span>(p|| EmptyStack(s))&#123;<br>        <span class="hljs-keyword">if</span>(p)&#123;<br>            PushStack(&amp;s,p);<br>            p=p-&gt;lchild;<br>        &#125; <span class="hljs-keyword">else</span>&#123;<br>            p= PopStack(&amp;s);<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\t&quot;</span>,p-&gt;data);<br>            p=p-&gt;rchild;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="非递归后续遍历"><a href="#非递归后续遍历" class="headerlink" title="非递归后续遍历"></a>非递归后续遍历</h4><p>与前两者不同，后续遍历中，要保证左孩子和右孩子都已被访问并且先访问左孩子后访问右孩子才能访问根节点。<br>算法思想：<br>    1. 从根节点开始，沿着左结点依次向下搜索，直到没有左结点的节点，全部按顺序依次入栈<br>    2. <strong>读取栈顶元素</strong>，判断其是否有右节点且是否被输出过，若有右结点且右结点没别访问过，则指针转向右结点，并执行 1 ；若没有右结点<strong>或者</strong>右节点已经被输出了，则出栈顶元素并输出该结点。<br>    3. 需要一个指针用于记录上一个输出的结点， 若一个结点的右孩子等于r，即该结点右节点已被输出，说明该结点所有子节点都被输出完了，该输出它自己了</p>
 <p>代码实现：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">DispalyTree_back_unrec</span><span class="hljs-params">(Bitree T)</span>&#123;<br>    LinkStack s;<br>    InitLStack(&amp;s);<br>    BitreeNode *p=T;<br>    BitreeNode *r=<span class="hljs-literal">NULL</span>;                 <span class="hljs-comment">//用于指向上一个输出的节点</span><br>    <span class="hljs-keyword">while</span>(p|| EmptyStack(s))&#123;<br>        <span class="hljs-keyword">if</span>(p)&#123;                          <span class="hljs-comment">//沿着左节点依次向下，全部入栈，直到为空</span><br>            PushStack(&amp;s,p);<br>            p=p-&gt;lchild;<br>        &#125; <span class="hljs-keyword">else</span>&#123;<br>            p=GetTop(s);                        <span class="hljs-comment">//读取栈顶元素</span><br>            <span class="hljs-keyword">if</span>(p-&gt;rchild&amp;&amp;p-&gt;rchild!=r)         <span class="hljs-comment">//若栈顶元素右结点存在，且未被输出</span><br>                p=p-&gt;rchild;                    <span class="hljs-comment">//转向结点</span><br>            <span class="hljs-keyword">else</span>&#123;                               <span class="hljs-comment">//否则,出栈并输出</span><br>                p=PopStack(&amp;s);<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c\t&quot;</span>,p-&gt;data);<br>                r=p;                            <span class="hljs-comment">//用于记录最后一个被输出的结点</span><br>                p=<span class="hljs-literal">NULL</span>;                         <span class="hljs-comment">//p置空,进入下一次循环</span><br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h1 id="二叉树的线索化"><a href="#二叉树的线索化" class="headerlink" title="二叉树的线索化"></a>二叉树的线索化</h1><h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><ul>
+<h2 id="二叉树的线索化"><a href="#二叉树的线索化" class="headerlink" title="二叉树的线索化"></a>二叉树的线索化</h2><h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul>
 <li><p>在二叉树的前序序列、中序序列和后序序列中，所有<strong>叶子结点</strong>的前后顺序完全相同</p>
 </li>
 <li><p><strong>线索二叉树是一种物理结构</strong></p>
@@ -355,6 +355,32 @@
 </ul>
 </li>
 </ul>
+<h2 id="树、森林"><a href="#树、森林" class="headerlink" title="树、森林"></a>树、森林</h2><h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>树与森林的遍历和二叉树遍历的对应关系</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">树</th>
+<th align="center">森林</th>
+<th align="center">二叉树</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">先根遍历</td>
+<td align="center">先序遍历</td>
+<td align="center">先序遍历</td>
+</tr>
+<tr>
+<td align="center">后根遍历</td>
+<td align="center">中序遍历</td>
+<td align="center">中序遍历</td>
+</tr>
+</tbody></table>
+<p>举例判断即可</p>
+<h2 id="树与二叉树的应用"><a href="#树与二叉树的应用" class="headerlink" title="树与二叉树的应用"></a>树与二叉树的应用</h2><h3 id="注意-2"><a href="#注意-2" class="headerlink" title="注意"></a>注意</h3><ul>
+<li>定长编码集要保证所有的编码在同一层</li>
+</ul>
 
                 
               </div>
@@ -400,7 +426,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>二叉树的遍历和线索二叉树</div>
+      <div>树与二叉树</div>
       <div>https://cjzk236.github.io/2023/04/22/数据结构-5-树与二叉树/</div>
     </div>
     <div class="license-meta">
