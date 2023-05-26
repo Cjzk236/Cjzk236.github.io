@@ -1,0 +1,850 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/codelogo.png">
+  <link rel="icon" href="/img/codelogo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#161e27">
+  <meta name="author" content="Cjzk">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="操作系统的基本概念计算机系统自下而上可大致分为三个部分：（注意：划分于计组的分层不同） 操作系统的概念、功能操作系统（Operating System， OS）是指控制和管理整个计算机系统的硬件和软件资源，并合理地组织调度计算机的工作和资源的分配；以提供给用户和其他软件方便的接口和环境；它是计算机系统中最基本的系统软件。  操作系统是系统资源的管理者  提供的功能 处理机管理 存储器管理 文件管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机系统概括">
+<meta property="og:url" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/index.html">
+<meta property="og:site_name" content="此间之客">
+<meta property="og:description" content="操作系统的基本概念计算机系统自下而上可大致分为三个部分：（注意：划分于计组的分层不同） 操作系统的概念、功能操作系统（Operating System， OS）是指控制和管理整个计算机系统的硬件和软件资源，并合理地组织调度计算机的工作和资源的分配；以提供给用户和其他软件方便的接口和环境；它是计算机系统中最基本的系统软件。  操作系统是系统资源的管理者  提供的功能 处理机管理 存储器管理 文件管理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-16-43-15.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-16-42-18.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-16-48-57.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-16-57-44.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-14-33.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-20-44.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-19-17.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-25-47.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-25-37.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-26-10.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-27-23.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-29-20.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-30-29.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-27-10.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-27-19.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-27-39.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-27-53.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-34-52.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-28-49.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-23.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-31.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-55.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-30-20.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-30-32.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-37-42.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-38-11.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-40-24.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-40-35.png">
+<meta property="article:published_time" content="2023-05-22T08:37:36.000Z">
+<meta property="article:modified_time" content="2023-05-23T00:50:39.548Z">
+<meta property="article:author" content="Cjzk">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-16-43-15.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>计算机系统概括 - 此间之客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"cjzk236.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>此间之客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/gladenlight.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="计算机系统概括"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-22 16:37" pubdate>
+          2023年5月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">计算机系统概括</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="操作系统的基本概念"><a href="#操作系统的基本概念" class="headerlink" title="操作系统的基本概念"></a>操作系统的基本概念</h2><p>计算机系统自下而上可大致分为三个部分：（注意：划分于计组的分层不同）<br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-16-43-15.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="操作系统的概念、功能"><a href="#操作系统的概念、功能" class="headerlink" title="操作系统的概念、功能"></a>操作系统的概念、功能</h3><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-16-42-18.png" srcset="/img/loading.gif" lazyload><br><strong>操作系统</strong>（Operating System， OS）是指控制和<strong>管理</strong>整个计算机系统的<strong>硬件和软件</strong>资源，并合理地组织调<br>度计算机的工作和资源的分配；以<strong>提供给用户和其他软件方便的接口和环境</strong>；它是计算机系统中最基本<br>的<strong>系统软件</strong>。<br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-16-48-57.png" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>操作系统是系统资源的管理者</p>
+<ul>
+<li>提供的功能<ul>
+<li>处理机管理</li>
+<li>存储器管理</li>
+<li>文件管理</li>
+<li>设备管理</li>
+</ul>
+</li>
+<li>目标<ul>
+<li>高效、安全</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>操作系统向上层提供方便易用的服务（作为用户与计算机硬件系统之间的接口）</p>
+<ul>
+<li>直接给用户使用的<ul>
+<li>GUI（图形用户界面）</li>
+<li>命令结构（用户可直接使用）<ul>
+<li>联机命令接口（又称交互式命令接口，用户说一句系统跟着做一句）</li>
+<li>脱机命令接口（又称批处理命令接口，用户说一堆系统跟着做一堆）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>给软件&#x2F;程序员使用的<ul>
+<li>程序接口（由一组“系统调用”（也称“广义指令”）组成，用户通过程序间接使用）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>注意：命令接口和程序接口统称为“用户接口”</p>
+<ol start="3">
+<li>操作系统是最接近硬件的一层软件<ul>
+<li>对硬件机器的拓展，没有任何软件支持的计算机成为裸机，通常把覆盖了软件的机器成为扩展机器，又称为虚拟机</li>
+</ul>
+</li>
+</ol>
+<h3 id="操作系统的特征"><a href="#操作系统的特征" class="headerlink" title="操作系统的特征"></a>操作系统的特征</h3><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-16-57-44.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h4><p>指两个或多个事件在同一时间间隔内发生。这些事件宏观上是同时发生的，但微观上是交替发生的。  </p>
+<ul>
+<li>常考易混概念——并行：指两个或多个事件在同一时刻同时发生。<br>  单核CPU同一时刻只能执行一个程序，各个程序只能并发地执行<br>  多核CPU同一时刻可以同时执行多个程序，多个程序可以并行地执行</li>
+<li>操作系统的并发性指计算机系统中“同时”运行着多个程序，这些程序宏观上看是同时运行着的，而微观上看是交替运行的。操作系统就是伴随着“多道程序技术”而出现的。因此，操作系统和程序并发是一起诞生的。操作系统的并发性是通过分时得以实现的。</li>
+</ul>
+<h4 id="共享"><a href="#共享" class="headerlink" title="共享"></a>共享</h4><ul>
+<li>互斥共享方式<br>系统中的某些资源，虽然可以提供给多个进程使用，但一个时间段内只允许一个进程访问该资源  </li>
+<li>同时访问方式<br>系统中的某些资源，允许一个时间段内由多个进程“同时”对它们进行访问<br>所谓的“同时”往往是宏观上的，而在微观上，这些进程可能是交替地对该资源进行访问的（即分时共享）</li>
+</ul>
+<p><strong>并发和共享是操作系统两个最基奎的特征，两者之间互为存在的条件</strong></p>
+<h4 id="虚拟"><a href="#虚拟" class="headerlink" title="虚拟"></a>虚拟</h4><p>虚拟是指把一个物理上的实体变为若干个逻辑上的对应物。物理实体（前者）是实际存在的，而逻辑上对应物（后者）是用户感受到的。</p>
+<ul>
+<li>虚拟技术<ul>
+<li>空分复用技术（如虚拟存储器技术）</li>
+<li>时分复用技术（如虚拟处理器）</li>
+</ul>
+</li>
+</ul>
+<p><strong>没有并发性，就谈不上虚拟性</strong></p>
+<h4 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h4><p>异步是指，在多道程序环境下，允许多个程序并发执行，但由于资源有限，进程的执行不是一贯到底的，而是走走停停，以不可预知的速度向前推进，这就是进程的异步性。<br><strong>只有系统拥有并发性，才有可能导致异步性。</strong></p>
+<h2 id="操作系统的发展和分类"><a href="#操作系统的发展和分类" class="headerlink" title="操作系统的发展和分类"></a>操作系统的发展和分类</h2><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-14-33.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="操作系统的运行环境"><a href="#操作系统的运行环境" class="headerlink" title="操作系统的运行环境"></a>操作系统的运行环境</h2><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-20-44.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="操作系统的运行机制"><a href="#操作系统的运行机制" class="headerlink" title="操作系统的运行机制"></a>操作系统的运行机制</h3><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-19-17.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>内核态、用户态的切换</strong><br>内核态-&gt;用户态：执行一条特权指令——修改PSW的标志位为“用户态”，这个动作意味着操作系统将主动让出CPU使用权<br>用户态-&gt;内核态：由“中断”引发，硬件自动完成变态过程，触发中断信号意味着操作系统将强行夺回CPU的使用权</p>
+<p><strong>操作系统的内核</strong><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-25-47.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-25-37.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>操作系统的体系结构</strong><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-26-10.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="中断和异常"><a href="#中断和异常" class="headerlink" title="中断和异常"></a>中断和异常</h3><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-27-23.png" srcset="/img/loading.gif" lazyload><br>中断是操作系统内核夺回CPU使用权的唯一途径（通过硬件实现）<br>内核态-&gt;用户态：执行一条特权指令——修改PSW的标志位为“用户态”，这个动作意味着操作系统将主动让出CPU使用权<br>用户态-&gt;内核态：由“中断”引发，硬件自动完成变态过程，触发中断信号意味着操作系统将强行夺回CPU的使用权<br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-29-20.png" srcset="/img/loading.gif" lazyload><br>不同的中断信号，需要用不同的中断处理程序来处理。当CPU检测到中断信号后，会根据中断信号的类型去查询“中断向量表”，以此来找到相应的中断处理程序在内存中的存放位置。<br>中断处理程序一定是内核程序，需要运行在“内核态”</p>
+<h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-30-29.png" srcset="/img/loading.gif" lazyload><br>系统调用 又称 广义指令<br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-27-10.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-27-19.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-27-39.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-27-53.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-34-52.png" srcset="/img/loading.gif" lazyload></p>
+<p>由用户态进入核心态，不仅状态需要切换，而且所用的堆栈也可能需要由用户堆栈切换为系统堆栈、但这个系统堆栈也是属于该进程的。<br>陷入指令 &#x3D; trap 指令 &#x3D; 访管指令  （不是特权指令）</p>
+<h2 id="操作系统的体系结构"><a href="#操作系统的体系结构" class="headerlink" title="操作系统的体系结构"></a>操作系统的体系结构</h2><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-28-49.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-23.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-31.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-55.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-30-20.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-30-32.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-37-42.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="操作系统引导"><a href="#操作系统引导" class="headerlink" title="操作系统引导"></a>操作系统引导</h2><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-38-11.png" srcset="/img/loading.gif" lazyload><br>常见操作系统的引导过程如下： </p>
+<ol>
+<li>激活CPU。激活的CPU读取ROM中的boot程序，将指令寄存器置为BIOS （基本输入&#x2F;输出系统）的第一条指令，即开始执行BIOS的指令。 </li>
+<li>硬件自检。启动BIOS程序后，先进行硬件自检，检查硬件是否出现故障。如有故障，主板会发出不同含义的蜂鸣，启动中止：如无故障，屏幕会显示CPU、内存、硬盘等信息。 </li>
+<li>加载带有操作系统的硬盘。硬件自检后，BIOS开始读取Boot Sequence （通过CMOS里保存的启动顺序，或者通过与用户交互的方式），把控制权交给启动顺序排在第一位的存储设备， 然后CPU将该存储设备引导扇区的内容加载到内存中。 </li>
+<li>加载主引导记录MBRo硬盘以特定的标识符区分引导硬盘和非引导硬盘。如果发现一个存储设备不是可引导盘，就检查下一个存储设备。如无其他启动设备，就会死机。主引导记录MBR的作用是告诉CPU去硬盘的哪个主分区去找操作系统。 </li>
+<li>扫描硬盘分区表，并加载硬盘活动分区。MBR包含硬盘分区表，硬盘分区表以特定的标识符区分活动分区和非活动分区。主引导记录扫描硬盘分区表，进而识别含有操作系统的硬盘分区（活动分区）。找到硬盘活动分区后，开始加载硬盘活动分区，将控制权交给活动分区。 </li>
+<li>加载分区引导记录PBR。读取活动分区的第一个扇区，这个扇区称为分区引导记录（PBR）,其作用是寻找并激活分区根目录下用于引导操作系统的程序（启动管理器）。 </li>
+<li>加载启动管理器。分区引导记录搜索活动分区中的启动管理器，加载启动管理器。 </li>
+<li>加载操作系统</li>
+</ol>
+<ul>
+<li>BIOS:Basic Input Output System 基本输入输出系统</li>
+<li>例子：为一个裸机安装操作系统<ol>
+<li>一般要先进入BIOS系统，选择安装模式</li>
+<li>安装系统的过程，其实是将操作系统相关数据写入硬盘的过程（C盘）</li>
+<li>安装完毕，正常开机启动，操作系统相关数据从硬盘加载到RAM（即一般我们说的“内存条”）中，才能被CPU处理</li>
+</ol>
+</li>
+<li>裸机里有什么？<ul>
+<li>裸机的主板上有ROM、RAM、有空空如也的硬盘</li>
+<li>一台裸机中只有ROM中有数据，包含着BIOS（主板出厂时被写入的）</li>
+</ul>
+</li>
+</ul>
+<h2 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h2><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-40-24.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-40-35.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="做题总结"><a href="#做题总结" class="headerlink" title="做题总结"></a>做题总结</h2><ol>
+<li>在计算机科学中，<strong>Shell</strong>俗称壳（用来区别于核），是指“为使用者提供操作界面”的软件（command interpreter，<strong>命令解析器</strong>）。它类似于DOS下的COMMAND.COM和后来的<strong>cmd.exe</strong>。它接收用户命令，然后调用相应的应用程序。<ul>
+<li>操作系统与用户通信接口通常不包括（D）A.shell B.命令解释器 C.广义指令 D.缓存管理指令</li>
+<li>命令解释器，命令解析器都属于 命令接口</li>
+<li>命令解释器 就是 cmd.exe</li>
+</ul>
+</li>
+<li>系统调用 又称 广义指令</li>
+<li>系统调用的目的是请求系统服务</li>
+<li>顺序性不属于多道程序设计的基本特征 ，其属于单道程序设计的基本特征</li>
+<li>单处理机系统中处理机与通道可并行</li>
+<li>计算机开机后，操作系统最终被加载到 RAM 里<ul>
+<li>RAM(random-access memory)随机访问存储器 可随机读写，读写速度快，断电后数据消失（内存条）</li>
+<li>ROM(read only memory)只读存储器 数据写入之后不可更改，即使断电数据也不消失 （DVD、VCD）</li>
+<li>EPROM(Electrically Programmable Read-Only-Memory)电可编程序只读存储器 一种特殊的ROM</li>
+</ul>
+</li>
+<li>早期的多道批处理操作系统会将所有的进程的数据全部调入主存，再让多道程序并发执行，即使不支持虚拟存储管理，也能实现“多道程序并发”</li>
+<li>进制多并不意味着CPU利用率高，进程数量越多，进程之间的竞争越激烈，甚至可能因为资源竞争而出现死锁现象</li>
+<li>中断技术使得多道批处理系统的I&#x2F;O设备可与CPU并行工作，当一道程序因I&#x2F;O请求而停止时，CPU便立即转去运行另一道程序</li>
+<li>要注意区分不同语境下“并行”所描述的对象<ul>
+<li>在说明操作系统特点时，我们说，单CPU的操作系统具有并发性而不具有并行性，在这里，“并行”描述的是进程之间的关系，单CPU操作系统无法真正同时运行多个进程，而只能从微观上分时交替地运行多个进程，符合并发却称不上并行</li>
+<li>而这里在说明多任务操作系统的特点时，“并行”指的是多个任务的关系而非多个进程的关系。虽然多进程在单CPU系统无法并行，但是多任务却可以，比如，任务A是执行算术运算，它占用CPU，任务B是执行l0，它不占用CPU，因此这两个任务是可以并行的，此即单CPU多任务操作系统的并行性。</li>
+</ul>
+</li>
+<li>进程调度由调度算法决定CPU使用权，由操作系统实现，不需要（特殊）硬件支持。<ul>
+<li>时钟管理，需要硬件定时器，定期发出时钟脉冲</li>
+<li>地址映射，需要地址变换相关的硬件机构，如页表寄存器、TLB等</li>
+<li>中断系统，需要中断向量地址形成部件，将中断信号映射为中断向量（具体见计组）</li>
+</ul>
+</li>
+<li>中断发生后，进入中断处理的程序属于操作系统程序（内核程序）（具体见计组JMP无条件跳转指令）<ul>
+<li>进入中断处理的程序 与 中断处理程序不同 ，不过中断处理程序也是内核程序</li>
+</ul>
+</li>
+<li>置时钟指令 只能在核心态下运行 因为若能在用户态下运行，那么一个用户进程可在时间片还未到之前把时钟改回去，从而导致时间片永远用不完，进而导致该用户进程一直占用CPU，这显然不合理<ul>
+<li>寄存器清零（通用寄存器清零，一些特殊的寄存器如PSW不允许用户态修改）、读时钟指令、取数指令，均可在汇编语言中涉及，因此都可以运行在用户态</li>
+</ul>
+</li>
+<li>CPU处于核心态时，它可以执行的指令是 除 访管指令 的全部指令</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/OS/" class="category-chain-item">OS</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/OS/%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="category-chain-item">第一章</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>计算机系统概括</div>
+      <div>https://cjzk236.github.io/2023/05/22/OS-1-计算机系统概括/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Cjzk</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/21/OS-4-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" title="OS-4-文件管理">
+                        <span class="hidden-mobile">OS-4-文件管理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
