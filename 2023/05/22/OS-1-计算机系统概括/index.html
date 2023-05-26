@@ -45,6 +45,7 @@
 <meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-23.png">
 <meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-31.png">
 <meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-55.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-23-22-51-18.png">
 <meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-30-20.png">
 <meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-30-32.png">
 <meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-37-42.png">
@@ -52,7 +53,7 @@
 <meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-40-24.png">
 <meta property="og:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-40-35.png">
 <meta property="article:published_time" content="2023-05-22T08:37:36.000Z">
-<meta property="article:modified_time" content="2023-05-23T00:50:39.548Z">
+<meta property="article:modified_time" content="2023-05-26T05:14:58.156Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cjzk236.github.io/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-16-43-15.png">
@@ -262,7 +263,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.8k 字
+          5.2k 字
         
       </span>
     
@@ -273,7 +274,7 @@
         
         
         
-          32 分钟
+          44 分钟
         
       </span>
     
@@ -389,7 +390,22 @@
 <h3 id="中断和异常"><a href="#中断和异常" class="headerlink" title="中断和异常"></a>中断和异常</h3><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-27-23.png" srcset="/img/loading.gif" lazyload><br>中断是操作系统内核夺回CPU使用权的唯一途径（通过硬件实现）<br>内核态-&gt;用户态：执行一条特权指令——修改PSW的标志位为“用户态”，这个动作意味着操作系统将主动让出CPU使用权<br>用户态-&gt;内核态：由“中断”引发，硬件自动完成变态过程，触发中断信号意味着操作系统将强行夺回CPU的使用权<br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-29-20.png" srcset="/img/loading.gif" lazyload><br>不同的中断信号，需要用不同的中断处理程序来处理。当CPU检测到中断信号后，会根据中断信号的类型去查询“中断向量表”，以此来找到相应的中断处理程序在内存中的存放位置。<br>中断处理程序一定是内核程序，需要运行在“内核态”</p>
 <h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-17-30-29.png" srcset="/img/loading.gif" lazyload><br>系统调用 又称 广义指令<br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-27-10.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-27-19.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-27-39.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-27-53.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-34-52.png" srcset="/img/loading.gif" lazyload></p>
 <p>由用户态进入核心态，不仅状态需要切换，而且所用的堆栈也可能需要由用户堆栈切换为系统堆栈、但这个系统堆栈也是属于该进程的。<br>陷入指令 &#x3D; trap 指令 &#x3D; 访管指令  （不是特权指令）</p>
-<h2 id="操作系统的体系结构"><a href="#操作系统的体系结构" class="headerlink" title="操作系统的体系结构"></a>操作系统的体系结构</h2><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-28-49.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-23.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-31.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-55.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-30-20.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-30-32.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-37-42.png" srcset="/img/loading.gif" lazyload></p>
+<h2 id="操作系统的体系结构"><a href="#操作系统的体系结构" class="headerlink" title="操作系统的体系结构"></a>操作系统的体系结构</h2><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-28-49.png" srcset="/img/loading.gif" lazyload><br><strong>大内核与微内核</strong><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-23.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-31.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-29-55.png" srcset="/img/loading.gif" lazyload><br>微内核构架，是指将内核中最基本的功能保留在内核，而将那些不需要在核心态执行的功能移到用户态执行，从而降低内核的设计复杂性。那些移出内核的操作系统代码根据分层的原则被划分成若干服务程序，它们的执行相互独立，交互则都借助于微内核进行通信。<br>微内核结构将操作系统划分为两大部分：微内核和多个服务器。微内核是指精心设计的、能实现操作系统最基本核心功能的小型内核，通常包含： </p>
+<ol>
+<li>与硬件处理紧密相关的部分；</li>
+<li>一些较基本的功能;</li>
+<li>客户和服务器之间的通信。<br>这些部分只是为构建通用操作系统提供一个重要基础,这样就可以确保将内核做得很小。操作系统中的绝大部分功能都放在微内核外的一组服务器（进程）中实现，如用于提供对进程（线程）进行管理的进程（线程）服务器、提供虚拟存储器管理功能的虚拟存储器服务器等，它们都是作为进程来实现的，运行在用户态，客户与服务器之间是借助微内核提供的消息传递机制来实现交互的。<br>单机环境下的客户&#x2F;服务器模式:<br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-23-22-51-18.png" srcset="/img/loading.gif" lazyload><br>微内核的特点：  </li>
+<li>拓展性和灵活性</li>
+<li>可靠性和安全性</li>
+<li>可移植性</li>
+<li>分布式计算<br><strong>分层结构</strong><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-30-20.png" srcset="/img/loading.gif" lazyload><br>分层法是将操作系统分为若干层，最底层（层0）为硬件，最高层（层N）为用户接口，每层只能调用紧邻它的低层的功能和服务（单向依赖）。</li>
+</ol>
+<p><strong>模块化</strong><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-30-32.png" srcset="/img/loading.gif" lazyload><br>在划分模块时，如果将模块划分得太小，虽然能降低模块本身的复杂性，但会使得模块之间的联系过多，造成系统比较混乱；如果模块划分得过大，又会增加模块内部的复杂性，显然应在两者间进行权衡。此外，在划分模块时，要充分考虑模块的独立性问题，因为模块独立性越高， 各模块间的交互就越少，系统的结构也就越清晰。衡量模块的独立性主要有两个标准： </p>
+<ul>
+<li>内聚性，模块内部各部分间联系的紧密程度。内聚性越高，模块独立性越好。 </li>
+<li>耦合度，模块间相互联系和相互影响的程度。耦合度越低，模块独立性越好。</li>
+</ul>
+<p><strong>外核</strong><br><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-37-42.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="操作系统引导"><a href="#操作系统引导" class="headerlink" title="操作系统引导"></a>操作系统引导</h2><p><img src="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/2023-05-22-19-38-11.png" srcset="/img/loading.gif" lazyload><br>常见操作系统的引导过程如下： </p>
 <ol>
 <li>激活CPU。激活的CPU读取ROM中的boot程序，将指令寄存器置为BIOS （基本输入&#x2F;输出系统）的第一条指令，即开始执行BIOS的指令。 </li>
@@ -456,6 +472,46 @@
 </ul>
 </li>
 <li>CPU处于核心态时，它可以执行的指令是 除 访管指令 的全部指令</li>
+<li>进程调度程序是内核程序</li>
+<li>中断处理时保存的数据<ul>
+<li>硬件负责<ul>
+<li>程序计数器PC</li>
+<li>程序状态字PSW</li>
+</ul>
+</li>
+<li>操作系统负责<ul>
+<li>其他有必要保存的信息，如某些通用寄存器（不是所有通用寄存器都需要保存，具体需要操作系统判断）</li>
+</ul>
+</li>
+<li>快表tlb和cache不需要 他们里面都是副本</li>
+</ul>
+</li>
+<li>假定指令已装入指令寄存器，则执行时不可能导致CPU从用户态变为内核态（系统态）的是 NOT R0;寄存器RO的内容取非<ul>
+<li>DIV RO, R1 ;（R0）&#x2F;（Rl）—R0 （除数取0，产生内中断）</li>
+<li>INT n ; 产生软中断（内中断，陷入指令）</li>
+<li>MOV RO, addr ;把地址addr处的内存数据放入寄存器R0（可能产生缺页中断）</li>
+</ul>
+</li>
+<li>“DMA传送结束”属于中断（外中断）；“访存时缺页”、“整数除以0”、“存储保护错”属于异常</li>
+<li>时钟中断的主要工作是处理和时间有关的信息及决定是否执行调度程序。和时间有关的所有信息包括：系统时间、进程的时间片、延时、使用CPU的时间、各种定时器。</li>
+<li>通用操作系统 如 安卓 <ul>
+<li>专用操作系统 如 火箭的操作系统</li>
+</ul>
+</li>
+<li>发起系统调用是在用户态 执行系统调用服务程序 是在内核态</li>
+<li>不同的操作系统为应用程序提供了不统一的系统调用接口</li>
+<li>通常可以从四个方面来描述微内核OS：<ol>
+<li>内核足够小</li>
+<li>基于客户&#x2F;服务器模式</li>
+<li>应用“机制与策略分离”原理</li>
+<li>采用面向对象技术</li>
+</ol>
+</li>
+<li>操作系统的引导程序位于磁盘活动分区的引导扇区中。引导程序分为两种：<ul>
+<li>一种是位于ROM中的自举程序（BIOS的组成部分），用于启动具体的设备；</li>
+<li>另一种是位于装有操作系统硬盘的活动分区的引导扇区中的引导程序（称为启动管理器），用于引导操作系统。</li>
+</ul>
+</li>
 </ol>
 
                 

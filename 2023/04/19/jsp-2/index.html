@@ -16,15 +16,15 @@
   <meta name="author" content="Cjzk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 JSP页面的基本结构 普通的HTML标记和JavaScript标记 JSP标记，如指令标记、动作标记 变量和方法的声明 Java 程序片 Java 表达式  2 声明变量和定义方法声明变量格式:&lt;%!变量%&gt;    声明的变量在整个JSP页面内都有效  定于方法格式:&lt;%!方法or类%&gt;    可以在Java程序片中调用该方法或使用该类创造对象  3 Java程序片格式">
+    <meta name="description" content="1 JSP页面的基本结构 普通的HTML标记和jsp标记 JSP标记，如指令标记、动作标记 变量和方法的声明 Java 程序片 Java 表达式  2 声明变量和定义方法声明变量格式:&lt;%!变量%&gt;    声明的变量在整个JSP页面内都有效  定于方法格式:&lt;%!方法or类%&gt;    可以在Java程序片中调用该方法或使用该类创造对象  3 Java程序片格式:&lt;%所">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSP语法">
 <meta property="og:url" content="https://cjzk236.github.io/2023/04/19/jsp-2/index.html">
 <meta property="og:site_name" content="此间之客">
-<meta property="og:description" content="1 JSP页面的基本结构 普通的HTML标记和JavaScript标记 JSP标记，如指令标记、动作标记 变量和方法的声明 Java 程序片 Java 表达式  2 声明变量和定义方法声明变量格式:&lt;%!变量%&gt;    声明的变量在整个JSP页面内都有效  定于方法格式:&lt;%!方法or类%&gt;    可以在Java程序片中调用该方法或使用该类创造对象  3 Java程序片格式">
+<meta property="og:description" content="1 JSP页面的基本结构 普通的HTML标记和jsp标记 JSP标记，如指令标记、动作标记 变量和方法的声明 Java 程序片 Java 表达式  2 声明变量和定义方法声明变量格式:&lt;%!变量%&gt;    声明的变量在整个JSP页面内都有效  定于方法格式:&lt;%!方法or类%&gt;    可以在Java程序片中调用该方法或使用该类创造对象  3 Java程序片格式:&lt;%所">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-19T15:00:11.000Z">
-<meta property="article:modified_time" content="2023-05-26T02:49:08.625Z">
+<meta property="article:modified_time" content="2023-05-26T05:14:49.514Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          2.5k 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          19 分钟
+          21 分钟
         
       </span>
     
@@ -288,7 +288,7 @@
               <div class="markdown-body">
                 
                 <h1 id="1-JSP页面的基本结构"><a href="#1-JSP页面的基本结构" class="headerlink" title="1 JSP页面的基本结构"></a>1 JSP页面的基本结构</h1><ul>
-<li>普通的HTML标记和JavaScript标记</li>
+<li>普通的HTML标记和jsp标记</li>
 <li>JSP标记，如指令标记、动作标记</li>
 <li>变量和方法的声明</li>
 <li>Java 程序片</li>
@@ -319,16 +319,16 @@
 <li>在编译JSP页面时会忽略JSP注释</li>
 </ul>
 <h1 id="6-JSP指令标记"><a href="#6-JSP指令标记" class="headerlink" title="6 JSP指令标记"></a>6 JSP指令标记</h1><h2 id="page指令标记"><a href="#page指令标记" class="headerlink" title="page指令标记"></a>page指令标记</h2><p>page 指令用来定义整个JSP页面的一些属性和这些属性的值。<br>可以使用多个page指令分别为每个属性指定值:  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;%@ page   属性<span class="hljs-number">1</span>=<span class="hljs-string">&quot;属性1的值&quot;</span>  %&gt;<br>&lt;%@ page   属性<span class="hljs-number">2</span>=<span class="hljs-string">&quot;属性2的值&quot;</span>  %&gt;<br>… …<br>&lt;%@ page   属性n=<span class="hljs-string">&quot;属性n的值&quot;</span>  %&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page   属性<span class="hljs-number">1</span>=<span class="hljs-string">&quot;属性1的值&quot;</span>  %&gt;<br>&lt;%@ page   属性<span class="hljs-number">2</span>=<span class="hljs-string">&quot;属性2的值&quot;</span>  %&gt;<br>… …<br>&lt;%@ page   属性n=<span class="hljs-string">&quot;属性n的值&quot;</span>  %&gt;<br></code></pre></td></tr></table></figure>
 <p>也可以用一个page指令指定多个属性的值:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;%@ page 属性<span class="hljs-number">1</span>=<span class="hljs-string">&quot;属性1的值&quot;</span> 属性<span class="hljs-number">2</span>=<span class="hljs-string">&quot;属性2的值&quot;</span> ...%&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page 属性<span class="hljs-number">1</span>=<span class="hljs-string">&quot;属性1的值&quot;</span> 属性<span class="hljs-number">2</span>=<span class="hljs-string">&quot;属性2的值&quot;</span> ...%&gt;<br></code></pre></td></tr></table></figure>
 <h3 id="page指令标记可以指定的属性"><a href="#page指令标记可以指定的属性" class="headerlink" title="page指令标记可以指定的属性"></a>page指令标记可以指定的属性</h3><h4 id="contentType属性"><a href="#contentType属性" class="headerlink" title="contentType属性"></a>contentType属性</h4><p>contentType属性值确定JSP页面响应的MIME类型。属性值的一般形式是： “MIME类型”<br>例如:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html &quot;</span> %&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html &quot;</span> %&gt;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>page指令只能为contentType指定一个值，不允许两次使用page指令给contentType属性指定不同的属性值。</li>
 </ul>
 <h4 id="pageEncoding-属性"><a href="#pageEncoding-属性" class="headerlink" title="pageEncoding 属性"></a>pageEncoding 属性</h4><p>用于保存JSP页面编码<br>例如:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;%@ page pageEncoding = <span class="hljs-string">&quot;utf-8&quot;</span> %&gt;    <br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ <span class="hljs-type">page</span> <span class="hljs-variable">pageEncoding</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;utf-8&quot;</span> %&gt;    <br></code></pre></td></tr></table></figure>
 <ul>
 <li>只能为pageEncoding指定一个值，不允许两次使用page指令给pageEncoding属性指定不同的或相同的属性值。</li>
 </ul>
@@ -337,11 +337,11 @@
 <li>未指定,默认java</li>
 </ul>
 <h4 id="import-属性"><a href="#import-属性" class="headerlink" title="import 属性"></a>import 属性</h4><p>该属性的作用是为JSP页面引入Java运行环境提供的包中的类。<br>例如:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;%@ page  <span class="hljs-keyword">import</span>=<span class="hljs-string">&quot;java.io.*&quot;</span>, <span class="hljs-string">&quot;java.time.LocalDate&quot;</span> %&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page  <span class="hljs-keyword">import</span>=<span class="hljs-string">&quot;java.io.*&quot;</span>, <span class="hljs-string">&quot;java.time.LocalDate&quot;</span> %&gt;<br></code></pre></td></tr></table></figure>
 <h4 id="session属性"><a href="#session属性" class="headerlink" title="session属性"></a>session属性</h4><p>session 属性用于设置是否需要使用内置的session对象。session的属性值可以是true或false。session属性默认的属性值是true</p>
 <h4 id="buffer属性"><a href="#buffer属性" class="headerlink" title="buffer属性"></a>buffer属性</h4><p>内置输出流对象out负责将服务器的某些信息或运行结果发送到用户端显示。buffer属性用来指定out设置的缓冲区的大小或不使用缓冲区 </p>
 <ul>
-<li>默认时8kb<br>例如:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;%@ page buffer= <span class="hljs-string">&quot;24kb&quot;</span> %&gt;<br></code></pre></td></tr></table></figure></li>
+<li>默认时8kb<br>例如:<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page buffer= <span class="hljs-string">&quot;24kb&quot;</span> %&gt;<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h4 id="autoFlush属性"><a href="#autoFlush属性" class="headerlink" title="autoFlush属性"></a>autoFlush属性</h4><p>autoFlush属性指定out的缓冲区被填满时，缓冲区是否会自动刷新。</p>
 <ul>
@@ -352,19 +352,24 @@
 <li>默认是true 指CPU的使用权在各个线程间快速切换</li>
 <li>可设置为false 指该JSP页面同一时刻只能响应一个用户的请求，其他用户须排队等待</li>
 </ul>
-<h4 id="info-属性"><a href="#info-属性" class="headerlink" title="info 属性"></a>info 属性</h4><p>info属性的属性值是一个字符串，其目的时为JSP页面准备一个常用但可能要经常修改的字符串。</p>
+<h4 id="info-属性"><a href="#info-属性" class="headerlink" title="info 属性"></a>info 属性</h4><p>info属性的属性值是一个字符串，其目的时为JSP页面准备一个常用但可能要经常修改的字符串。<br>例如： </p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ <span class="hljs-type">page</span> <span class="hljs-variable">info</span> <span class="hljs-operator">=</span><span class="hljs-string">&quot;we are students&quot;</span>%&gt;<br></code></pre></td></tr></table></figure>
+<p>可以在jsp页面中使用方法：<code>getServletInfo();</code>来获取info属性的属性值  </p>
 <h2 id="include指令标记"><a href="#include指令标记" class="headerlink" title="include指令标记"></a>include指令标记</h2><p>include可以在JSP页面内某处静态整体嵌入一个文件,该文件的编码必须和当前JSP页面一致</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;% @ <span class="hljs-type">include</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span><span class="hljs-string">&quot;文件的URL&quot;</span>%&gt;<br></code></pre></td></tr></table></figure>
 <h1 id="7-JSP动作标记"><a href="#7-JSP动作标记" class="headerlink" title="7 JSP动作标记"></a>7 JSP动作标记</h1><p>动作标记时一种特殊的标记，它影响JSP运行时的功能。</p>
 <h2 id="include动作标记"><a href="#include动作标记" class="headerlink" title="include动作标记"></a>include动作标记</h2><p>格式:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;<span class="hljs-attr">jsp</span>:include page= <span class="hljs-string">&quot;文件的URL&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:include page= <span class="hljs-string">&quot;文件的URL&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
 <p>或者</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;<span class="hljs-attr">jsp</span>:include page= <span class="hljs-string">&quot;文件的URL&quot;</span> &gt;<br>   param子标记<br>&lt;/<span class="hljs-attr">jsp</span>:include&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:include page= <span class="hljs-string">&quot;文件的URL&quot;</span> &gt;<br>   param子标记<br>&lt;/jsp:include&gt;<br></code></pre></td></tr></table></figure>
+<p>这个文件在JSP运行（Java文件的字节码文件被加载执行）时才包含进来</p>
 <h2 id="param动作标记"><a href="#param动作标记" class="headerlink" title="param动作标记"></a>param动作标记</h2><p>param标记以<code>名字—值</code>对的形式为其他标记提供附加信息。<br>格式:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;<span class="hljs-attr">jsp</span>:param  name= <span class="hljs-string">&quot;参数&quot;</span>  value= <span class="hljs-string">&quot; 参数的值&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:param  name= <span class="hljs-string">&quot;参数&quot;</span>  value= <span class="hljs-string">&quot; 参数的值&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+<p>该标记与<code>jsp:include</code>动作标记一起使用时,可以将<code>param标记</code>中参数的值传递到<code>include动作标记</code>要加载的文件中去,被加载的JSP文件可以通过使用Tomcat服务器提供的<code>request内置对象</code>获取<code>include动作标记</code>的<code>param子标记</code>中<code>name</code>给出的参数的值</p>
 <h2 id="forward-动作标记"><a href="#forward-动作标记" class="headerlink" title="forward 动作标记"></a>forward 动作标记</h2><p>作用是从该指令处停止当前页面的执行，而转向执行page属性指定的JSP页面。<br>格式:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;<span class="hljs-attr">jsp</span>:forward page=<span class="hljs-string">&quot;要转向的页面&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:forward page=<span class="hljs-string">&quot;要转向的页面&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
 <p>或</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">&lt;<span class="hljs-attr">jsp</span>:forward page=<span class="hljs-string">&quot;要转向的页面&quot;</span> &gt;<br>   param子标记<br>&lt;/<span class="hljs-attr">jsp</span>:forward&gt;<br></code></pre></td></tr></table></figure>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:forward page=<span class="hljs-string">&quot;要转向的页面&quot;</span> &gt;<br>   param子标记<br>&lt;/jsp:forward&gt;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>浏览器地址栏中显示的仍然是转向前的JSP页面的URL地址</li>
 </ul>
