@@ -16,15 +16,15 @@
   <meta name="author" content="Cjzk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="目录  tag文件 tag文件的结构 tag文件的保存 tag文件所在的目录 tag文件的编码     tag标记 tag标记与tag文件 tag标记的使用 tag标记的运行原理   tag文件的常用指令 tag指令 include指令 attribute指令 variable指令 taglib指令   总结为:  tag文件tag文件的结构Tag文件是扩展名为.tag的文本文件，其结构与jsp文">
+    <meta name="description" content="目录  tag文件 tag文件的结构 tag文件的保存 tag文件所在的目录 tag文件的编码     tag标记 tag标记与tag文件 tag标记的使用 tag标记的运行原理   tag文件的常用指令 tag指令 include指令 attribute指令 variable指令 taglib指令   总结  tag文件tag文件的结构Tag文件是扩展名为.tag的文本文件，其结构与jsp文件类">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tag文件与Tag标记">
 <meta property="og:url" content="https://cjzk236.github.io/2023/05/04/jsp-3/index.html">
 <meta property="og:site_name" content="此间之客">
-<meta property="og:description" content="目录  tag文件 tag文件的结构 tag文件的保存 tag文件所在的目录 tag文件的编码     tag标记 tag标记与tag文件 tag标记的使用 tag标记的运行原理   tag文件的常用指令 tag指令 include指令 attribute指令 variable指令 taglib指令   总结为:  tag文件tag文件的结构Tag文件是扩展名为.tag的文本文件，其结构与jsp文">
+<meta property="og:description" content="目录  tag文件 tag文件的结构 tag文件的保存 tag文件所在的目录 tag文件的编码     tag标记 tag标记与tag文件 tag标记的使用 tag标记的运行原理   tag文件的常用指令 tag指令 include指令 attribute指令 variable指令 taglib指令   总结  tag文件tag文件的结构Tag文件是扩展名为.tag的文本文件，其结构与jsp文件类">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-04T02:44:34.000Z">
-<meta property="article:modified_time" content="2023-05-26T05:17:37.235Z">
+<meta property="article:modified_time" content="2023-05-26T05:22:12.046Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -312,7 +312,7 @@
 <li><a href="#taglib%E6%8C%87%E4%BB%A4">taglib指令</a></li>
 </ul>
 </li>
-<li><a href="#%E6%80%BB%E7%BB%93%E4%B8%BA">总结为:</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
 </ul>
 <h1 id="tag文件"><a href="#tag文件" class="headerlink" title="tag文件"></a>tag文件</h1><h2 id="tag文件的结构"><a href="#tag文件的结构" class="headerlink" title="tag文件的结构"></a>tag文件的结构</h2><p>Tag文件是扩展名为.tag的文本文件，其结构与jsp文件类似<br>可以被jsp页面动态加载调用,实现代码的复用(但用户不能直接通过该Tag文件所在的Web服务目录直接访问Tag文件)<br>包含:  </p>
 <ul>
@@ -402,7 +402,7 @@
 <ul>
 <li>JSP页面或Tag文件都可以使用taglib指令使用标记库</li>
 </ul>
-<h1 id="总结为"><a href="#总结为" class="headerlink" title="总结为:"></a>总结为:</h1><ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ol>
 <li>先在jsp文件中 通过<code>taglib指令</code> 引入标记库(tag文件所在目录) <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ taglib tagdir=<span class="hljs-string">&quot;自定义标记库的位置&quot;</span> prefix=<span class="hljs-string">&quot;前缀&quot;</span>&gt;<br></code></pre></td></tr></table></figure></li>
 <li>再在引入的tag文件中通过<code>attribute指令</code><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs tag">&lt;%@ attribute name=&quot;对象名字&quot; required=&quot;ture&quot;|&quot;false&quot; type =&quot;对象的类型&quot;%&gt;<br></code></pre></td></tr></table></figure>
 让使用它的jsp文件向该tag文件传递引用给<code>name</code><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;前缀:Tag文件名字 对象名字=<span class="hljs-string">&quot;对象的引用&quot;</span>/&gt;   <span class="hljs-comment">//前缀为taglib指令中指定的prefix</span><br></code></pre></td></tr></table></figure>
