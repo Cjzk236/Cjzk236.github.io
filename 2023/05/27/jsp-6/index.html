@@ -16,28 +16,23 @@
   <meta name="author" content="Cjzk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="折半查找（二分）代码： 12345678910111213int Binary_Search(SSTable LzElemType key)&amp;#123;    int low&#x3D;O,high&#x3D;L.TableLen-l,mid;    while(low&lt;&#x3D;high)&amp;#123;        mid&#x3D; (low+high)&#x2F;2;          &#x2F;&#x2F;取中间位置        if(L.ele">
+    <meta name="description" content="有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。 servlet的部署、创建与运行servlet的工作原理通过jsp页面访问servlet共享变量dopost和doget方法重定向">
 <meta property="og:type" content="article">
-<meta property="og:title" content="查找">
-<meta property="og:url" content="https://cjzk236.github.io/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/index.html">
+<meta property="og:title" content="Java Servlet 基础">
+<meta property="og:url" content="https://cjzk236.github.io/2023/05/27/jsp-6/index.html">
 <meta property="og:site_name" content="此间之客">
-<meta property="og:description" content="折半查找（二分）代码： 12345678910111213int Binary_Search(SSTable LzElemType key)&amp;#123;    int low&#x3D;O,high&#x3D;L.TableLen-l,mid;    while(low&lt;&#x3D;high)&amp;#123;        mid&#x3D; (low+high)&#x2F;2;          &#x2F;&#x2F;取中间位置        if(L.ele">
+<meta property="og:description" content="有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。 servlet的部署、创建与运行servlet的工作原理通过jsp页面访问servlet共享变量dopost和doget方法重定向">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cjzk236.github.io/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-49-16.png">
-<meta property="og:image" content="https://cjzk236.github.io/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-45-42.png">
-<meta property="og:image" content="https://cjzk236.github.io/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-47-47.png">
-<meta property="og:image" content="https://cjzk236.github.io/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-48-34.png">
-<meta property="article:published_time" content="2023-05-16T03:38:05.000Z">
-<meta property="article:modified_time" content="2023-05-23T14:43:52.302Z">
+<meta property="article:published_time" content="2023-05-27T14:54:04.000Z">
+<meta property="article:modified_time" content="2023-05-28T14:58:22.358Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cjzk236.github.io/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-49-16.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>查找 - 此间之客</title>
+  <title>Java Servlet 基础 - 此间之客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -215,7 +210,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="查找"></span>
+            <span id="subtitle" data-typed-text="Java Servlet 基础"></span>
           
         </div>
 
@@ -226,8 +221,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-16 11:38" pubdate>
-          2023年5月16日 中午
+        <time datetime="2023-05-27 22:54" pubdate>
+          2023年5月27日 晚上
         </time>
       </span>
     
@@ -238,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          885 字
+          210 字
         
       </span>
     
@@ -249,7 +244,7 @@
         
         
         
-          8 分钟
+          2 分钟
         
       </span>
     
@@ -287,34 +282,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">查找</h1>
+            <h1 style="display: none">Java Servlet 基础</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="折半查找（二分）"><a href="#折半查找（二分）" class="headerlink" title="折半查找（二分）"></a>折半查找（二分）</h3><p><img src="/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-49-16.png" srcset="/img/loading.gif" lazyload><br>代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">Binary_Search</span><span class="hljs-params">(SSTable LzElemType key)</span>&#123;<br>    <span class="hljs-type">int</span> low=O,high=L.TableLen-l,mid;<br>    <span class="hljs-keyword">while</span>(low&lt;=high)&#123;<br>        mid= (low+high)/<span class="hljs-number">2</span>;          <span class="hljs-comment">//取中间位置</span><br>        <span class="hljs-keyword">if</span>(L.elem［mid］==key)<br>            <span class="hljs-keyword">return</span> mid;             <span class="hljs-comment">//查找成功则返回所在位置</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(L.elem［mid］&gt;key)<br>            high=mid-l;             <span class="hljs-comment">//从前半部分继续查找</span><br>        <span class="hljs-keyword">else</span><br>            low-mid+l;              <span class="hljs-comment">//从后半部分继续查找</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;                      <span class="hljs-comment">//查找失败，返回-1</span><br>&#125;<br></code></pre></td></tr></table></figure>
-<p>注意与另一种<a href="/2023/04/17/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-1-%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89/#%E4%BA%8C%E5%88%86">二分</a>写法区分，考试以此处为准</p>
-<h4 id="折半查找判定树的构建"><a href="#折半查找判定树的构建" class="headerlink" title="折半查找判定树的构建"></a>折半查找判定树的构建</h4><p><img src="/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-45-42.png" srcset="/img/loading.gif" lazyload><br>要学会如何画判定二叉树，如下图 16个元素的有序表 按编号绘制的判定二叉树<br><img src="/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-47-47.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-48-34.png" srcset="/img/loading.gif" lazyload></p>
-<h4 id="拓展思考"><a href="#拓展思考" class="headerlink" title="拓展思考"></a>拓展思考</h4><ul>
-<li>折半查找时间复杂度是O(log<sub>2</sub>n)<br>  顺序查找的时间复杂度是O(n)<br>  但折半查找的速度不一定不顺序查找更快</li>
-<li>mid向上取整时 反过来 l和r之间有偶数个元素，mid分隔后，左半部分比右半部分多一个元素</li>
-</ul>
-<h2 id="做题总结"><a href="#做题总结" class="headerlink" title="做题总结"></a>做题总结</h2><ol>
-<li><p>折半查找和二叉排序树的时间性能有时不相同</p>
-<ul>
-<li>折半查找查找过程构成了二叉排序树，是二叉平衡树 时间复杂度O(log<sub>2</sub>n)</li>
-<li>而二叉排序树在不限平衡的条件下是自由发挥的 最坏情况下 查找长度为O(n)</li>
-</ul>
-</li>
-<li><p>折半查找查找某个不存在的元素，求比较次数至多、至少是多少</p>
-<ul>
-<li>方法一：画出对应二叉排序树（左少右多）</li>
-<li>方法二：我们已知 在二分时 若当前l与r之间有奇数个元素，则mid分隔后，左右两部分元素个数相等，若当前l和r之间有偶数个元素 ，则mid分隔后，左半部分比右半部少一个元素 。对元素为n的顺序数组进行二分对应的二叉排序树是平衡二叉树 <strong>最大高度$h&#x3D;\left \lceil \log_{2}{n+1}  \right \rceil $ 若n为奇数  若查找某个不存在的元素 查找次数至多<code>h</code>,至少要具体看是否能满足满二叉树的要求，若为满二叉树则为<code>h</code>，若不为则为<code>h-1</code>；若n为偶数 若查找某个不存在的元素 至多是 <code>h</code> 至少是 <code>h-1</code>(因为满二叉树结点树n&#x3D;2<sup>h</sup>-1,n一定为奇数) 。</strong></li>
-</ul>
-</li>
-</ol>
-
+                <hr>
+<p>有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。</p>
+<h1 id="servlet的部署、创建与运行"><a href="#servlet的部署、创建与运行" class="headerlink" title="servlet的部署、创建与运行"></a>servlet的部署、创建与运行</h1><h1 id="servlet的工作原理"><a href="#servlet的工作原理" class="headerlink" title="servlet的工作原理"></a>servlet的工作原理</h1><h1 id="通过jsp页面访问servlet"><a href="#通过jsp页面访问servlet" class="headerlink" title="通过jsp页面访问servlet"></a>通过jsp页面访问servlet</h1><h1 id="共享变量"><a href="#共享变量" class="headerlink" title="共享变量"></a>共享变量</h1><h1 id="dopost和doget方法"><a href="#dopost和doget方法" class="headerlink" title="dopost和doget方法"></a>dopost和doget方法</h1><h1 id="重定向与转发"><a href="#重定向与转发" class="headerlink" title="重定向与转发"></a>重定向与转发</h1><h1 id="使用session"><a href="#使用session" class="headerlink" title="使用session"></a>使用session</h1>
                 
               </div>
             
@@ -332,12 +307,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  <a href="/categories/JSP/" class="category-chain-item">JSP</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%B8%83%E7%AB%A0/" class="category-chain-item">第七章</a>
+  <a href="/categories/JSP/%E7%AC%AC%E5%85%AD%E7%AB%A0/" class="category-chain-item">第六章</a>
   
   
 
@@ -359,8 +334,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>查找</div>
-      <div>https://cjzk236.github.io/2023/05/16/数据结构-7-查找/</div>
+      <div>Java Servlet 基础</div>
+      <div>https://cjzk236.github.io/2023/05/27/jsp-6/</div>
     </div>
     <div class="license-meta">
       
@@ -372,7 +347,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月16日</div>
+          <div>2023年5月27日</div>
         </div>
       
       
@@ -404,9 +379,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/21/OS-4-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" title="文件管理">
+                      <a href="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" title="OS-2-进程与线程">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">文件管理</span>
+                        <span class="hidden-mobile">OS-2-进程与线程</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -414,8 +389,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-6-%E5%9B%BE/" title="图">
-                        <span class="hidden-mobile">图</span>
+                      <a href="/2023/05/27/jsp-5/" title="JSP 与Java bean">
+                        <span class="hidden-mobile">JSP 与Java bean</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -472,12 +447,6 @@
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -696,49 +665,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

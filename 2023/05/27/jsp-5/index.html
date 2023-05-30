@@ -1,0 +1,794 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/codelogo.png">
+  <link rel="icon" href="/img/codelogo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#161e27">
+  <meta name="author" content="Cjzk">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="目录  编写javabean和使用jababean 编写javabean 保存bean的字节码 创建与使用bean 使用bean bean的加载原理 bean的有效范围和生命周期     获取和修改bean的属性 getproperty动作标记 setproperty动作标记   bean的辅助类 jsp与bean结合的简单例子  编写javabean和使用jababeanJSP页面可以将数据的处">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSP 与Java bean">
+<meta property="og:url" content="https://cjzk236.github.io/2023/05/27/jsp-5/index.html">
+<meta property="og:site_name" content="此间之客">
+<meta property="og:description" content="目录  编写javabean和使用jababean 编写javabean 保存bean的字节码 创建与使用bean 使用bean bean的加载原理 bean的有效范围和生命周期     获取和修改bean的属性 getproperty动作标记 setproperty动作标记   bean的辅助类 jsp与bean结合的简单例子  编写javabean和使用jababeanJSP页面可以将数据的处">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/27/jsp-5/2023-05-27-22-42-37.png">
+<meta property="article:published_time" content="2023-05-27T14:20:25.000Z">
+<meta property="article:modified_time" content="2023-05-27T14:52:18.816Z">
+<meta property="article:author" content="Cjzk">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cjzk236.github.io/2023/05/27/jsp-5/2023-05-27-22-42-37.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>JSP 与Java bean - 此间之客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"cjzk236.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>此间之客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/gladenlight.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JSP 与Java bean"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-27 22:20" pubdate>
+          2023年5月27日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          42 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JSP 与Java bean</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><font size=6><strong>目录</strong></font></p>
+<ul>
+<li><a href="#%E7%BC%96%E5%86%99javabean%E5%92%8C%E4%BD%BF%E7%94%A8jababean">编写javabean和使用jababean</a><ul>
+<li><a href="#%E7%BC%96%E5%86%99javabean">编写javabean</a></li>
+<li><a href="#%E4%BF%9D%E5%AD%98bean%E7%9A%84%E5%AD%97%E8%8A%82%E7%A0%81">保存bean的字节码</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8bean">创建与使用bean</a><ul>
+<li><a href="#%E4%BD%BF%E7%94%A8bean">使用bean</a></li>
+<li><a href="#bean%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%8E%9F%E7%90%86">bean的加载原理</a></li>
+<li><a href="#bean%E7%9A%84%E6%9C%89%E6%95%88%E8%8C%83%E5%9B%B4%E5%92%8C%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">bean的有效范围和生命周期</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E5%92%8C%E4%BF%AE%E6%94%B9bean%E7%9A%84%E5%B1%9E%E6%80%A7">获取和修改bean的属性</a><ul>
+<li><a href="#getproperty%E5%8A%A8%E4%BD%9C%E6%A0%87%E8%AE%B0">getproperty动作标记</a></li>
+<li><a href="#setproperty%E5%8A%A8%E4%BD%9C%E6%A0%87%E8%AE%B0">setproperty动作标记</a></li>
+</ul>
+</li>
+<li><a href="#bean%E7%9A%84%E8%BE%85%E5%8A%A9%E7%B1%BB">bean的辅助类</a></li>
+<li><a href="#jsp%E4%B8%8Ebean%E7%BB%93%E5%90%88%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90">jsp与bean结合的简单例子</a></li>
+</ul>
+<h1 id="编写javabean和使用jababean"><a href="#编写javabean和使用jababean" class="headerlink" title="编写javabean和使用jababean"></a>编写javabean和使用jababean</h1><p>JSP页面可以将数据的处理过程指派给一个或几个bean来完成，即JSP页面调用这些bean完成数据的处理，并将有关处理结果存放到bean中，然后JSP页面负责显示bean中的数据。</p>
+<h2 id="编写javabean"><a href="#编写javabean" class="headerlink" title="编写javabean"></a>编写javabean</h2><p>编写Javabean就是编写一个Java的类，所以只要会写类就能编写一个Javabean。这个类创建的一个对象称为一个Javabean，简称bean，分配给bean的变量（成员变量），也称bean的属性。为了能让使用bean的应用程序构建工具（比如Tomcat服务器）使用JSP动作标记知道bean的属性和方法，只须在类的方法命名上遵守以下规则：</p>
+<ol>
+<li>如果类的成员变量，也称bean的属性的名字是xxx，那么为了获取或更改bean的属性的值，类中必须提供两个方法：<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jsp">getXxx()，用来获取属性xxx。<br>setXxx()，用来修改属性xxx.。<br></code></pre></td></tr></table></figure>
+也就是<strong>方法的名字用get或set为前缀，后缀是将属性（成员变量）名字的首字母大写的字符序列。</strong></li>
+<li>类中定义的方法的访问权限都必须是public的。</li>
+<li>类中定义的构造方法必须是public、无参数的。</li>
+</ol>
+<h2 id="保存bean的字节码"><a href="#保存bean的字节码" class="headerlink" title="保存bean的字节码"></a>保存bean的字节码</h2><p>例如：在webapps目录下新建一个Web服务目录ch5，创建bean的类的字节码文件需要按要求存放，因此需要在ch5下建立如下的目录结构（目录名字WEB-INF中的字母大写）：<br><code>\ch5\WEB-INF\classes</code></p>
+<ul>
+<li><code>ch5\WEB-INF\classes</code>目录下，根据包名对应的路径，在<code>classes</code>下再建立相应的子目录。比如，包名<code>tom.jiafei</code>对应的路径是<code>tom\jiafei</code>，那么在<code>classes</code>下建立子目录结构：<code>tom\jiafei</code>。</li>
+<li>将创建bean的字节码文件，比如<code>Circle.class</code>，复制到<br><code>\WEB-INF\classes\tom\jiafei</code></li>
+<li>为了调试程序方便，可以直接按照bean的包名将bean的源文件，比如<code>Circle.java</code>，保存在<code>\WEB-INF\classes\tom\jiafei</code>目录中，然后用命令行进入<code>tom\jiafei</code>的父目录<code>classes</code>（不要进入tom或jiafei目录）编译<code>Circle.java</code>：</li>
+</ul>
+<p><code>classes&gt;javac tom\jiafei\Circle.java</code></p>
+<h2 id="创建与使用bean"><a href="#创建与使用bean" class="headerlink" title="创建与使用bean"></a>创建与使用bean</h2><h3 id="使用bean"><a href="#使用bean" class="headerlink" title="使用bean"></a>使用bean</h3><p>使用JSP动作标记useBean加载使用bean，语法格式是：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:useBean id=<span class="hljs-string">&quot;bean的名字&quot;</span> class=<span class="hljs-string">&quot;创建bean的类&quot;</span> scope=<span class="hljs-string">&quot;bean有效范围&quot;</span>/&gt;<br>或<br>&lt;jsp:useBean id=<span class="hljs-string">&quot;bean的名字&quot;</span> class=<span class="hljs-string">&quot;创建bean的类&quot;</span> scope= <span class="hljs-string">&quot;bean有效范围&quot;</span>&gt;<br>&lt;/jsp:useBean&gt;<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:useBean id=<span class="hljs-string">&quot;circle&quot;</span> class=<span class="hljs-string">&quot;tom.jiafei.Circle&quot;</span> scope=<span class="hljs-string">&quot;page&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+
+<p>需要特别注意的是，其中的“创建bean的类”要带有包名，比如：<br><code>class=&quot;tom.jiafei.Circle&quot;</code></p>
+<h3 id="bean的加载原理"><a href="#bean的加载原理" class="headerlink" title="bean的加载原理"></a>bean的加载原理</h3><p>Tomcat服务器首先在Tomcat服务器管理的pageContent内置对象中查找是否含有这样的bean。如果这样的bean存在，Tomcat服务器就分配这样的bean给用户，如果在pageContent中没有查找到JSP动作标记要求的bean，就根据class指定的类创建一个bean，并将所创建的bean添加到pageContent中。通过Tomcat服务器创建bean的过程可以看出，首次创建一个新的bean需要用相应类的字节码文件创建对象，当某些JSP页面再需要同样的bean时，Tomcat服务器直接将pageContent中已经有的bean分配给JSP页面，提高了JSP使用bean的效率。</p>
+<ul>
+<li>如果修改了字节码文件，必须重新启动Tomcat服务器才能使用新的字节码文件。</li>
+</ul>
+<h3 id="bean的有效范围和生命周期"><a href="#bean的有效范围和生命周期" class="headerlink" title="bean的有效范围和生命周期"></a>bean的有效范围和生命周期</h3><ol>
+<li>page bean<br>scope取值为page的bean称为page bean.<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:useBean id=<span class="hljs-string">&quot;circle&quot;</span> class=<span class="hljs-string">&quot;tom.jiafei.Circle&quot;</span> scope=<span class="hljs-string">&quot;page&quot;</span> /&gt;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>page bean的有效范围是用户访问的当前页面，存活时间直到当前页面执行完毕。</li>
+<li>不同用户（浏览器）的page bean是互不相同的。也就是说，当两个用户同时访问一个JSP页面时，一个用户对自己page bean的属性的改变，不会影响到另一个用户。</li>
+</ul>
+<ol start="2">
+<li>session bean<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:useBean id=<span class="hljs-string">&quot;circle&quot;</span> class=<span class="hljs-string">&quot;tom.jiafei.Circle&quot;</span> scope=<span class="hljs-string">&quot;session&quot;</span> /&gt;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>session bean的有效范围是用户访问的Web服务目录下的各个页面，存活时间是用户的会话期（session）间。</li>
+<li>如果用户访问Web服务目录多个页面，那么每个页面id相同的session bean是同一个bean。</li>
+<li>不同用户（浏览器）的session bean是互不相同的.</li>
+<li>要使用session bean时，要保证用户端支持cookie</li>
+</ul>
+<ol start="3">
+<li>request bean<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:useBean id=<span class="hljs-string">&quot;circle&quot;</span> class=<span class="hljs-string">&quot;tom.jiafei.Circle&quot;</span> scope=<span class="hljs-string">&quot;request&quot;</span> /&gt;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>bean的有效范围是用户请求的当前页面，存活时间是从用户的请求到请求结束。request bean存活时间略长于page bean的存活时间，原因是Tomcat服务器认为页面执行完毕后，响应才算结束。</li>
+<li>不同用户的request bean的也是互不相同的。也就是说，当两个用户同时请求一个JSP页面时，一个用户对自己request bean的属性的改变，不会影响到另一个用户。</li>
+</ul>
+<ol start="4">
+<li>application bean<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:useBean id=<span class="hljs-string">&quot;circle&quot;</span> class=<span class="hljs-string">&quot;tom.jiafei.Circle&quot;</span> scope=<span class="hljs-string">&quot;application&quot;</span> /&gt;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>application bean的有效范围是当前Web服务目录下的各个页面，存活时间直到Tomcat服务器关闭。</li>
+<li>Tomcat服务器为访问Web服务目录的所有用户分配一个共享的bean，即不同用户的application bean也都是相同的一个。也就是说，任何一个用户对自己application bean的属性的改变，都会影响到其他的用户（不同Web服务目录的application bean互不相同）。</li>
+</ul>
+<p>综上 bean的有效范围见下图<br><img src="/2023/05/27/jsp-5/2023-05-27-22-42-37.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="获取和修改bean的属性"><a href="#获取和修改bean的属性" class="headerlink" title="获取和修改bean的属性"></a>获取和修改bean的属性</h1><p>使用useBean动作标记获得一个bean后，在Java程序片或表达式中bean就可以调用方法产生行为</p>
+<h2 id="getproperty动作标记"><a href="#getproperty动作标记" class="headerlink" title="getproperty动作标记"></a>getproperty动作标记</h2><p>使用<code>getProperty动作标记</code>可以获得bean的属性值，并将这个值用串的形式发送给用户的浏览器。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:getProperty  name=<span class="hljs-string">&quot;bean的id &quot;</span> property=<span class="hljs-string">&quot;bean的属性&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:getProperty  name=<span class="hljs-string">&quot;bean的id &quot;</span>  property=<span class="hljs-string">&quot;bean的属性&quot;</span>&gt;<br>&lt;/jsp:getProperty&gt;<br></code></pre></td></tr></table></figure>
+<p>其中，name取值是bean的id，用来指定要获取哪个bean的属性的值，property取值是该bean的一个属性的名字。<br>当JSP页面使用getProperty标记获取属性xxx的值时，必须保证bean有相应的getXxx方法，即对方法的名字的命名有特殊的要求。</p>
+<ul>
+<li>让request调用setCharacterEncoding方法设置编码为utf-8，以避免显示bean的属性值出现乱码现象</li>
+</ul>
+<h2 id="setproperty动作标记"><a href="#setproperty动作标记" class="headerlink" title="setproperty动作标记"></a>setproperty动作标记</h2><p>使用<code>setProperty动作标记</code>可以设置bean的属性值，使用这个标记之前，必须使用useBean标记得到一个相应的bean<br><code>setProperty动作标记</code>可以通过两种方式设置bean的属性值：</p>
+<ol>
+<li>将bean属性的值设置为一个表达式的值或字符序列。<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:setProperty name=<span class="hljs-string">&quot;bean的id &quot;</span> property=<span class="hljs-string">&quot;bean的属性&quot;</span> <br>value= <span class="hljs-string">&quot;&lt;%=expression%&gt;&quot;</span>/&gt;<br>&lt;jsp:setProperty name=<span class="hljs-string">&quot;bean的id &quot;</span> property=<span class="hljs-string">&quot;bean的属性&quot;</span> <br>value= <span class="hljs-string">&quot;字符序列&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+value给出的值的类型要和bean的属性的类型一致。</li>
+<li>通过HTTP表单的参数的值来设置bean的相应属性的值。</li>
+</ol>
+<ul>
+<li><p>用form表单的所有参数的值设置bean相对应的属性值的使用格式如下：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:setProperty  name= <span class="hljs-string">&quot;bean的id的名字&quot;</span>  property=<span class="hljs-string">&quot;*&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+<p>在setProperty标记的上述用法中不具体指定bean属性的值将对应form表单中哪个参数指定的值，系统会自动根据名字进行匹配对应，但要求bean属性的名字必须在form表单中有名称相同的参数名字相对应，Tomcat服务器会自动将参数的字符串值转换为bean相对应的属性的值</p>
+</li>
+<li><p>用form表单的某个参数的值设置bean的某个属性值的使用格式如下：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:setProperty  name= <span class="hljs-string">&quot;bean的名字&quot;</span>  property=<span class="hljs-string">&quot;属性名&quot;</span>  param= <span class="hljs-string">&quot;参数名&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
+<p>setProperty标记的上述用法具体指定了bean属性的值将对应表单中哪个参数名（param）指定的值，这种设置bean的属性值的方法，不要求property给出的bean属性的名字和param给出的参数名一致，即不要求bean属性的名字必须和表单中某个参数。</p>
+</li>
+<li><p>注:用form表单设置bean的属性值时，只有提交了表单，对应的setProperty标记才会被执行。</p>
+</li>
+</ul>
+<h1 id="bean的辅助类"><a href="#bean的辅助类" class="headerlink" title="bean的辅助类"></a>bean的辅助类</h1><p>写一个创建bean的类时，除了需要用import语句引入JDK提供的类，可能还需要自己编写一些其他的类，只要将这样类的包名和bean类的包名一致即可（也可以和创建bean的类写在一个Java源文件中）。</p>
+<h1 id="jsp与bean结合的简单例子"><a href="#jsp与bean结合的简单例子" class="headerlink" title="jsp与bean结合的简单例子"></a>jsp与bean结合的简单例子</h1><p>JSP页面中调用bean可以将数据的处理从页面中分离出来，实现代码复用，以便更有效地维护一个Web应用。<br>如：创建bean的类的包名都是<code>red.star</code>，使用的Web服务目录仍然是<code>ch5</code>，因此，需要在<code>ch5</code>下建立如下的目录结构：<br><code>ch5\WEB-INF\classes\red\star</code><br>创建bean的字节码文件都需要保存在上述目录中。为了调试程序方便，可以直接按照创建bean的类的包名将相应的Java源文件保存在Web服务目录的相应目录中，比如将Java源文件保存在Web服务目录<code>ch5</code>的<code>WEB-INF\classes\red\star</code>目录中，然后使用<code>MS-DOS</code>命令行进入<code>\red\star</code>的父目录<code>classes</code>，如下编译Java源文件：<br><code>classes&gt; javac red\star\源文件名</code></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/JSP/" class="category-chain-item">JSP</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/JSP/%E7%AC%AC%E4%BA%94%E7%AB%A0/" class="category-chain-item">第五章</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>JSP 与Java bean</div>
+      <div>https://cjzk236.github.io/2023/05/27/jsp-5/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Cjzk</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/27/jsp-6/" title="Java Servlet 基础">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java Servlet 基础</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/27/jsp-4/" title="内置对象">
+                        <span class="hidden-mobile">内置对象</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

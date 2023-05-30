@@ -16,28 +16,38 @@
   <meta name="author" content="Cjzk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="折半查找（二分）代码： 12345678910111213int Binary_Search(SSTable LzElemType key)&amp;#123;    int low&#x3D;O,high&#x3D;L.TableLen-l,mid;    while(low&lt;&#x3D;high)&amp;#123;        mid&#x3D; (low+high)&#x2F;2;          &#x2F;&#x2F;取中间位置        if(L.ele">
+    <meta name="description" content="进程与线程进程的概念、组织、特征在多道程序环境下，允许多个程序并发执行，此时它们将失去封闭性，并具有间断性及不可再现性的特征。为此引入了进程（Process）的概念，以便更好地描述和控制程序的并发执行，实现操作系统的并发性和共享性（最基本的两个特性）  注意：PCB是进程存在的唯一标志PCB是给操作系统用的程序段、数据段是给进程自己用的 更准确来说 PCB、程序段、数据段 三部分组成了 进程实体（">
 <meta property="og:type" content="article">
-<meta property="og:title" content="查找">
-<meta property="og:url" content="https://cjzk236.github.io/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/index.html">
+<meta property="og:title" content="OS-2-进程与线程">
+<meta property="og:url" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/index.html">
 <meta property="og:site_name" content="此间之客">
-<meta property="og:description" content="折半查找（二分）代码： 12345678910111213int Binary_Search(SSTable LzElemType key)&amp;#123;    int low&#x3D;O,high&#x3D;L.TableLen-l,mid;    while(low&lt;&#x3D;high)&amp;#123;        mid&#x3D; (low+high)&#x2F;2;          &#x2F;&#x2F;取中间位置        if(L.ele">
+<meta property="og:description" content="进程与线程进程的概念、组织、特征在多道程序环境下，允许多个程序并发执行，此时它们将失去封闭性，并具有间断性及不可再现性的特征。为此引入了进程（Process）的概念，以便更好地描述和控制程序的并发执行，实现操作系统的并发性和共享性（最基本的两个特性）  注意：PCB是进程存在的唯一标志PCB是给操作系统用的程序段、数据段是给进程自己用的 更准确来说 PCB、程序段、数据段 三部分组成了 进程实体（">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cjzk236.github.io/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-49-16.png">
-<meta property="og:image" content="https://cjzk236.github.io/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-45-42.png">
-<meta property="og:image" content="https://cjzk236.github.io/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-47-47.png">
-<meta property="og:image" content="https://cjzk236.github.io/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-48-34.png">
-<meta property="article:published_time" content="2023-05-16T03:38:05.000Z">
-<meta property="article:modified_time" content="2023-05-23T14:43:52.302Z">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-07-08.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-15-40.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-16-05.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-33-07.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-21-42.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-22-47.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-26-35.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-39-36.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-48-06.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-48-16.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-49-27.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-50-15.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-54-07.png">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-20-00-12.png">
+<meta property="article:published_time" content="2023-05-28T15:03:27.000Z">
+<meta property="article:modified_time" content="2023-05-30T03:05:37.898Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cjzk236.github.io/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-49-16.png">
+<meta name="twitter:image" content="https://cjzk236.github.io/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-07-08.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>查找 - 此间之客</title>
+  <title>OS-2-进程与线程 - 此间之客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -215,7 +225,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="查找"></span>
+            <span id="subtitle" data-typed-text="OS-2-进程与线程"></span>
           
         </div>
 
@@ -226,8 +236,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-16 11:38" pubdate>
-          2023年5月16日 中午
+        <time datetime="2023-05-28 23:03" pubdate>
+          2023年5月28日 晚上
         </time>
       </span>
     
@@ -238,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          885 字
+          1.5k 字
         
       </span>
     
@@ -249,7 +259,7 @@
         
         
         
-          8 分钟
+          13 分钟
         
       </span>
     
@@ -287,34 +297,79 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">查找</h1>
+            <h1 style="display: none">OS-2-进程与线程</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="折半查找（二分）"><a href="#折半查找（二分）" class="headerlink" title="折半查找（二分）"></a>折半查找（二分）</h3><p><img src="/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-49-16.png" srcset="/img/loading.gif" lazyload><br>代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">Binary_Search</span><span class="hljs-params">(SSTable LzElemType key)</span>&#123;<br>    <span class="hljs-type">int</span> low=O,high=L.TableLen-l,mid;<br>    <span class="hljs-keyword">while</span>(low&lt;=high)&#123;<br>        mid= (low+high)/<span class="hljs-number">2</span>;          <span class="hljs-comment">//取中间位置</span><br>        <span class="hljs-keyword">if</span>(L.elem［mid］==key)<br>            <span class="hljs-keyword">return</span> mid;             <span class="hljs-comment">//查找成功则返回所在位置</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(L.elem［mid］&gt;key)<br>            high=mid-l;             <span class="hljs-comment">//从前半部分继续查找</span><br>        <span class="hljs-keyword">else</span><br>            low-mid+l;              <span class="hljs-comment">//从后半部分继续查找</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;                      <span class="hljs-comment">//查找失败，返回-1</span><br>&#125;<br></code></pre></td></tr></table></figure>
-<p>注意与另一种<a href="/2023/04/17/acwing-%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE-1-%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95%EF%BC%88%E4%B8%80%EF%BC%89/#%E4%BA%8C%E5%88%86">二分</a>写法区分，考试以此处为准</p>
-<h4 id="折半查找判定树的构建"><a href="#折半查找判定树的构建" class="headerlink" title="折半查找判定树的构建"></a>折半查找判定树的构建</h4><p><img src="/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-45-42.png" srcset="/img/loading.gif" lazyload><br>要学会如何画判定二叉树，如下图 16个元素的有序表 按编号绘制的判定二叉树<br><img src="/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-47-47.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/16/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-7-%E6%9F%A5%E6%89%BE/2023-05-23-21-48-34.png" srcset="/img/loading.gif" lazyload></p>
-<h4 id="拓展思考"><a href="#拓展思考" class="headerlink" title="拓展思考"></a>拓展思考</h4><ul>
-<li>折半查找时间复杂度是O(log<sub>2</sub>n)<br>  顺序查找的时间复杂度是O(n)<br>  但折半查找的速度不一定不顺序查找更快</li>
-<li>mid向上取整时 反过来 l和r之间有偶数个元素，mid分隔后，左半部分比右半部分多一个元素</li>
-</ul>
-<h2 id="做题总结"><a href="#做题总结" class="headerlink" title="做题总结"></a>做题总结</h2><ol>
-<li><p>折半查找和二叉排序树的时间性能有时不相同</p>
+                <h2 id="进程与线程"><a href="#进程与线程" class="headerlink" title="进程与线程"></a>进程与线程</h2><h3 id="进程的概念、组织、特征"><a href="#进程的概念、组织、特征" class="headerlink" title="进程的概念、组织、特征"></a>进程的概念、组织、特征</h3><h2 id=""><a href="#" class="headerlink" title=""></a><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-07-08.png" srcset="/img/loading.gif" lazyload></h2><p>在多道程序环境下，允许多个程序并发执行，此时它们将失去封闭性，并具有间断性及不可再现性的特征。为此引入了进程（Process）的概念，以便更好地描述和控制程序的并发执行，实现操作系统的并发性和共享性（最基本的两个特性）<br><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-15-40.png" srcset="/img/loading.gif" lazyload></p>
 <ul>
-<li>折半查找查找过程构成了二叉排序树，是二叉平衡树 时间复杂度O(log<sub>2</sub>n)</li>
-<li>而二叉排序树在不限平衡的条件下是自由发挥的 最坏情况下 查找长度为O(n)</li>
+<li>注意：PCB是进程存在的唯一标志<br><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-16-05.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-33-07.png" srcset="/img/loading.gif" lazyload><br>PCB是给操作系统用的<br>程序段、数据段是给进程自己用的</li>
+<li>更准确来说 <strong>PCB、程序段、数据段</strong> 三部分组成了 <strong>进程实体（进程映像）</strong></li>
+<li>程序是静态的 进程是动态的</li>
+<li><strong>进程</strong>是<strong>进程实体</strong>的<strong>运行过程</strong>，是系统进行<strong>资源分配</strong>和<strong>调度</strong>的一个独立单位。</li>
+</ul>
+<h3 id="进程的状态与转化"><a href="#进程的状态与转化" class="headerlink" title="进程的状态与转化"></a>进程的状态与转化</h3><h2 id="-1"><a href="#-1" class="headerlink" title=""></a><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-21-42.png" srcset="/img/loading.gif" lazyload></h2><p><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-22-47.png" srcset="/img/loading.gif" lazyload><br><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-26-35.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>阻塞态 → 就绪态 不是进程自身能控制的 是一种<strong>被动行为</strong>，需要其他相关进程的协助</li>
+<li>运行态 → 阻塞态 是一种进程自身做出的<strong>主观行为</strong></li>
+<li>不能由阻塞态直接转换为运行态，也不能由就绪态直接转换为阻塞态（因为进入阻塞态是进程主动请求的，必然需要进程在运行时才能发出这种请求）</li>
+</ul>
+<h3 id="进程的组织方式"><a href="#进程的组织方式" class="headerlink" title="进程的组织方式"></a>进程的组织方式</h3><ul>
+<li>链接方式<ul>
+<li>按照进程状态将PCB分成多个队列 <ul>
+<li>例如单核CPU计算机的执行指针or多核CPU的执行队列、就绪队列、阻塞队列（很多操作系统还会根据阻塞原因不同，贼分为多个阻阻塞队列）</li>
 </ul>
 </li>
-<li><p>折半查找查找某个不存在的元素，求比较次数至多、至少是多少</p>
-<ul>
-<li>方法一：画出对应二叉排序树（左少右多）</li>
-<li>方法二：我们已知 在二分时 若当前l与r之间有奇数个元素，则mid分隔后，左右两部分元素个数相等，若当前l和r之间有偶数个元素 ，则mid分隔后，左半部分比右半部少一个元素 。对元素为n的顺序数组进行二分对应的二叉排序树是平衡二叉树 <strong>最大高度$h&#x3D;\left \lceil \log_{2}{n+1}  \right \rceil $ 若n为奇数  若查找某个不存在的元素 查找次数至多<code>h</code>,至少要具体看是否能满足满二叉树的要求，若为满二叉树则为<code>h</code>，若不为则为<code>h-1</code>；若n为偶数 若查找某个不存在的元素 至多是 <code>h</code> 至少是 <code>h-1</code>(因为满二叉树结点树n&#x3D;2<sup>h</sup>-1,n一定为奇数) 。</strong></li>
+<li>操作系统持有指向各个队列的指针</li>
 </ul>
 </li>
+<li>索引方式<ul>
+<li>根据进程状态的不同，建立几张索引表<ul>
+<li>与链接方式类似，但是队列换成了索引表</li>
+</ul>
+</li>
+<li>操作系统持有指向各个索引表的指针</li>
+</ul>
+</li>
+</ul>
+<h3 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h3><p>进程控制的主要功能是对系统中的所有进程实施有效的管理，它具有创建新进程、撤销已有进程、<strong>实现进程状态转换</strong>等功能<br><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-39-36.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>进程的控制是用<strong>原语</strong>实现的<ul>
+<li><strong>原语</strong>是一种特殊的程序，它的执行具有<strong>原子性</strong>。也就是说，这段程序的运行必须一气呵成，不可中断。</li>
+<li>可以通过<code>关中断指令</code>和<code>开中断指令</code>这两个<strong>特权指令</strong>来实现<strong>原子性</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>进程控制相关的原语</strong><br>进程的创建<br><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-48-06.png" srcset="/img/loading.gif" lazyload><br>进程的终止<br><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-48-16.png" srcset="/img/loading.gif" lazyload><br>进程的阻塞和唤醒(<strong>阻塞和唤醒要成对出现</strong>)<br><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-49-27.png" srcset="/img/loading.gif" lazyload><br>阻塞原语(Block) 唤醒原语(Wakeup) 必须成对使用如果在某进程中调用了Block原语，则必须在与之合作的或其他相关的进程中安排一条相应的Wakeup原语，以便唤醒阻塞进程；否则，阻塞进程将会因不能被唤醒而永久地处于阻塞状态。</p>
+<p>进程的切换<br><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-50-15.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>进程的控制会导致进程状态的转化。无论哪个进程控制原语，要做的无非三类事情:<ol>
+<li>更新PCB中的信息<ul>
+<li>所有的进程控制原语一定都会修改进程状态标志</li>
+<li>剥夺当前运行进程的CPU使用权必然需要保存其运行环境</li>
+<li>某进程开始运行前必然要恢复其运行环境</li>
+</ul>
+</li>
+<li>将PCB插入合适的队列</li>
+<li>分配&#x2F;回收资源</li>
 </ol>
-
+</li>
+</ul>
+<h3 id="进程的通信-IPC"><a href="#进程的通信-IPC" class="headerlink" title="进程的通信 IPC"></a>进程的通信 IPC</h3><h2 id="进程间通信（Inter-Process-Communication，-IPC）是指两个进程之间产生数据交互进程是分配系统资源的单位（包括内存地址空间），因此各进程拥有的内存地址空间相互独立。为了保证安全，一个进程不能直接访问另一个进程的地址空间-因此进程通信需要操作系统的支持"><a href="#进程间通信（Inter-Process-Communication，-IPC）是指两个进程之间产生数据交互进程是分配系统资源的单位（包括内存地址空间），因此各进程拥有的内存地址空间相互独立。为了保证安全，一个进程不能直接访问另一个进程的地址空间-因此进程通信需要操作系统的支持" class="headerlink" title="进程间通信（Inter-Process Communication， IPC）是指两个进程之间产生数据交互进程是分配系统资源的单位（包括内存地址空间），因此各进程拥有的内存地址空间相互独立。为了保证安全，一个进程不能直接访问另一个进程的地址空间,因此进程通信需要操作系统的支持"></a>进程间通信（Inter-Process Communication， IPC）是指两个进程之间产生数据交互<br>进程是分配系统资源的单位（包括内存地址空间），因此<strong>各进程拥有的内存地址空间相互独立</strong>。<strong>为了保证安全</strong>，<strong>一个进程不能直接访问另一个进程的地址空间</strong>,因此进程通信需要操作系统的支持<br><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-19-54-07.png" srcset="/img/loading.gif" lazyload></h2><p>PV操作是低级通信方式,高级通信方式是指以较高的效率传输大量的通信方式 高级通信方式主要有以下三类:</p>
+<h4 id="共享存储"><a href="#共享存储" class="headerlink" title="共享存储"></a>共享存储</h4><p>在通信的进程之间存在一块可直接访问的共享空间，通过对这片共享空间进行写&#x2F;读操作实现进程之间的信息交换<br><img src="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/2023-05-29-20-00-12.png" srcset="/img/loading.gif" lazyload><br>为避免出错，各个进程对共享空间的访问应该是互斥的。各个进程可使用操作系统内核提供的同步互斥工具（如P、V操作）<br>共享存储又分两种:</p>
+<ul>
+<li>基于数据结构的共享(低级方式)<ul>
+<li>比如共享空间里只能放一个长度为10的数组。这种共享方式速度慢、限制多，是一种低级通信方式</li>
+</ul>
+</li>
+<li>基于存储区的共享(高级方式)<ul>
+<li>操作系统在内存中划出一块共享存储区，数据的形式、存放位置都由通信进程控制，而不是操作系统,操作系统只负责为通信进程提供可共享使用的存储空间和同步互斥工具。这种共享方式速度很快，是一种高级通信方式。</li>
+</ul>
+</li>
+</ul>
+<h4 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h4><p>进程间的数据交换以<strong>格式化的消息（Message）为单位</strong>。进程通过操作系统提供的“发送消息&#x2F;接收消息”两个原语进行数据交换。</p>
+<h4 id="管道通信"><a href="#管道通信" class="headerlink" title="管道通信"></a>管道通信</h4><h2 id="处理机调度"><a href="#处理机调度" class="headerlink" title="处理机调度"></a>处理机调度</h2><h2 id="同步与互斥"><a href="#同步与互斥" class="headerlink" title="同步与互斥"></a>同步与互斥</h2><h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2>
                 
               </div>
             
@@ -332,12 +387,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  <a href="/categories/OS/" class="category-chain-item">OS</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AC%AC%E4%B8%83%E7%AB%A0/" class="category-chain-item">第七章</a>
+  <a href="/categories/OS/%E7%AC%AC%E4%BA%8C%E7%AB%A0/" class="category-chain-item">第二章</a>
   
   
 
@@ -359,8 +414,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>查找</div>
-      <div>https://cjzk236.github.io/2023/05/16/数据结构-7-查找/</div>
+      <div>OS-2-进程与线程</div>
+      <div>https://cjzk236.github.io/2023/05/28/OS-2-进程与线程/</div>
     </div>
     <div class="license-meta">
       
@@ -372,7 +427,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月16日</div>
+          <div>2023年5月28日</div>
         </div>
       
       
@@ -404,9 +459,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/21/OS-4-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" title="文件管理">
+                      <a href="/2023/05/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%8D%E4%B9%A0/" title="">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">文件管理</span>
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -414,8 +469,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-6-%E5%9B%BE/" title="图">
-                        <span class="hidden-mobile">图</span>
+                      <a href="/2023/05/27/jsp-6/" title="Java Servlet 基础">
+                        <span class="hidden-mobile">Java Servlet 基础</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -472,12 +527,6 @@
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -696,49 +745,6 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
