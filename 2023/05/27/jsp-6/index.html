@@ -16,15 +16,15 @@
   <meta name="author" content="Cjzk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。 servlet的部署、创建与运行servlet的工作原理通过jsp页面访问servlet共享变量dopost和doget方法重定向">
+    <meta name="description" content="有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。 servlet的部署、创建与运行源文件及字节码文件servlet类写一个创建servlet的类就是编写一个特殊类的子类，这个特殊的类">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java Servlet 基础">
 <meta property="og:url" content="https://cjzk236.github.io/2023/05/27/jsp-6/index.html">
 <meta property="og:site_name" content="此间之客">
-<meta property="og:description" content="有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。 servlet的部署、创建与运行servlet的工作原理通过jsp页面访问servlet共享变量dopost和doget方法重定向">
+<meta property="og:description" content="有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。 servlet的部署、创建与运行源文件及字节码文件servlet类写一个创建servlet的类就是编写一个特殊类的子类，这个特殊的类">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-27T14:54:04.000Z">
-<meta property="article:modified_time" content="2023-05-28T14:58:22.358Z">
+<meta property="article:modified_time" content="2023-06-02T03:10:15.511Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          210 字
+          7k 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          2 分钟
+          59 分钟
         
       </span>
     
@@ -287,9 +287,80 @@
             
               <div class="markdown-body">
                 
-                <hr>
-<p>有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。</p>
-<h1 id="servlet的部署、创建与运行"><a href="#servlet的部署、创建与运行" class="headerlink" title="servlet的部署、创建与运行"></a>servlet的部署、创建与运行</h1><h1 id="servlet的工作原理"><a href="#servlet的工作原理" class="headerlink" title="servlet的工作原理"></a>servlet的工作原理</h1><h1 id="通过jsp页面访问servlet"><a href="#通过jsp页面访问servlet" class="headerlink" title="通过jsp页面访问servlet"></a>通过jsp页面访问servlet</h1><h1 id="共享变量"><a href="#共享变量" class="headerlink" title="共享变量"></a>共享变量</h1><h1 id="dopost和doget方法"><a href="#dopost和doget方法" class="headerlink" title="dopost和doget方法"></a>dopost和doget方法</h1><h1 id="重定向与转发"><a href="#重定向与转发" class="headerlink" title="重定向与转发"></a>重定向与转发</h1><h1 id="使用session"><a href="#使用session" class="headerlink" title="使用session"></a>使用session</h1>
+                <p>有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。</p>
+<h1 id="servlet的部署、创建与运行"><a href="#servlet的部署、创建与运行" class="headerlink" title="servlet的部署、创建与运行"></a>servlet的部署、创建与运行</h1><h2 id="源文件及字节码文件"><a href="#源文件及字节码文件" class="headerlink" title="源文件及字节码文件"></a>源文件及字节码文件</h2><h3 id="servlet类"><a href="#servlet类" class="headerlink" title="servlet类"></a>servlet类</h3><p>写一个创建servlet的类就是编写一个特殊类的子类，这个特殊的类就是javax.servlet.http包中的HttpServlet类。HttpServlet实现了Servlet接口，实现了响应用户的方法（这些方法将在后续内容中讲述）。HttpServlet的子类被习惯地称作一个Servlet类，这样的类创建的对象习惯地被称作一个servlet。</p>
+<h3 id="字节码文件的保存"><a href="#字节码文件的保存" class="headerlink" title="字节码文件的保存"></a>字节码文件的保存</h3><p>字节码文件按着类的包名对应的目录路径保存到Web服务目录中特定子目录中。包名moon.sun对应的目录路径是moon\sun，因此，保存到：<br><code>\ch6\WEB-INF\classes\moon\sun</code><br>可以事先将Java源文件，按照其包名，比如，包名为moon.sun，保存到<br><code>\ch6\WEB-INF\classes\moon\sun</code><br>然后用命令行进入moon\sun的父目录classes（不要进入moon或sun目录）编译：<br><code>classes&gt; javac -cp servlet-api.jar moon\sun\Example6_1.java</code></p>
+<h2 id="编写部署文件web-xml"><a href="#编写部署文件web-xml" class="headerlink" title="编写部署文件web.xml"></a>编写部署文件web.xml</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs web.xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;<br>&lt;web-app&gt;<br>    &lt;servlet&gt;<br>        &lt;servlet-name&gt;hello&lt;/servlet-name&gt;<br>        &lt;servlet-class&gt;moon.sun.Example6_1&lt;/servlet-class&gt;<br>    &lt;/servlet&gt;<br>    &lt;servlet-mapping&gt;<br>        &lt;servlet-name&gt;hello&lt;/servlet-name&gt;<br>        &lt;url-pattern&gt;/lookHello&lt;/url-pattern&gt;<br>    &lt;/servlet-mapping&gt;<br>&lt;/web-app&gt;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>Servlet类的字节码文件保存到指定的目录后，必须为Tomcat服务器编写一个部署文件，只有这样，Tomcat服务器才会用Servlet类创建servlet对象。</li>
+<li>部署文件是一个XML文件，名字必须是web.xml。</li>
+<li>web.xml由Tomcat服务器负责管理，Tomcat服务器配有内置的解析器，可以解析XML文件的标记中的数据。</li>
+<li>编写的web.xml文件必须保存到Web服务目录的WEB-INF子目录中，比如ch6\WEB-INF中（不要保存在ch6中）。根据例子6_1给出的Servlet类，web.xml文件的内容如下（需要用纯文本编辑器编辑web.xml）</li>
+<li>Web服务目录的WEB-INF子目录下的web.xml文件负责管理当前Web服务目录下的全部servlet，当该Web服务目录需要提供更多的servlet时，只要在web.xml文件中增加servlet和servlet-mapping子标记即可。</li>
+<li>对于webapps下的Web服务目录，如果修改并重新保存web.xml文件，Tomcat服务器就会立刻重新读取web.xml文件，因此，修改web.xml文件不必重新启动Tomcat服务器。但是，如果修改导致web.xml文件出现错误，Tomcat服务器就会关闭当前Web服务目录下的所有servlet的使用权限。所以必须保证web.xml文件正确无误，才能成功启动Tomcat服务器。但是，对于不是webapps下的Web服务目录，如果新建或修改了相应的web.xml文件，需要重新启动Tomcat服务器。</li>
+</ul>
+<h2 id="servlet的创建与运行"><a href="#servlet的创建与运行" class="headerlink" title="servlet的创建与运行"></a>servlet的创建与运行</h2><ul>
+<li><p>用户就可以根据web.xml部署文件来请求Tomcat服务器创建并运行一个servlet。</p>
+</li>
+<li><p>如果Tomcat服务器没有名字为hello的servlet，就会根据web.xml文件中servlet标记的子标记servlet-class指定的Servlet类创建一个名字为hello的servlet。因此，如果名字是hello的servlet被创建之后，又修改Java源文件、编译得到新的Servlet类，并希望Tomcat服务器用新的Servlet类创建servlet，那么就要重新启动Tomcat服务器。</p>
+</li>
+<li><p>请求Tomcat服务器运行名字是hello的servlet。</p>
+</li>
+</ul>
+<h2 id="向servlet传递参数的值"><a href="#向servlet传递参数的值" class="headerlink" title="向servlet传递参数的值"></a>向servlet传递参数的值</h2><p>在请求一个servlet时，可以在请求的url-pattern中额外加入参数及其值，格式是：<br><code>url-pattern?参数1=值&amp;参数2=值…参数n=值</code><br>那么被请求的servlet就可以使用request对象获取参数的值，例如：<br><code>request.getParameter(参数n)</code></p>
+<h1 id="servlet的工作原理"><a href="#servlet的工作原理" class="headerlink" title="servlet的工作原理"></a>servlet的工作原理</h1><p>servlet由Tomcat服务器负责管理，Tomcat服务器通过读取web.xml，然后创建并运行servlet。</p>
+<h2 id="servlet-对象的生命周期"><a href="#servlet-对象的生命周期" class="headerlink" title="servlet 对象的生命周期"></a>servlet 对象的生命周期</h2><p>servlet由Tomcat服务器负责创建并完成初始化工作。当多个用户请求一个servlet时，服务器为每个用户启动一个线程。<br>一个servlet的生命周期主要有下列三个过程组成：</p>
+<ol>
+<li>servlet第一次被请求加载时，服务器创建servlet，servlet调用init方法完成必要的初始化工作。</li>
+<li>新诞生的servlet再调用service方法响应用户的请求。</li>
+<li>当服务器关闭时，调用destroy方法销毁servlet。</li>
+</ol>
+<ul>
+<li><strong>init方法只被调用一次。</strong>当后续的用户请求servlet服务时，Tomcat服务器将启动一个新的线程，在该线程中，servlet调用service方法。也就是说，<strong>每个用户的每次请求都导致service方法被调用执行，其执行过程分别运行在不同的线程中。</strong></li>
+</ul>
+<h2 id="init方法"><a href="#init方法" class="headerlink" title="init方法"></a>init方法</h2><p><code>public void init(ServletConfig  config) throws ServletException</code><br>servlet第一次被请求加载时，服务器创建一个servlet，这个对象调用init方法完成必要的初始化工作。该方法在执行时，服务器会把一个SevletConfig类型的对象传递给init()方法，这个对象就被保存在servlet中，直到servlet被销毁。</p>
+<h2 id="service方法"><a href="#service方法" class="headerlink" title="service方法"></a>service方法</h2><p><code>public void service(HttpServletRequest request  HttpServletResponse  response)throw ServletException,IOException</code><br>Tomcat服务器将两个参数传递给该方法。和init方法不同的是，<strong>init方法只被调用一次，而service方法可能被多次的调用。</strong>当后续的用户请求该servlet时，Tomcat服务器将启动一个新的线程，在该线程中servlet调用service方法响应用户的请求，调用过程运行在不同的线程中，互不干扰。因此，不同线程的service方法中的局部变量互不干扰，一个线程改变了自己的service方法中局部变量的值不会影响其他线程的service方法中的局部变量。</p>
+<h2 id="destory方法"><a href="#destory方法" class="headerlink" title="destory方法"></a>destory方法</h2><p><code>public destroy()</code><br>当Tomcat服务器终止服务时，destroy()方法会被执行，销毁servlet.子类可直接继承这个方法，一般不需要重写。</p>
+<h1 id="通过jsp页面访问servlet"><a href="#通过jsp页面访问servlet" class="headerlink" title="通过jsp页面访问servlet"></a>通过jsp页面访问servlet</h1><p>按着部署文件web.xml给出的servlet的url-pattern，用户除了可以在浏览器输入url-pattern请求运行一个servlet外，也可以通过JSP页面来请求一个servlet。<br>需要特别注意的是，如果web.xml文件中给出的servlet的url-pattern是&#x2F;lookHello，那么JSP页面请求servlet时，必须要写成 lookHello，不可以写成&#x2F;lookHello。</p>
+<h2 id="通过表单向servlet提交数据"><a href="#通过表单向servlet提交数据" class="headerlink" title="通过表单向servlet提交数据"></a>通过表单向servlet提交数据</h2><p>如果web.xml文件中给出的servlet的url-pattern是&#x2F;computeBill，那么form表单中action给出的值就是computeBill ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>  <span class="hljs-attr">action</span>= <span class="hljs-string">&quot;computeBill &quot;</span>  &gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>当请求一个servlet时，也可以在请求的url-pattern中额外加入参数及其值，格式是：<br><code>url-pattern?参数1=值&amp;参数2=值…参数n=值</code><br>例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>  <span class="hljs-attr">action</span>= <span class="hljs-string">&quot;computeBill?sideA=10.66&amp;sideB=23.9&amp;sideC=897 &quot;</span>  &gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="通过超链接访问servlet"><a href="#通过超链接访问servlet" class="headerlink" title="通过超链接访问servlet"></a>通过超链接访问servlet</h2><p>JSP页面可以使用超链接去请求某个servlet。如果web.xml文件中给出的请求servlet的url-pattern是&#x2F;circle，那么超链接标记中href的值是circle（不要写成&#x2F;circle）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs web.xml">&lt;a href=&quot;circle&quot;&gt;&lt;/a&gt;<br></code></pre></td></tr></table></figure>
+
+<h1 id="共享变量"><a href="#共享变量" class="headerlink" title="共享变量"></a>共享变量</h1><ul>
+<li>Servlet类是HttpServlet的一个子类，在编写子类时就可以声明某些成员变量，那么，请求<strong>servlet的用户将共享该servlet的成员变量</strong>。</li>
+<li>service方法可能被多次的调用。也就是说，当后续的用户请求该servlet时，Tomcat服务器将启动一个新的线程，在该线程中servlet调用service方法响应用户的请求，即每个用户的请求都导致service方法被调用执行，调用过程运行在不同的线程中，互不干扰。因此，<strong>不同线程的service方法中的局部变量互不干扰，一个线程改变了自己的service方法中局部变量的值不会影响其他线程的service方法中的局部变量。</strong></li>
+</ul>
+<h1 id="dopost和doget方法"><a href="#dopost和doget方法" class="headerlink" title="dopost和doget方法"></a>dopost和doget方法</h1><ul>
+<li>HttpServlet类除了init、service、destroy方法外，该类还有两个很重要的方法：doGet和doPost，用来处理用户的请求并作出响应。</li>
+<li>实际上HttpServlet类所给出的service方法的功能是检查HTTP请求类型（get、post），并在service方法中根据用户的请求方式，在service方法中对应地再调用doGet或doPost方法。</li>
+<li>因此，<strong>在编写的Servlet类（HttpServlet类的一个子类）时，也可以不重写service方法来响应用户，直接继承service方法即可</strong>。</li>
+<li><strong>如果不重写service方法，就需要在Servlet类中重写doPost或doGet方法来响应用户的请求</strong>。如果不论用户请求类型是post还是get，Tomcat服务器的处理过程完全相同，那么可以只在doPost方法中编写处理过程，而在doGet方法中再调用doPost方法即可，或只在doGet方法中编写处理过程，而在doPost方法中再调用doGet方法。如果根据请求的类型进行不同的处理，就要在两个方法中编写不同的处理过程（这一点比service方法更为灵活）</li>
+</ul>
+<h1 id="重定向与转发"><a href="#重定向与转发" class="headerlink" title="重定向与转发"></a>重定向与转发</h1><p>重定向的功能是将用户从当前页面或servlet定向到另一个JSP页面或servlet。转发的功能是将用户对当前JSP页面或servlet的请求转发给另一个JSP页面或servlet。本节学习在Servlet类中使用HttpServletResponse类的sendRedirect重定向方法，以及RequestDispatcher类的forward转发方法，并指出二者的区别。</p>
+<h2 id="sendRedirect方法"><a href="#sendRedirect方法" class="headerlink" title="sendRedirect方法"></a>sendRedirect方法</h2><p>重定向方法<code>void sendRedirect(String location)</code><br>将用户重新定向到另一个JSP页面或servlet。重定向方法仅仅是将用户从当前页面或servlet定向到另一个JSP页面或servlet，但不能将用户对当前页面或servlet的请求（HttpServletRequest对象）转发给所定向的资源。即重定向的目标页面或servlet无法使用request获取用户提交的数据。</p>
+<p>执行sendRedirect方法（重定向）时，Tomcat服务器还是要把当前的servlet代码执行完毕后才实施重定向（跳转）操作，但Tomcat服务器不再给用户看当前servlet代码的执行效果。如果在执行sendRedirect(URL url)方法后，servlet紧接着执行了return返回语句，那么Tomcat服务器会立刻结束当前servlet的执行。</p>
+<h2 id="forward方法"><a href="#forward方法" class="headerlink" title="forward方法"></a>forward方法</h2><p>步骤1:</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jsp"><span class="hljs-type">RequestDispatcher</span> <span class="hljs-variable">dispatcher</span> <span class="hljs-operator">=</span> <br>request.getRequestDispatcher(JSP页面的URL或servlet的url-pattern);<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp"><span class="hljs-type">RequestDispatcher</span> <span class="hljs-variable">dispatcher</span> <span class="hljs-operator">=</span> request.getRequestDispatcher(<span class="hljs-string">&quot;target.jsp&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>步骤2:转发。<br>在步骤1中获取的<code>RequestDispatcher</code>对象调用</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jsp"><span class="hljs-keyword">void</span> <span class="hljs-title function_">forward</span><span class="hljs-params">(ServletRequest request,ServletResponse response)</span>             <span class="hljs-keyword">throws</span> <br>ServletException,ava.io.IOException<br></code></pre></td></tr></table></figure>
+<p>方法可以将用户对当前JSP页面或servlet的请求转发给RequestDispatcher对象所指定的JSP页面或servlet，例如：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JSP">dispatcher.forward (request,response);<br></code></pre></td></tr></table></figure>
+<p>把用户对当前JSP页面或servlet的请求转变为对转发到的JSP页面或servlet的请求。</p>
+<p>RequestDispatcher对象可以把用户对当前JSP页面或servlet的请求转发给另一个JSP页面或servlet，而且将用户对当前JSP页面或servlet的请求传递给转发到的JSP页面或servlet。也就是说，当前页面<strong>所转发到的标页面或servlet可以使用request获取用户提交的数据</strong>。</p>
+<h2 id="二者的区别"><a href="#二者的区别" class="headerlink" title="二者的区别"></a>二者的区别</h2><ul>
+<li>转发（forwar）和重定向方法（sendRedirect）不同的是，用户可以看到转发到的JSP页面或servlet的运行效果，但是，在浏览器的地址栏中不能看到forward方法转发到的JSP页面的地址或servlet的地址，用户在浏览器的地址栏中所看到的仍然是当前JSP页面的URL或servlet的url-pattern。如果此时刷新浏览器，那么请求将是当前的JSP页面或servlet。<strong>所转发到的标页面或servlet可以使用request获取用户提交的数据。而重定向的目标页面或servlet无法使用request获取用户提交的数据</strong>。</li>
+<li>另外，当servlet中执行forward方法实施转发操作时，Tomcat会立刻结速当前servlet的执行。而servlet中执行sendRedirect方法（重定向，也见4.2.3）时，Tomcat服务器还是要把当前的servlet代码执行完毕后才实施重定向（跳转）操作，但Tomcat服务器不再给用户看当前servlet代码的执行效果。如果在执行sendRedirect(URL url)方法后，servlet紧接着执行了return返回语句，那么Tomcat服务器会立刻结束当前servlet的执行。</li>
+</ul>
+<h1 id="使用session"><a href="#使用session" class="headerlink" title="使用session"></a>使用session</h1><p>HTTP通信协议是用户与服务器之间一种请求与响应（request&#x2F;response）的通信协议，属于无状态协议。所谓无状态是指，当用户（浏览器）发送请求给服务器，Tomcat服务器作出响应后，如果同一个用户再发送请求给Tomcat服务器时，Tomcat服务器并不知道就是刚才的那个用户。简单地说，Tomcat服务器不会记录用户的信息。<br>用户在访问一个Web服务目录期间，Tomcat服务器为该用户分配一个session对象（称为用户的会话），Tomcat服务器可以在各个页面以及servlet中使用这个session记录用户的有关信息，而且Tomcat服务器保证不同用户的session对象互不相同。有关session对象的原理、常用方法可参见第4章的4.3节</p>
+<p>HttpServletRequest对象request调用getSession方法获取用户的session对象：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">HttpSession session=request.getSession(<span class="hljs-literal">true</span>);<br></code></pre></td></tr></table></figure>
+<p>访问某个Web服务目录的用户，<strong>在不同的servlet中获取的session对象是完全相同的</strong>，不同的用户的session对象互不相同。</p>
+
                 
               </div>
             
