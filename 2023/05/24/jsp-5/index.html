@@ -19,16 +19,16 @@
     <meta name="description" content="目录  编写javabean和使用jababean 编写javabean 保存bean的字节码 创建与使用bean 使用bean bean的加载原理 bean的有效范围和生命周期     获取和修改bean的属性 getproperty动作标记 setproperty动作标记   bean的辅助类 jsp与bean结合的简单例子  编写javabean和使用jababeanJSP页面可以将数据的处">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSP 与Java bean">
-<meta property="og:url" content="https://cjzk236.github.io/2023/05/27/jsp-5/index.html">
+<meta property="og:url" content="https://cjzk236.github.io/2023/05/24/jsp-5/index.html">
 <meta property="og:site_name" content="此间之客">
 <meta property="og:description" content="目录  编写javabean和使用jababean 编写javabean 保存bean的字节码 创建与使用bean 使用bean bean的加载原理 bean的有效范围和生命周期     获取和修改bean的属性 getproperty动作标记 setproperty动作标记   bean的辅助类 jsp与bean结合的简单例子  编写javabean和使用jababeanJSP页面可以将数据的处">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cjzk236.github.io/2023/05/27/jsp-5/2023-05-27-22-42-37.png">
-<meta property="article:published_time" content="2023-05-27T14:20:25.000Z">
-<meta property="article:modified_time" content="2023-05-27T14:54:05.781Z">
+<meta property="og:image" content="https://cjzk236.github.io/2023/05/24/jsp-5/2023-05-27-22-42-37.png">
+<meta property="article:published_time" content="2023-05-24T14:20:25.000Z">
+<meta property="article:modified_time" content="2023-06-04T16:14:54.044Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cjzk236.github.io/2023/05/27/jsp-5/2023-05-27-22-42-37.png">
+<meta name="twitter:image" content="https://cjzk236.github.io/2023/05/24/jsp-5/2023-05-27-22-42-37.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -223,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-27 22:20" pubdate>
-          2023年5月27日 晚上
+        <time datetime="2023-05-24 22:20" pubdate>
+          2023年5月24日 晚上
         </time>
       </span>
     
@@ -365,7 +365,7 @@
 <li>application bean的有效范围是当前Web服务目录下的各个页面，存活时间直到Tomcat服务器关闭。</li>
 <li>Tomcat服务器为访问Web服务目录的所有用户分配一个共享的bean，即不同用户的application bean也都是相同的一个。也就是说，任何一个用户对自己application bean的属性的改变，都会影响到其他的用户（不同Web服务目录的application bean互不相同）。</li>
 </ul>
-<p>综上 bean的有效范围见下图<br><img src="/2023/05/27/jsp-5/2023-05-27-22-42-37.png" srcset="/img/loading.gif" lazyload></p>
+<p>综上 bean的有效范围见下图<br><img src="/2023/05/24/jsp-5/2023-05-27-22-42-37.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="获取和修改bean的属性"><a href="#获取和修改bean的属性" class="headerlink" title="获取和修改bean的属性"></a>获取和修改bean的属性</h1><p>使用useBean动作标记获得一个bean后，在Java程序片或表达式中bean就可以调用方法产生行为</p>
 <h2 id="getproperty动作标记"><a href="#getproperty动作标记" class="headerlink" title="getproperty动作标记"></a>getproperty动作标记</h2><p>使用<code>getProperty动作标记</code>可以获得bean的属性值，并将这个值用串的形式发送给用户的浏览器。</p>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:getProperty  name=<span class="hljs-string">&quot;bean的id &quot;</span> property=<span class="hljs-string">&quot;bean的属性&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
@@ -441,7 +441,7 @@ value给出的值的类型要和bean的属性的类型一致。</li>
   <div class="license-box my-3">
     <div class="license-title">
       <div>JSP 与Java bean</div>
-      <div>https://cjzk236.github.io/2023/05/27/jsp-5/</div>
+      <div>https://cjzk236.github.io/2023/05/24/jsp-5/</div>
     </div>
     <div class="license-meta">
       
@@ -453,7 +453,7 @@ value给出的值的类型要和bean的属性的类型一致。</li>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月27日</div>
+          <div>2023年5月24日</div>
         </div>
       
       
@@ -495,8 +495,8 @@ value给出的值的类型要和bean的属性的类型一致。</li>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/27/jsp-4/" title="内置对象">
-                        <span class="hidden-mobile">内置对象</span>
+                      <a href="/2023/05/22/OS-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E6%8B%AC/" title="计算机系统概括">
+                        <span class="hidden-mobile">计算机系统概括</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
