@@ -1,0 +1,750 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/codelogo.png">
+  <link rel="icon" href="/img/codelogo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#161e27">
+  <meta name="author" content="Cjzk">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="目录  mvc介绍 JSP中的MVC模式 模型的生命周期与视图更新 request bean bean的创建 视图更新   session bean bean的创建 视图更新   application bean bean的创建 视图更新      mvc介绍模型-视图-控制器（Model-View-Controller），简称为MVC。MVC已经成为软件设计者必须熟练使用的开发模式。本章必须理解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MVC模式">
+<meta property="og:url" content="https://cjzk236.github.io/2023/06/02/jsp-7/index.html">
+<meta property="og:site_name" content="此间之客">
+<meta property="og:description" content="目录  mvc介绍 JSP中的MVC模式 模型的生命周期与视图更新 request bean bean的创建 视图更新   session bean bean的创建 视图更新   application bean bean的创建 视图更新      mvc介绍模型-视图-控制器（Model-View-Controller），简称为MVC。MVC已经成为软件设计者必须熟练使用的开发模式。本章必须理解">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cjzk236.github.io/2023/06/02/jsp-7/2023-06-04-23-32-40.png">
+<meta property="article:published_time" content="2023-06-02T04:18:51.000Z">
+<meta property="article:modified_time" content="2023-06-04T15:39:33.077Z">
+<meta property="article:author" content="Cjzk">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cjzk236.github.io/2023/06/02/jsp-7/2023-06-04-23-32-40.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>MVC模式 - 此间之客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"cjzk236.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>此间之客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/gladenlight.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="MVC模式"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-02 12:18" pubdate>
+          2023年6月2日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MVC模式</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><font size=6><strong>目录</strong></font></p>
+<ul>
+<li><a href="#mvc%E4%BB%8B%E7%BB%8D">mvc介绍</a></li>
+<li><a href="#jsp%E4%B8%AD%E7%9A%84mvc%E6%A8%A1%E5%BC%8F">JSP中的MVC模式</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%8E%E8%A7%86%E5%9B%BE%E6%9B%B4%E6%96%B0">模型的生命周期与视图更新</a><ul>
+<li><a href="#request-bean">request bean</a><ul>
+<li><a href="#bean%E7%9A%84%E5%88%9B%E5%BB%BA">bean的创建</a></li>
+<li><a href="#%E8%A7%86%E5%9B%BE%E6%9B%B4%E6%96%B0">视图更新</a></li>
+</ul>
+</li>
+<li><a href="#session-bean">session bean</a><ul>
+<li><a href="#bean%E7%9A%84%E5%88%9B%E5%BB%BA-1">bean的创建</a></li>
+<li><a href="#%E8%A7%86%E5%9B%BE%E6%9B%B4%E6%96%B0-1">视图更新</a></li>
+</ul>
+</li>
+<li><a href="#application-bean">application bean</a><ul>
+<li><a href="#bean%E7%9A%84%E5%88%9B%E5%BB%BA-2">bean的创建</a></li>
+<li><a href="#%E8%A7%86%E5%9B%BE%E6%9B%B4%E6%96%B0-2">视图更新</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="mvc介绍"><a href="#mvc介绍" class="headerlink" title="mvc介绍"></a>mvc介绍</h1><p>模型-视图-控制器（Model-View-Controller），简称为MVC。MVC已经成为软件设计者必须熟练使用的开发模式。本章必须理解、掌握在JSP程序设计中怎样具体体现MVC开发模式（其他语言的程序设计是非常类似的，仅仅是具体使用的API不同而已）。<br>MVC是一种通过三部分构造一个软件或组件的理想办法。</p>
+<ul>
+<li>模型（model） 用于存储数据的对象。</li>
+<li>视图（view） 向控制器提交所需数据、显示模型中的数据。</li>
+<li>控制器（controller） 负责具体的业务逻辑操作，即控制器根据视图提出的要求对数据做出（商业）处理，将有关结果存储到模型中，并负责让模型和视图进行必要的交互，当模型中的数据变化时，让视图更新显示。</li>
+</ul>
+<h1 id="JSP中的MVC模式"><a href="#JSP中的MVC模式" class="headerlink" title="JSP中的MVC模式"></a>JSP中的MVC模式</h1><ul>
+<li><strong>模型（Model） 一个或多个Javabean对象</strong>，用于存储数据。</li>
+<li><strong>视图（View） 一个或多个JSP页面</strong>，其作用是向控制器提交必要的数据和显示数据。JSP页面可以使用HTML标记、Javabean标记以及Java程序片或Java表达式来显示数据。视图的主要工作就是显示数据，对数据的逻辑操作由控制器负责。</li>
+<li><strong>控制器（Controller） 一个或多个servlet对象</strong>，根据视图提交的要求进行数据处理操作，并将有关的结果存储到Javabean中，然后servlet使用转发或重定向的方式请求视图中的某个JSP页面显示数据。比如让某个JSP页面通过使用Javabean标记、Java程序片或Java表达式显示控制器存储在Javabean中的数据。<br><img src="/2023/06/02/jsp-7/2023-06-04-23-32-40.png" srcset="/img/loading.gif" lazyload></li>
+</ul>
+<h1 id="模型的生命周期与视图更新"><a href="#模型的生命周期与视图更新" class="headerlink" title="模型的生命周期与视图更新"></a>模型的生命周期与视图更新</h1><h2 id="request-bean"><a href="#request-bean" class="headerlink" title="request bean"></a>request bean</h2><h3 id="bean的创建"><a href="#bean的创建" class="headerlink" title="bean的创建"></a>bean的创建</h3><p>servlet创建request bean的步骤如下：</p>
+<ol>
+<li>用BeanClass类的某个构造方法创建bean对象，例如：<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">BeanClass bean=<span class="hljs-keyword">new</span> <span class="hljs-title class_">BeanClass</span>();<br></code></pre></td></tr></table></figure></li>
+<li>如下<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">request.setAttribute(<span class="hljs-string">&quot;keyWord&quot;</span>,bean);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="视图更新"><a href="#视图更新" class="headerlink" title="视图更新"></a>视图更新</h3><p>servlet所请求的JSP页面可以使用相应的标记显示该request bean中的数据。该JSP页面对请求做出响应之后，request bean所占有的内存被释放，结束自己的生命。</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jsp">RequestDispatcher dispatcher= request.getRequestDispatcher(<span class="hljs-string">&quot;show.jsp&quot;</span>);<br>dispatcher.forward(request,response);<br></code></pre></td></tr></table></figure>
+<p>servlet所请求的JSP页面，比如show.jsp页面可以使用如下标记获得servlet所创建的request bean：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:useBean id=<span class="hljs-string">&quot;keyWord&quot;</span> class=<span class="hljs-string">&quot;save.data.BeanClass&quot;</span> scope=<span class="hljs-string">&quot;request&quot;</span>/&gt;<br></code></pre></td></tr></table></figure>
+<p>该标记中的id是servlet所创建的bean的id。<br>然后JSP页面可以使用相应的标记或程序片显示该request bean中的数据。</p>
+<h2 id="session-bean"><a href="#session-bean" class="headerlink" title="session bean"></a>session bean</h2><h3 id="bean的创建-1"><a href="#bean的创建-1" class="headerlink" title="bean的创建"></a>bean的创建</h3><p>servlet创建session bean的步骤如下：</p>
+<ol>
+<li>用BeanClass类的某个构造方法创建bean对象，例如：<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">BeanClass bean=<span class="hljs-keyword">new</span> <span class="hljs-title class_">BeanClass</span>();<br></code></pre></td></tr></table></figure></li>
+<li>如下<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jsp">HttpSession session=request.getSession(<span class="hljs-literal">true</span>);<br>session.setAttribute(<span class="hljs-string">&quot;keyWord&quot;</span>,bean);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="视图更新-1"><a href="#视图更新-1" class="headerlink" title="视图更新"></a>视图更新</h3><p>Web服务目录的各个JSP都可以使用</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:useBean id=<span class="hljs-string">&quot;keyWord&quot;</span> class=<span class="hljs-string">&quot;save.data.BeanClass&quot;</span> scope=<span class="hljs-string">&quot;session&quot;</span>/&gt;<br></code></pre></td></tr></table></figure>
+<p>标记获得servlet所创建的session bean，然后使用相应的标记或程序片显示该request bean中的数据。<br>如果servlet希望某个JSP显示其中的数据，可以使用RequestDispatcher对象转发到该页面，也可以使用HttpServletResponse类中的重定向方法（sendRedirect）定向到该页面。</p>
+<h2 id="application-bean"><a href="#application-bean" class="headerlink" title="application bean"></a>application bean</h2><h3 id="bean的创建-2"><a href="#bean的创建-2" class="headerlink" title="bean的创建"></a>bean的创建</h3><p>ervlet创建application bean的步骤如下：</p>
+<ol>
+<li>用BeanClass类的某个构造方法创建bean对象，例如：<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">BeanClass bean=<span class="hljs-keyword">new</span> <span class="hljs-title class_">BeanClass</span>();<br></code></pre></td></tr></table></figure></li>
+<li>如下<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">getServletContext().setAttribute(<span class="hljs-string">&quot;keyWord&quot;</span>,bean);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="视图更新-2"><a href="#视图更新-2" class="headerlink" title="视图更新"></a>视图更新</h3><p>servlet建bean的第<code>2</code>步骤决定了bean为application bean。<br>用户在访问Web服务目录的各个JSP中都可以使用</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:useBean id=<span class="hljs-string">&quot;keyWord&quot;</span> class=<span class="hljs-string">&quot;save.data.BeanClass&quot;</span> scope=<span class="hljs-string">&quot;application&quot;</span>/&gt;<br></code></pre></td></tr></table></figure>
+<p>标记获得servlet所创建的application bean，然后使用相应的标记或程序片显示该application bean中的数据，例如，使用</p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:getProperty name=<span class="hljs-string">&quot;keyWord&quot;</span> property=<span class="hljs-string">&quot;bean的变量&quot;</span>/&gt;<br></code></pre></td></tr></table></figure>
+<p>标记显示该application bean中的数据。<br>如果servlet希望某个JSP显示其中的数据，可以使用RequestDispatcher对象向该JSP页面发出请求，也可以使用HttpServletResponse类中的重定向方法（sendRedirect）。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/JSP/" class="category-chain-item">JSP</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/JSP/%E7%AC%AC%E4%B8%83%E7%AB%A0/" class="category-chain-item">第七章</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>MVC模式</div>
+      <div>https://cjzk236.github.io/2023/06/02/jsp-7/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Cjzk</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年6月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/04/jsp-8/" title="JSP中使用数据库">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JSP中使用数据库</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/28/OS-2-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" title="进程与线程">
+                        <span class="hidden-mobile">进程与线程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

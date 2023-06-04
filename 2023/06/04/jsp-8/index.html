@@ -1,0 +1,903 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/codelogo.png">
+  <link rel="icon" href="/img/codelogo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#161e27">
+  <meta name="author" content="Cjzk">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="目录  mysql数据库管理系统 连接mysql 下载jdbc-mysql数据库连接器表 加载jdbc-mysql数据库连接器 连接数据库 注意汉字问题     连接mysql数据库 查询记录 结果集与查询 随机查询 条件查询 where子语句 排序     更新、添加与删除记录 更新 添加 删除   用结果集操作数据库中的表 更新记录 插入记录   预处理语句 预处理语句优点 使用通配符   事">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSP中使用数据库">
+<meta property="og:url" content="https://cjzk236.github.io/2023/06/04/jsp-8/index.html">
+<meta property="og:site_name" content="此间之客">
+<meta property="og:description" content="目录  mysql数据库管理系统 连接mysql 下载jdbc-mysql数据库连接器表 加载jdbc-mysql数据库连接器 连接数据库 注意汉字问题     连接mysql数据库 查询记录 结果集与查询 随机查询 条件查询 where子语句 排序     更新、添加与删除记录 更新 添加 删除   用结果集操作数据库中的表 更新记录 插入记录   预处理语句 预处理语句优点 使用通配符   事">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cjzk236.github.io/2023/06/04/jsp-8/2023-06-04-23-43-13.png">
+<meta property="article:published_time" content="2023-06-04T15:38:16.000Z">
+<meta property="article:modified_time" content="2023-06-04T16:02:15.040Z">
+<meta property="article:author" content="Cjzk">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cjzk236.github.io/2023/06/04/jsp-8/2023-06-04-23-43-13.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>JSP中使用数据库 - 此间之客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"cjzk236.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":1},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>此间之客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/gladenlight.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="JSP中使用数据库"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-04 23:38" pubdate>
+          2023年6月4日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          81 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JSP中使用数据库</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><font size=6><strong>目录</strong></font></p>
+<ul>
+<li><a href="#mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F">mysql数据库管理系统</a><ul>
+<li><a href="#%E8%BF%9E%E6%8E%A5mysql">连接mysql</a><ul>
+<li><a href="#%E4%B8%8B%E8%BD%BDjdbc-mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E5%99%A8%E8%A1%A8">下载jdbc-mysql数据库连接器表</a></li>
+<li><a href="#%E5%8A%A0%E8%BD%BDjdbc-mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%9E%E6%8E%A5%E5%99%A8">加载jdbc-mysql数据库连接器</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93">连接数据库</a></li>
+<li><a href="#%E6%B3%A8%E6%84%8F%E6%B1%89%E5%AD%97%E9%97%AE%E9%A2%98">注意汉字问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%BF%9E%E6%8E%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93">连接mysql数据库</a></li>
+<li><a href="#%E6%9F%A5%E8%AF%A2%E8%AE%B0%E5%BD%95">查询记录</a><ul>
+<li><a href="#%E7%BB%93%E6%9E%9C%E9%9B%86%E4%B8%8E%E6%9F%A5%E8%AF%A2">结果集与查询</a></li>
+<li><a href="#%E9%9A%8F%E6%9C%BA%E6%9F%A5%E8%AF%A2">随机查询</a></li>
+<li><a href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2">条件查询</a><ul>
+<li><a href="#where%E5%AD%90%E8%AF%AD%E5%8F%A5">where子语句</a></li>
+<li><a href="#%E6%8E%92%E5%BA%8F">排序</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%9B%B4%E6%96%B0%E6%B7%BB%E5%8A%A0%E4%B8%8E%E5%88%A0%E9%99%A4%E8%AE%B0%E5%BD%95">更新、添加与删除记录</a><ul>
+<li><a href="#%E6%9B%B4%E6%96%B0">更新</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0">添加</a></li>
+<li><a href="#%E5%88%A0%E9%99%A4">删除</a></li>
+</ul>
+</li>
+<li><a href="#%E7%94%A8%E7%BB%93%E6%9E%9C%E9%9B%86%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E8%A1%A8">用结果集操作数据库中的表</a><ul>
+<li><a href="#%E6%9B%B4%E6%96%B0%E8%AE%B0%E5%BD%95">更新记录</a></li>
+<li><a href="#%E6%8F%92%E5%85%A5%E8%AE%B0%E5%BD%95">插入记录</a></li>
+</ul>
+</li>
+<li><a href="#%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E5%8F%A5">预处理语句</a><ul>
+<li><a href="#%E9%A2%84%E5%A4%84%E7%90%86%E8%AF%AD%E5%8F%A5%E4%BC%98%E7%82%B9">预处理语句优点</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E9%80%9A%E9%85%8D%E7%AC%A6">使用通配符</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8B%E5%8A%A1">事务</a><ul>
+<li><a href="#%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86">事务处理</a></li>
+<li><a href="#%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86%E6%AD%A5%E9%AA%A4">事务处理步骤</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%86%E9%A1%B5%E6%98%BE%E7%A4%BA%E8%AE%B0%E5%BD%95">分页显示记录</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5sql-server%E4%B8%8Eaccess%E6%95%B0%E6%8D%AE%E5%BA%93">连接sql server与access数据库</a><ul>
+<li><a href="#%E8%BF%9E%E6%8E%A5microsoft-sql-server%E6%95%B0%E6%8D%AE%E5%BA%93">连接microsoft sql server数据库</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5microsoft-access%E6%95%B0%E6%8D%AE%E5%BA%93">连接microsoft access数据库</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0">使用连接池</a><ul>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0%E7%AE%80%E4%BB%8B">连接池简介</a></li>
+<li><a href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E6%B1%A0">建立连接池</a><ul>
+<li><a href="#%E8%BF%9E%E6%8E%A5%E6%B1%A0%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">连接池配置文件</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E8%BF%9E%E6%8E%A5%E6%B1%A0-1">使用连接池</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="mysql数据库管理系统"><a href="#mysql数据库管理系统" class="headerlink" title="mysql数据库管理系统"></a>mysql数据库管理系统</h1><p>MySQL数据库管理系统，简称MySQL，是目前流行的开源数据库管理系统，其社区版（MySQL Community Edition）是可免费下载的开源数据库管理系统。MySQL最初由瑞典MySQL AB公司开发，目前由Oracle公司负责源代码的维护和升级。Oracle将MySQL分为社区版和商业版，并保留MySQL开放源码这一特点。目前许多Web开发项目都选用社区版MySQL，其主要原因是社区版MySQL的性能卓越，满足许多Web应用已经绰绰有余，而且社区版MySQL是开源数据库管理系统，可以降低软件的开发和使用成本。</p>
+<h2 id="连接mysql"><a href="#连接mysql" class="headerlink" title="连接mysql"></a>连接mysql</h2><p>为了使Java编写的程序不依赖于具体的数据库，Java提供了专门用于操作数据库的API，即JDBC（Java Data Base Connectivity）。JDBC操作不同的数据库仅仅是加载的数据库连接器不同以及和数据库建立连接的方式不同而已，使用JDBC的应用程序和数据库建立连接之后，就可以使用JDBC提供的API操作数据库。</p>
+<h3 id="下载jdbc-mysql数据库连接器表"><a href="#下载jdbc-mysql数据库连接器表" class="headerlink" title="下载jdbc-mysql数据库连接器表"></a>下载jdbc-mysql数据库连接器表</h3><p><code>https://dev.mysql.com/downloads/connector/j/</code><br>下载的是mysql-connector-java-8.0.18.zip（linux系统可下载tar.gz格式文件），将该zip文件解压至硬盘，在解压目录下的<code>mysql-connector-java-8.0.18.jar</code>文件就是连接MySQL数据库的JDBC-MySQL数据库连接器（作者也将该文件放在了教学资源的源代码文件夹中）。</p>
+<ul>
+<li>将MySQL数据库的JDBC-MySQL数据库连接器<br><code>mysql-connector-java-8.0.18.jar</code><br>保存到Tomcat安装目录下的lib文件夹中（例如D:\apache-tomcat-9.0.26\lib）.</li>
+<li>重新启动Tomcat服务器。</li>
+</ul>
+<h3 id="加载jdbc-mysql数据库连接器"><a href="#加载jdbc-mysql数据库连接器" class="headerlink" title="加载jdbc-mysql数据库连接器"></a>加载jdbc-mysql数据库连接器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span>&#123;  Class.forName(<span class="hljs-string">&quot;com.mysql.cj.jdbc.Driver &quot;</span>);<br>&#125;<br><span class="hljs-keyword">catch</span>(Exception e)&#123;&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><p>MySQL数据库驱动是mysql-connector-java-8.0.18.jar文件中的Driver类，该类的包名是com.mysql.cj.jdbc.Driver（包名和以前的版本: com.mysql.jdbc.Driver不同）。Driver类不是Java运行环境类库中的类，是连接器mysql-connector-java-8.0.18.jar中的类</p>
+</li>
+<li><p>JDBC操作不同的数据库仅仅是加载的数据库连接器不同以及和数据库建立连接的方式不同而已，使用JDBC的应用程序和数据库建立连接之后，就可以使用JDBC提供的API操作数据库.</p>
+</li>
+</ul>
+<p><img src="/2023/06/04/jsp-8/2023-06-04-23-43-13.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java">Connection con;<br><span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span><br><span class="hljs-string">&quot;jdbc:mysql://192.168.100.1:3306/bookDatabase?useSSL=false&amp;serverTimezone=GMT&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span><span class="hljs-string">&quot;root&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">password</span> <span class="hljs-operator">=</span><span class="hljs-string">&quot;&quot;</span>;<br><span class="hljs-keyword">try</span>&#123;  <br>      con = DriverManager.getConnection(url,user,password); <span class="hljs-comment">//连接代码</span><br>&#125;<br><span class="hljs-keyword">catch</span>(SQLException e)&#123;<br>      System.out.println(e);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="注意汉字问题"><a href="#注意汉字问题" class="headerlink" title="注意汉字问题"></a>注意汉字问题</h3><p>需要特别注意的是，如果数据库的表中的记录有汉字，那么在建立连接时需要额外多传递一个参数characterEncoding，并取值gb2312或utf-8</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <br><span class="hljs-string">&quot;jdbc:mysql://localhost/bookDatabase?&quot;</span>+<br><span class="hljs-string">&quot;useSSL=false&amp;serverTimezone=GMT&amp;characterEncoding=utf-8&quot;</span>;<br>con = DriverManager.getConnection(url, <span class="hljs-string">&quot;root&quot;</span>,<span class="hljs-string">&quot;&quot;</span>);<br><br></code></pre></td></tr></table></figure>
+
+<h1 id="连接mysql数据库"><a href="#连接mysql数据库" class="headerlink" title="连接mysql数据库"></a>连接mysql数据库</h1><h1 id="查询记录"><a href="#查询记录" class="headerlink" title="查询记录"></a>查询记录</h1><p>和数据库建立连接后，就可以使用JDBC提供的API与数据库交互信息，比如查询、修改和更新数据库中的表等。JDBC与数据库表进行交互的主要方式是使用SQL语句。JDBC提供的API可以将标准的SQL语句发送给数据库，实现和数据库的交互。</p>
+<h2 id="结果集与查询"><a href="#结果集与查询" class="headerlink" title="结果集与查询"></a>结果集与查询</h2><p>对一个数据库中的表进行查询，然后将查询结果返回到一个ResultSet对象中，习惯称ResultSet对象为结果集对象。SQL查询语句与结果集<br>连接对象con调用方法createStatement()返回SQL语句对象，代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span>&#123;  Statement sql=con.createStatement();<br>   &#125;<br><span class="hljs-keyword">catch</span>(SQLException e )&#123;<br>      System.out.println(e); <br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><p>结果集<br>sql对象就可以调用相应的方法查询数据库中的表，并将查询结果存放在一个ResultSet结果集中。ResultSet结果集由以列（也称字段）为结构的数据行组成。例如，对于</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">ResultSet rs=sql.executeQuery(<span class="hljs-string">&quot;SELECT * FROM bookList&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>内存中的结果集对象rs的列数是4列，刚好和bookList表的列数相同，第1列至第4列分别是ISBN、name、price和publishDate列；而对于</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">ResultSet rs=sql.executeQuery(<span class="hljs-string">&quot;SELECT name,price FROM bookList&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>结果集对象rs只有两列，第1列是name列，第2列是price列。</p>
+</li>
+<li><p>ResultSet结果集一次只能看到一个数据行，使用next()方法可走到下一数据行。获得一行数据后，ResultSet结果集可以使用getXxx（int columnIndex）或getXxx（String columnName）方法获得字段值（列值）</p>
+</li>
+<li><p>无论列（字段）是何种属性，总可以使用getString(int columnIndex)或getString(String columnName)方法返回列（字段）值的串表示。</p>
+</li>
+</ul>
+<h2 id="随机查询"><a href="#随机查询" class="headerlink" title="随机查询"></a>随机查询</h2><p>默认的ResultSet结果集使用next()方法顺序地查询记录，但有时候需要在结果集中前后移动、显示结果集指定的一条（一行）记录或随机显示若干条记录等。这时，必须返回一个可滚动的结果集（结果集的游标可以上下移动）。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lasso">   Statement stmt=con.createStatement(int <span class="hljs-keyword">type</span>,int concurrency);<br>   <span class="hljs-keyword">ResultSet</span> re=stmt.executeQuery(SQL语句);<br><span class="hljs-keyword">type</span>：<br>   <span class="hljs-keyword">ResultSet</span>.TYPE_FORWORD_ONLY<br>   <span class="hljs-keyword">ResultSet</span>.TYPE_SCROLL_INSENSITIVE：结果集的游标可以上下移动，当数据库变化时，当前结果集不变。<br><span class="hljs-keyword">ResultSet</span>.TYPE_SCROLL_SENSITIVE：结果集的游标可以上下移动，当数据库变化时，当前结果集同步改变。<br>Concurrency：<br>  <span class="hljs-keyword">ResultSet</span>.CONCUR_READ_ONLY：不能用结果集更新数据库中的表。<br>  <span class="hljs-keyword">ResultSet</span>.CONCUR_UPDATABLE：能用结果集更新数据库中的表。<br></code></pre></td></tr></table></figure>
+<h2 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h2><h3 id="where子语句"><a href="#where子语句" class="headerlink" title="where子语句"></a>where子语句</h3><p>一般格式：  </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> 字段 <span class="hljs-keyword">from</span> 表名 <span class="hljs-keyword">where</span> 条件<br></code></pre></td></tr></table></figure>
+<p>（1）字段值和固定值比较，例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> name,price <span class="hljs-keyword">from</span> bookList <span class="hljs-keyword">where</span> name<span class="hljs-operator">=</span><span class="hljs-string">&#x27;高等数学&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>（2）字段值在某个区间范围，例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> bookList <span class="hljs-keyword">where</span> price<span class="hljs-operator">&gt;</span><span class="hljs-number">28.68</span> <span class="hljs-keyword">and</span> price<span class="hljs-operator">&lt;=</span><span class="hljs-number">87.7</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> bookList <span class="hljs-keyword">where</span> price<span class="hljs-operator">&gt;</span><span class="hljs-number">56</span> <span class="hljs-keyword">and</span> name <span class="hljs-operator">!=</span> <span class="hljs-string">&#x27;月亮湾&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<p>使用某些特殊的日期函数，如year,month,day：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> bookList <span class="hljs-keyword">where</span> <span class="hljs-keyword">year</span>(publishDay)<span class="hljs-operator">&lt;</span><span class="hljs-number">1980</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> bookList <span class="hljs-keyword">where</span> <span class="hljs-keyword">year</span>(publishDay) <span class="hljs-keyword">between</span> <span class="hljs-number">2015</span> <span class="hljs-keyword">and</span> <span class="hljs-number">2020</span> <br></code></pre></td></tr></table></figure>
+
+<p>（3）用操作符like进行模式般配，使用%代替0个或多个字符，用一个下划线_代替一个字符。例如查询name含有“程序”二字的记录：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> bookLidt <span class="hljs-keyword">where</span> name <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%程序%&#x27;</span><br></code></pre></td></tr></table></figure>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>用order by子语句对记录排序，</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> 表名 <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> 字段名（列名）<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> 表名 <span class="hljs-keyword">where</span> 条件 <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> 字段名（列名）<br></code></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> bookList <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> price<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> bookList <span class="hljs-keyword">where</span> name <span class="hljs-keyword">like</span> <span class="hljs-string">&#x27;%编程%&#x27;</span> <span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> name<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="更新、添加与删除记录"><a href="#更新、添加与删除记录" class="headerlink" title="更新、添加与删除记录"></a>更新、添加与删除记录</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">executeUpdate</span><span class="hljs-params">(String sqlStatement)</span>;<br></code></pre></td></tr></table></figure>
+<p>通过参数sqlStatement指定的方式实现对数据库表中记录的更新、添加和删除操作</p>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">update</span>  表 <span class="hljs-keyword">set</span> 字段 <span class="hljs-operator">=</span> 新值 <span class="hljs-keyword">where</span> <span class="hljs-operator">&lt;</span>条件子句<span class="hljs-operator">&gt;</span><br></code></pre></td></tr></table></figure>
+<p>例如:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql">sql.executeUpdate<br>(&quot;update bookList set publishDate =&#x27;2019-12-26&#x27; where name=&#x27;大学英语&#x27;&quot;);<br></code></pre></td></tr></table></figure>
+<h2 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> 表(字段列表) <span class="hljs-keyword">values</span> (对应的具体的记录)<br></code></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> 表 <span class="hljs-keyword">values</span> (对应的具体的记录)<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> bookList <span class="hljs-keyword">values</span> (<span class="hljs-string">&#x27;2306084657&#x27;</span>,<span class="hljs-string">&#x27;春天&#x27;</span>, <span class="hljs-number">35.8</span>,<span class="hljs-string">&#x27;2020-3-20&#x27;</span>),<br>                            (<span class="hljs-string">&#x27;5777564629&#x27;</span>,<span class="hljs-string">&#x27;冬日&#x27;</span>, <span class="hljs-number">29.9</span>,<span class="hljs-string">&#x27;2019-12-23&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span>  表名 <span class="hljs-keyword">where</span> <span class="hljs-operator">&lt;</span>条件子句<span class="hljs-operator">&gt;</span><br></code></pre></td></tr></table></figure>
+<p>例如:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">delete</span>  <span class="hljs-keyword">from</span> bookList <span class="hljs-keyword">where</span> ISBN <span class="hljs-operator">=</span> <span class="hljs-string">&#x27;9352914657&#x27;</span><br></code></pre></td></tr></table></figure>
+
+
+<h1 id="用结果集操作数据库中的表"><a href="#用结果集操作数据库中的表" class="headerlink" title="用结果集操作数据库中的表"></a>用结果集操作数据库中的表</h1><h2 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h2><ol>
+<li>游标移动到第n行：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">rs.absolute(n);<br></code></pre></td></tr></table></figure></li>
+<li>结果集rs将第n行的column列的列值更新。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">rs.updateDate(<span class="hljs-type">int</span> column, Date x);<br></code></pre></td></tr></table></figure></li>
+<li>更新数据库中的表。最后，结果集rs调用updateRow()方法用结果集中的第n行更新数据库表中的第n行记录。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">rs.updateRow();<br></code></pre></td></tr></table></figure>
+例如：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">rs.absolute(<span class="hljs-number">3</span>);<br>rs.updateString(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;操作系统&quot;</span>);<br>rs.updateRow();<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="插入记录"><a href="#插入记录" class="headerlink" title="插入记录"></a>插入记录</h2><ol>
+<li>将结果集rs的游标移动到插入行。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">rs.moveToInsertRow();<br></code></pre></td></tr></table></figure></li>
+<li>更新插入行的列值。设置插入行的列值：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">rs.updateString(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;7307014659&quot;</span>);<br>rs.updateString(<span class="hljs-number">2</span>, <span class="hljs-string">&quot;数据结构&quot;</span>);<br>rs.updateFloat(<span class="hljs-number">3</span>,<span class="hljs-number">58</span>);<br>rs.updateDate(<span class="hljs-number">4</span>, <span class="hljs-string">&#x27;2020-08-10&#x27;</span>);<br></code></pre></td></tr></table></figure></li>
+<li>最后，结果集调用insertRow()方法用结果集中的插入行向数据库表中插入一行新记录： <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">rs.insertRow()<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="预处理语句"><a href="#预处理语句" class="headerlink" title="预处理语句"></a>预处理语句</h1><p>Java提供了更高效率的数据库操作机制，就是<code>PreparedStatement对象</code>。</p>
+<h2 id="预处理语句优点"><a href="#预处理语句优点" class="headerlink" title="预处理语句优点"></a>预处理语句优点</h2><p>减轻数据库的负担，也提高了访问数据库的速度。</p>
+<ul>
+<li>步骤</li>
+</ul>
+<ol>
+<li>Connection连接对象con调用prepareStatement(String sql)方法：<br><code>PreparedStatement pre=con.prepareStatement(String sql);</code><br>对参数sql指定的SQL语句进行预编译处理，生成该数据库底层的内部命令，并将该命令封装在PreparedStatement对象pre中。</li>
+<li><ol start="2">
+<li>pre对象调用下列方法都可以使得该底层内部命令被数据库执行：<br><code>ResultSet executeQuery()</code><br><code>boolean execute() （执行成功返回false）</code><br><code>int executeUpdate() (执行成功返回1)</code><br>只要编译好了PreparedStatement对象pre，那么pre可以随时执行上述方法，显然提高了访问数据库的速度。</li>
+</ol>
+</li>
+</ol>
+<h2 id="使用通配符"><a href="#使用通配符" class="headerlink" title="使用通配符"></a>使用通配符</h2><p>在对SQL进行预处理时可以使用通配符?（英文问号）来代替字段的值，只要在预处理语句执行之前再设置通配符所表示的具体值即可。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">pre=con.prepareStatement(<span class="hljs-string">&quot;SELECT * FROM bookList WHERE price &lt; ? &quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>在sql对象执行之前，必须调用相应的方法设置通配符?代表的具体值，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">pre.setFloat(<span class="hljs-number">1</span>,<span class="hljs-number">65</span>);<br></code></pre></td></tr></table></figure>
+<p>指定上述预处理语句pre中通配符?代表的值是65。通配符按照它们在预处理的“SQL语句”中从左至右依次出现的顺序分别被称作第1个、第2个…… 第m个通配符。</p>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><p>事务由一组SQL语句组成。所谓“事务处理”是指应用程序保证事务中的SQL语句要么全部都执行，要么一个都不执行。</p>
+<h2 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h2><p>事务处理是保证数据库中数据完整性与一致性的重要机制。应用程序和数据库建立连接之后，可能使用多条SQL语句操作数据库中的一个表或多个表。一个管理资金转账的应用程序为了完成一个简单的转账业务可能需要两条SQL语句，比如，有户geng给另一个用户zhang转帐50元，那么需要一条SQL语句完成将用户geng的userMoney的值由原来的100更改为50（减去50的操作），另一条SQL语句完成将zhang的用户的userMoney的值由原来的20更新为70（增加50的操作）。应用程序必须保证这两条SQL语句要么全都执行，要么全都不执行。</p>
+<h2 id="事务处理步骤"><a href="#事务处理步骤" class="headerlink" title="事务处理步骤"></a>事务处理步骤</h2><ol>
+<li>用setAutoCommit(booean b)方法关闭自动提交模式<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">con.setAutoCommit(<span class="hljs-literal">false</span>);<br></code></pre></td></tr></table></figure></li>
+<li>用commit()方法处理事务<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">con.commit();<br></code></pre></td></tr></table></figure>
+ Statement对象（PreparedStatement对象）提交多个SQL语句，这些SQL语句就是一个事务。事务中的SQL语句不会立刻生效，直到连接con调用commit()方法。</li>
+<li>用rollback()方法处理事务失败<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">con.rollback();<br></code></pre></td></tr></table></figure>
+连接con调用commit()方法进行事务处理时，只要事务中任何一个SQL语句没有生效，就抛出SQLException异常。在处理SQLException异常时，必须让con调用rollback()方法，其作用是：撤消事务中成功执行过的SQL语句对数据库数据所做的更新、插入或删除操作，即撤消引起数据发生变化的SQL语句操作，将数据库中的数据恢复到commit()方法执行之前的状态。</li>
+</ol>
+<h1 id="分页显示记录"><a href="#分页显示记录" class="headerlink" title="分页显示记录"></a>分页显示记录</h1><ul>
+<li>可以使用二维数组table存放表的记录，即用二维数组table中的行（一维数组table[i]）存放一条记录。</li>
+<li>如果一个表中有许多记录，那么二维数组table就有多行。</li>
+<li>为避免长时间占用数据库的连接，应当将全部记录存放到二维数组中，然后关闭数据库连接。</li>
+<li>假设table存放了m行记录，准备每页显示n行，那么，总页数的计算公式是：<ul>
+<li>如果m除以n的余数大于0，总页数等于m除以n的商加1；</li>
+<li>如果m除以n的余数等于0，总页数等于m除以n的商。<br>  即<br>  总页数&#x3D;(m%n)&#x3D;&#x3D;0?(m&#x2F;n):(m&#x2F;n+1);</li>
+</ul>
+</li>
+<li>如果准备显示第p页的内容，应当从table第**(p-1)*n**行开始，连续输出n行（最后一页可能不足n行）。</li>
+</ul>
+<h1 id="连接sql-server与access数据库"><a href="#连接sql-server与access数据库" class="headerlink" title="连接sql server与access数据库"></a>连接sql server与access数据库</h1><h2 id="连接microsoft-sql-server数据库"><a href="#连接microsoft-sql-server数据库" class="headerlink" title="连接microsoft sql server数据库"></a>连接microsoft sql server数据库</h2><ol>
+<li>登录<a target="_blank" rel="noopener" href="http://www.micsosoft.com下载microsoft/">www.micsosoft.com下载Microsoft</a> JDBC Driver 6.0 for SQL Server，即下载sqljdbc_6.0.8112.200_chs.tar.gz。在解压目录的sqljdbc_6.0\chs\jre8子目录中可以找到JDBC-SQLServer连接器：<code>sqljdbc42.jar</code></li>
+</ol>
+<p>将SQLServer 数据库的JDBC-SQLServer数据库连接器sqljdbc42.jar保存到Tomcat安装目录下的lib文件夹中（例如D:\apache-tomcat-9.0.26\lib），并重新启动Tomcat服务器。<br>应用程序加载JDBC-SQLServer数据库连接器的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;  Class.forName(<span class="hljs-string">&quot;com.microsoft.sqlserver.jdbc.SQLServerDriver&quot;</span>);<br>&#125;<br><span class="hljs-keyword">catch</span>(Exception e)&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ol start="2">
+<li>建立连接<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span>&#123;<br>     String url= <br><span class="hljs-string">&quot;jdbc:sqlserver://192.168.100.1:1433;DatabaseName=warehouse&quot;</span>;<br>      String user=<span class="hljs-string">&quot;sa&quot;</span>;<br>      String password=<span class="hljs-string">&quot;dog123456&quot;</span>;<br>      con=DriverManager.getConnection(url,user,password);<br>   &#125;<br><span class="hljs-keyword">catch</span>(SQLException e)&#123;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="连接microsoft-access数据库"><a href="#连接microsoft-access数据库" class="headerlink" title="连接microsoft access数据库"></a>连接microsoft access数据库</h2><ol>
+<li>登录：<br><code>http://www.hxtt.com/access.zip</code><br>下载JDBC-Access连接器。解压下载得access.zip，在解压目录下\lib子目录中的Access_JDBC30.jar就是JDBC-Access连接器，将Access_JDBC30.jar保存到Tomcat安装目录下的lib文件夹中，并重新启动Tomcat服务器。<br>加载Access数据库连接器程序的代码是：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Class.forName(<span class="hljs-string">&quot;com.hxtt.sql.access.AccessDriver&quot;</span>);<br></code></pre></td></tr></table></figure></li>
+<li>建立连接<br>将bookDatabase.accdb数据库保存在启动Tomcat服务器的当前目录下，即Tomcat安装目录的bin中。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">path</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;./bookDatabase.accdb&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">loginName</span> <span class="hljs-operator">=</span><span class="hljs-string">&quot;&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">password</span> <span class="hljs-operator">=</span><span class="hljs-string">&quot;&quot;</span>;<br>con = <br>DriverManager.getConnection(<span class="hljs-string">&quot;jdbc:Access://&quot;</span>+path,loginName,password); <br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="使用连接池"><a href="#使用连接池" class="headerlink" title="使用连接池"></a>使用连接池</h1><h2 id="连接池简介"><a href="#连接池简介" class="headerlink" title="连接池简介"></a>连接池简介</h2><p>连接池的思想是，</p>
+<ul>
+<li>由一个管理者，比如Tomcat服务器，事先建立好若干个连接放在一起（存放在一个实现DataSource接口的对象中），称作一个连接池。</li>
+<li>当Web应用程序需要连接数据库时，只需到连接池中获得一个Connection对象即可。</li>
+<li>当Web应用程序不再需要Connection对象时，就让Connection对象调用close()方法，这样就可以把这个Connection对象再返回到连接池中，以便其他Web应用程序使用这个Connection对象。</li>
+<li>需要注意的是，Tomcat服务器提供的连接池中的Connection对象调用close()方法不会关闭和数据库的TCP连接，其作用仅仅是把Connection对象返回到连接池（这一点和Web应用程序自己创建的Connection对象不同，其原理不必深究）。</li>
+<li>简单地说，连接池可以让Web应用程序方便地使用Connection对象（用完务必放回），再用再取，节省了创建Connection的时间，提高了Web应用程序访问数据库的效率。。</li>
+</ul>
+<h2 id="建立连接池"><a href="#建立连接池" class="headerlink" title="建立连接池"></a>建立连接池</h2><h3 id="连接池配置文件"><a href="#连接池配置文件" class="headerlink" title="连接池配置文件"></a>连接池配置文件</h3><p><code>context.xml</code></p>
+<ul>
+<li>name：设置连接池的名字（命名一个喜欢的名字即可），例如gxy，该名字是连接池的id，context.xml文件中，如果有多个Resource标记（一个Resource标记对应一个连接池），必须保证这些Resource标记中的name互不相同，即context.xml文件可以给出多个不同连接池的配置信息。</li>
+<li>type： 设置连接池的类型，这里必须是javax.sql.DataSource</li>
+<li>driverClassName：设置数据库连接器，即数据库驱动的类。</li>
+<li>url：设置连接数据库的URL，注意url要小写。需要注意的是对于url中的 &amp;字符要写成“&amp;”，这是XML文件对特殊字符的一个特殊规定。 </li>
+<li>username：给出可以访问数据库的用户名，例如root。</li>
+<li>password ：给出访问数据库的密码，比如，root用户的默认密码是无密码。</li>
+<li>maxActive：设置连接池的大小，即连接池中处于活动状态Connection对象的数目。</li>
+<li>maxIdle ：设置连接池中可处于空闲状态的Connection对象的最大数目。</li>
+<li>maxWait ：设置连接池中没有空闲状态Connection对象可用时，用户请求获得连接池中Connection对象需要等待的最长时间（单位是毫秒）。</li>
+</ul>
+<h3 id="使用连接池-1"><a href="#使用连接池-1" class="headerlink" title="使用连接池"></a>使用连接池</h3><p>步骤如下：</p>
+<ol>
+<li>Context接口<br>首先创建一个实现Context（上下文）接口的对象：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Context</span>  <span class="hljs-variable">context</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">InitialContext</span>(); <br></code></pre></td></tr></table></figure>
+然后让context去寻找Tomcat服务器曾绑定在运行环境中的另一个Context对象：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Context</span>  <span class="hljs-variable">contextNeeded</span> <span class="hljs-operator">=</span> (Context)context.lookup(<span class="hljs-string">&quot;java:comp/env&quot;</span>);<br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>其中的java:comp&#x2F;env是Tomcat服务器绑定这个Context对象时使用的资源标志符（不可以写错）。</li>
+</ul>
+<ol start="2">
+<li>得到连接池<br> 连接池绑定在Context对象contextNeeded中。绑定用的资源标志符是连接池配置文件context.xml中name给的值，比如gxy。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">DataSource</span>  <span class="hljs-variable">ds</span> <span class="hljs-operator">=</span> (DataSource)contextNeeded.lookup(<span class="hljs-string">&quot;gxy&quot;</span>);<br></code></pre></td></tr></table></figure></li>
+<li>从连接池中获得连接<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Connection</span> <span class="hljs-variable">con</span>  <span class="hljs-operator">=</span> ds.getConnnection();<br></code></pre></td></tr></table></figure>
+（4）将连接返回连接池<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">con.close();<br></code></pre></td></tr></table></figure></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/JSP/" class="category-chain-item">JSP</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/JSP/%E7%AC%AC%E5%85%AB%E7%AB%A0/" class="category-chain-item">第八章</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>JSP中使用数据库</div>
+      <div>https://cjzk236.github.io/2023/06/04/jsp-8/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Cjzk</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年6月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/02/jsp-7/" title="MVC模式">
+                        <span class="hidden-mobile">MVC模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

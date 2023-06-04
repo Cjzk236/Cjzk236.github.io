@@ -16,15 +16,15 @@
   <meta name="author" content="Cjzk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。 servlet的部署、创建与运行源文件及字节码文件servlet类写一个创建servlet的类就是编写一个特殊类的子类，这个特殊的类">
+    <meta name="description" content="目录  servlet的部署、创建与运行 源文件及字节码文件 servlet类 字节码文件的保存   编写部署文件web.xml servlet的创建与运行 向servlet传递参数的值   servlet的工作原理 servlet 对象的生命周期 init方法 service方法 destory方法   通过jsp页面访问servlet 通过表单向servlet提交数据 通过超链接访问servl">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java Servlet 基础">
 <meta property="og:url" content="https://cjzk236.github.io/2023/05/27/jsp-6/index.html">
 <meta property="og:site_name" content="此间之客">
-<meta property="og:description" content="有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。 servlet的部署、创建与运行源文件及字节码文件servlet类写一个创建servlet的类就是编写一个特殊类的子类，这个特殊的类">
+<meta property="og:description" content="目录  servlet的部署、创建与运行 源文件及字节码文件 servlet类 字节码文件的保存   编写部署文件web.xml servlet的创建与运行 向servlet传递参数的值   servlet的工作原理 servlet 对象的生命周期 init方法 service方法 destory方法   通过jsp页面访问servlet 通过表单向servlet提交数据 通过超链接访问servl">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-27T14:54:04.000Z">
-<meta property="article:modified_time" content="2023-06-02T03:10:15.511Z">
+<meta property="article:modified_time" content="2023-06-04T15:30:57.752Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7k 字
+          7.2k 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          59 分钟
+          61 分钟
         
       </span>
     
@@ -287,7 +287,42 @@
             
               <div class="markdown-body">
                 
-                <p>有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。</p>
+                <p><font size=6><strong>目录</strong></font></p>
+<ul>
+<li><a href="#servlet%E7%9A%84%E9%83%A8%E7%BD%B2%E5%88%9B%E5%BB%BA%E4%B8%8E%E8%BF%90%E8%A1%8C">servlet的部署、创建与运行</a><ul>
+<li><a href="#%E6%BA%90%E6%96%87%E4%BB%B6%E5%8F%8A%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6">源文件及字节码文件</a><ul>
+<li><a href="#servlet%E7%B1%BB">servlet类</a></li>
+<li><a href="#%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E7%9A%84%E4%BF%9D%E5%AD%98">字节码文件的保存</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BC%96%E5%86%99%E9%83%A8%E7%BD%B2%E6%96%87%E4%BB%B6webxml">编写部署文件web.xml</a></li>
+<li><a href="#servlet%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E8%BF%90%E8%A1%8C">servlet的创建与运行</a></li>
+<li><a href="#%E5%90%91servlet%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E7%9A%84%E5%80%BC">向servlet传递参数的值</a></li>
+</ul>
+</li>
+<li><a href="#servlet%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86">servlet的工作原理</a><ul>
+<li><a href="#servlet-%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">servlet 对象的生命周期</a></li>
+<li><a href="#init%E6%96%B9%E6%B3%95">init方法</a></li>
+<li><a href="#service%E6%96%B9%E6%B3%95">service方法</a></li>
+<li><a href="#destory%E6%96%B9%E6%B3%95">destory方法</a></li>
+</ul>
+</li>
+<li><a href="#%E9%80%9A%E8%BF%87jsp%E9%A1%B5%E9%9D%A2%E8%AE%BF%E9%97%AEservlet">通过jsp页面访问servlet</a><ul>
+<li><a href="#%E9%80%9A%E8%BF%87%E8%A1%A8%E5%8D%95%E5%90%91servlet%E6%8F%90%E4%BA%A4%E6%95%B0%E6%8D%AE">通过表单向servlet提交数据</a></li>
+<li><a href="#%E9%80%9A%E8%BF%87%E8%B6%85%E9%93%BE%E6%8E%A5%E8%AE%BF%E9%97%AEservlet">通过超链接访问servlet</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F">共享变量</a></li>
+<li><a href="#dopost%E5%92%8Cdoget%E6%96%B9%E6%B3%95">dopost和doget方法</a></li>
+<li><a href="#%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E8%BD%AC%E5%8F%91">重定向与转发</a><ul>
+<li><a href="#sendredirect%E6%96%B9%E6%B3%95">sendRedirect方法</a></li>
+<li><a href="#forward%E6%96%B9%E6%B3%95">forward方法</a></li>
+<li><a href="#%E4%BA%8C%E8%80%85%E7%9A%84%E5%8C%BA%E5%88%AB">二者的区别</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8session">使用session</a></li>
+</ul>
+<p>有些Web应用可能只需要JSP+Javabean就能设计得很好，但是有些Web应用，就可能需要JSP+Javabean+servlet来完成，即需要服务器再创建一些servlet，配合JSP页面来完成整个Web应用程序的工作。关于这一点将在第7章的MVC模式中讲述。</p>
 <h1 id="servlet的部署、创建与运行"><a href="#servlet的部署、创建与运行" class="headerlink" title="servlet的部署、创建与运行"></a>servlet的部署、创建与运行</h1><h2 id="源文件及字节码文件"><a href="#源文件及字节码文件" class="headerlink" title="源文件及字节码文件"></a>源文件及字节码文件</h2><h3 id="servlet类"><a href="#servlet类" class="headerlink" title="servlet类"></a>servlet类</h3><p>写一个创建servlet的类就是编写一个特殊类的子类，这个特殊的类就是javax.servlet.http包中的HttpServlet类。HttpServlet实现了Servlet接口，实现了响应用户的方法（这些方法将在后续内容中讲述）。HttpServlet的子类被习惯地称作一个Servlet类，这样的类创建的对象习惯地被称作一个servlet。</p>
 <h3 id="字节码文件的保存"><a href="#字节码文件的保存" class="headerlink" title="字节码文件的保存"></a>字节码文件的保存</h3><p>字节码文件按着类的包名对应的目录路径保存到Web服务目录中特定子目录中。包名moon.sun对应的目录路径是moon\sun，因此，保存到：<br><code>\ch6\WEB-INF\classes\moon\sun</code><br>可以事先将Java源文件，按照其包名，比如，包名为moon.sun，保存到<br><code>\ch6\WEB-INF\classes\moon\sun</code><br>然后用命令行进入moon\sun的父目录classes（不要进入moon或sun目录）编译：<br><code>classes&gt; javac -cp servlet-api.jar moon\sun\Example6_1.java</code></p>
 <h2 id="编写部署文件web-xml"><a href="#编写部署文件web-xml" class="headerlink" title="编写部署文件web.xml"></a>编写部署文件web.xml</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs web.xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;<br>&lt;web-app&gt;<br>    &lt;servlet&gt;<br>        &lt;servlet-name&gt;hello&lt;/servlet-name&gt;<br>        &lt;servlet-class&gt;moon.sun.Example6_1&lt;/servlet-class&gt;<br>    &lt;/servlet&gt;<br>    &lt;servlet-mapping&gt;<br>        &lt;servlet-name&gt;hello&lt;/servlet-name&gt;<br>        &lt;url-pattern&gt;/lookHello&lt;/url-pattern&gt;<br>    &lt;/servlet-mapping&gt;<br>&lt;/web-app&gt;<br></code></pre></td></tr></table></figure>
