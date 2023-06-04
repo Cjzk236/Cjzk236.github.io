@@ -24,7 +24,7 @@
 <meta property="og:description" content="目录  servlet的部署、创建与运行 源文件及字节码文件 servlet类 字节码文件的保存   编写部署文件web.xml servlet的创建与运行 向servlet传递参数的值   servlet的工作原理 servlet 对象的生命周期 init方法 service方法 destory方法   通过jsp页面访问servlet 通过表单向servlet提交数据 通过超链接访问servl">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-27T14:54:04.000Z">
-<meta property="article:modified_time" content="2023-06-04T15:30:57.752Z">
+<meta property="article:modified_time" content="2023-06-04T16:12:05.704Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -358,9 +358,9 @@
 <h2 id="destory方法"><a href="#destory方法" class="headerlink" title="destory方法"></a>destory方法</h2><p><code>public destroy()</code><br>当Tomcat服务器终止服务时，destroy()方法会被执行，销毁servlet.子类可直接继承这个方法，一般不需要重写。</p>
 <h1 id="通过jsp页面访问servlet"><a href="#通过jsp页面访问servlet" class="headerlink" title="通过jsp页面访问servlet"></a>通过jsp页面访问servlet</h1><p>按着部署文件web.xml给出的servlet的url-pattern，用户除了可以在浏览器输入url-pattern请求运行一个servlet外，也可以通过JSP页面来请求一个servlet。<br>需要特别注意的是，如果web.xml文件中给出的servlet的url-pattern是&#x2F;lookHello，那么JSP页面请求servlet时，必须要写成 lookHello，不可以写成&#x2F;lookHello。</p>
 <h2 id="通过表单向servlet提交数据"><a href="#通过表单向servlet提交数据" class="headerlink" title="通过表单向servlet提交数据"></a>通过表单向servlet提交数据</h2><p>如果web.xml文件中给出的servlet的url-pattern是&#x2F;computeBill，那么form表单中action给出的值就是computeBill ：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>  <span class="hljs-attr">action</span>= <span class="hljs-string">&quot;computeBill &quot;</span>  &gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>  <span class="hljs-attr">action</span>= <span class="hljs-string">&quot;computeBill &quot;</span>  &gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <p>当请求一个servlet时，也可以在请求的url-pattern中额外加入参数及其值，格式是：<br><code>url-pattern?参数1=值&amp;参数2=值…参数n=值</code><br>例如：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>  <span class="hljs-attr">action</span>= <span class="hljs-string">&quot;computeBill?sideA=10.66&amp;sideB=23.9&amp;sideC=897 &quot;</span>  &gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>  <span class="hljs-attr">action</span>= <span class="hljs-string">&quot;computeBill?sideA=10.66&amp;sideB=23.9&amp;sideC=897 &quot;</span>  &gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h2 id="通过超链接访问servlet"><a href="#通过超链接访问servlet" class="headerlink" title="通过超链接访问servlet"></a>通过超链接访问servlet</h2><p>JSP页面可以使用超链接去请求某个servlet。如果web.xml文件中给出的请求servlet的url-pattern是&#x2F;circle，那么超链接标记中href的值是circle（不要写成&#x2F;circle）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs web.xml">&lt;a href=&quot;circle&quot;&gt;&lt;/a&gt;<br></code></pre></td></tr></table></figure>
 
