@@ -16,16 +16,16 @@
   <meta name="author" content="Cjzk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="目录  mvc介绍 JSP中的MVC模式 模型的生命周期与视图更新 request bean bean的创建 视图更新   session bean bean的创建 视图更新   application bean bean的创建 视图更新      mvc介绍模型-视图-控制器（Model-View-Controller），简称为MVC。MVC已经成为软件设计者必须熟练使用的开发模式。本章必须理解">
+    <meta name="description" content="目录  mvc介绍 JSP中的mvc模式 模型的生命周期与视图更新 request bean bean的创建 视图更新   session bean bean的创建 视图更新   application bean bean的创建 视图更新      mvc介绍模型-视图-控制器（Model-View-Controller），简称为MVC。MVC已经成为软件设计者必须熟练使用的开发模式。本章必须理解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MVC模式">
 <meta property="og:url" content="https://cjzk236.github.io/2023/06/02/jsp-7/index.html">
 <meta property="og:site_name" content="此间之客">
-<meta property="og:description" content="目录  mvc介绍 JSP中的MVC模式 模型的生命周期与视图更新 request bean bean的创建 视图更新   session bean bean的创建 视图更新   application bean bean的创建 视图更新      mvc介绍模型-视图-控制器（Model-View-Controller），简称为MVC。MVC已经成为软件设计者必须熟练使用的开发模式。本章必须理解">
+<meta property="og:description" content="目录  mvc介绍 JSP中的mvc模式 模型的生命周期与视图更新 request bean bean的创建 视图更新   session bean bean的创建 视图更新   application bean bean的创建 视图更新      mvc介绍模型-视图-控制器（Model-View-Controller），简称为MVC。MVC已经成为软件设计者必须熟练使用的开发模式。本章必须理解">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cjzk236.github.io/2023/06/02/jsp-7/2023-06-04-23-32-40.png">
 <meta property="article:published_time" content="2023-06-02T04:18:51.000Z">
-<meta property="article:modified_time" content="2023-06-04T15:39:33.077Z">
+<meta property="article:modified_time" content="2023-06-04T16:08:18.242Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cjzk236.github.io/2023/06/02/jsp-7/2023-06-04-23-32-40.png">
@@ -292,7 +292,7 @@
                 <p><font size=6><strong>目录</strong></font></p>
 <ul>
 <li><a href="#mvc%E4%BB%8B%E7%BB%8D">mvc介绍</a></li>
-<li><a href="#jsp%E4%B8%AD%E7%9A%84mvc%E6%A8%A1%E5%BC%8F">JSP中的MVC模式</a></li>
+<li><a href="#jsp%E4%B8%AD%E7%9A%84mvc%E6%A8%A1%E5%BC%8F">JSP中的mvc模式</a></li>
 <li><a href="#%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%8E%E8%A7%86%E5%9B%BE%E6%9B%B4%E6%96%B0">模型的生命周期与视图更新</a><ul>
 <li><a href="#request-bean">request bean</a><ul>
 <li><a href="#bean%E7%9A%84%E5%88%9B%E5%BB%BA">bean的创建</a></li>
@@ -318,7 +318,7 @@
 <li>视图（view） 向控制器提交所需数据、显示模型中的数据。</li>
 <li>控制器（controller） 负责具体的业务逻辑操作，即控制器根据视图提出的要求对数据做出（商业）处理，将有关结果存储到模型中，并负责让模型和视图进行必要的交互，当模型中的数据变化时，让视图更新显示。</li>
 </ul>
-<h1 id="JSP中的MVC模式"><a href="#JSP中的MVC模式" class="headerlink" title="JSP中的MVC模式"></a>JSP中的MVC模式</h1><ul>
+<h1 id="JSP中的mvc模式"><a href="#JSP中的mvc模式" class="headerlink" title="JSP中的mvc模式"></a>JSP中的mvc模式</h1><ul>
 <li><strong>模型（Model） 一个或多个Javabean对象</strong>，用于存储数据。</li>
 <li><strong>视图（View） 一个或多个JSP页面</strong>，其作用是向控制器提交必要的数据和显示数据。JSP页面可以使用HTML标记、Javabean标记以及Java程序片或Java表达式来显示数据。视图的主要工作就是显示数据，对数据的逻辑操作由控制器负责。</li>
 <li><strong>控制器（Controller） 一个或多个servlet对象</strong>，根据视图提交的要求进行数据处理操作，并将有关的结果存储到Javabean中，然后servlet使用转发或重定向的方式请求视图中的某个JSP页面显示数据。比如让某个JSP页面通过使用Javabean标记、Java程序片或Java表达式显示控制器存储在Javabean中的数据。<br><img src="/2023/06/02/jsp-7/2023-06-04-23-32-40.png" srcset="/img/loading.gif" lazyload></li>
