@@ -16,15 +16,15 @@
   <meta name="author" content="Cjzk">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1 JSP页面的基本结构 普通的HTML标记和jsp标记 JSP标记，如指令标记、动作标记 变量和方法的声明 Java 程序片 Java 表达式  2 声明变量和定义方法声明变量格式:&lt;%!变量%&gt;    声明的变量在整个JSP页面内都有效  定于方法格式:&lt;%!方法or类%&gt;    可以在Java程序片中调用该方法或使用该类创造对象  3 Java程序片格式:&lt;%所">
+    <meta name="description" content="目录  jsp页面的基本结构 声明变量和定义方法 声明变量 定于方法   java程序片 Java表达式 jsp中的注释 html注释 jsp注释   jsp指令标记 page指令标记 page指令标记可以指定的属性 contenttype属性 pageencoding 属性 language属性 import 属性 session属性 buffer属性 autoflush属性 isthreads">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSP语法">
 <meta property="og:url" content="https://cjzk236.github.io/2023/04/19/jsp-2/index.html">
 <meta property="og:site_name" content="此间之客">
-<meta property="og:description" content="1 JSP页面的基本结构 普通的HTML标记和jsp标记 JSP标记，如指令标记、动作标记 变量和方法的声明 Java 程序片 Java 表达式  2 声明变量和定义方法声明变量格式:&lt;%!变量%&gt;    声明的变量在整个JSP页面内都有效  定于方法格式:&lt;%!方法or类%&gt;    可以在Java程序片中调用该方法或使用该类创造对象  3 Java程序片格式:&lt;%所">
+<meta property="og:description" content="目录  jsp页面的基本结构 声明变量和定义方法 声明变量 定于方法   java程序片 Java表达式 jsp中的注释 html注释 jsp注释   jsp指令标记 page指令标记 page指令标记可以指定的属性 contenttype属性 pageencoding 属性 language属性 import 属性 session属性 buffer属性 autoflush属性 isthreads">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-19T15:00:11.000Z">
-<meta property="article:modified_time" content="2023-05-26T05:14:49.514Z">
+<meta property="article:modified_time" content="2023-06-06T14:25:15.640Z">
 <meta property="article:author" content="Cjzk">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          2.7k 字
         
       </span>
     
@@ -244,7 +244,7 @@
         
         
         
-          21 分钟
+          23 分钟
         
       </span>
     
@@ -287,14 +287,56 @@
             
               <div class="markdown-body">
                 
-                <h1 id="1-JSP页面的基本结构"><a href="#1-JSP页面的基本结构" class="headerlink" title="1 JSP页面的基本结构"></a>1 JSP页面的基本结构</h1><ul>
+                <p><font size=6><strong>目录</strong></font></p>
+<ul>
+<li><a href="#jsp%E9%A1%B5%E9%9D%A2%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84">jsp页面的基本结构</a></li>
+<li><a href="#%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F%E5%92%8C%E5%AE%9A%E4%B9%89%E6%96%B9%E6%B3%95">声明变量和定义方法</a><ul>
+<li><a href="#%E5%A3%B0%E6%98%8E%E5%8F%98%E9%87%8F">声明变量</a></li>
+<li><a href="#%E5%AE%9A%E4%BA%8E%E6%96%B9%E6%B3%95">定于方法</a></li>
+</ul>
+</li>
+<li><a href="#java%E7%A8%8B%E5%BA%8F%E7%89%87">java程序片</a></li>
+<li><a href="#java%E8%A1%A8%E8%BE%BE%E5%BC%8F">Java表达式</a></li>
+<li><a href="#jsp%E4%B8%AD%E7%9A%84%E6%B3%A8%E9%87%8A">jsp中的注释</a><ul>
+<li><a href="#html%E6%B3%A8%E9%87%8A">html注释</a></li>
+<li><a href="#jsp%E6%B3%A8%E9%87%8A">jsp注释</a></li>
+</ul>
+</li>
+<li><a href="#jsp%E6%8C%87%E4%BB%A4%E6%A0%87%E8%AE%B0">jsp指令标记</a><ul>
+<li><a href="#page%E6%8C%87%E4%BB%A4%E6%A0%87%E8%AE%B0">page指令标记</a><ul>
+<li><a href="#page%E6%8C%87%E4%BB%A4%E6%A0%87%E8%AE%B0%E5%8F%AF%E4%BB%A5%E6%8C%87%E5%AE%9A%E7%9A%84%E5%B1%9E%E6%80%A7">page指令标记可以指定的属性</a><ul>
+<li><a href="#contenttype%E5%B1%9E%E6%80%A7">contenttype属性</a></li>
+<li><a href="#pageencoding-%E5%B1%9E%E6%80%A7">pageencoding 属性</a></li>
+<li><a href="#language%E5%B1%9E%E6%80%A7">language属性</a></li>
+<li><a href="#import-%E5%B1%9E%E6%80%A7">import 属性</a></li>
+<li><a href="#session%E5%B1%9E%E6%80%A7">session属性</a></li>
+<li><a href="#buffer%E5%B1%9E%E6%80%A7">buffer属性</a></li>
+<li><a href="#autoflush%E5%B1%9E%E6%80%A7">autoflush属性</a></li>
+<li><a href="#isthreadsafe%E5%B1%9E%E6%80%A7">isthreadsafe属性</a></li>
+<li><a href="#info-%E5%B1%9E%E6%80%A7">info 属性</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#include%E6%8C%87%E4%BB%A4%E6%A0%87%E8%AE%B0">include指令标记</a></li>
+</ul>
+</li>
+<li><a href="#7-jsp%E5%8A%A8%E4%BD%9C%E6%A0%87%E8%AE%B0">7 jsp动作标记</a><ul>
+<li><a href="#include%E5%8A%A8%E4%BD%9C%E6%A0%87%E8%AE%B0">include动作标记</a></li>
+<li><a href="#param%E5%8A%A8%E4%BD%9C%E6%A0%87%E8%AE%B0">param动作标记</a></li>
+<li><a href="#forward-%E5%8A%A8%E4%BD%9C%E6%A0%87%E8%AE%B0">forward 动作标记</a></li>
+<li><a href="#usebean%E5%8A%A8%E4%BD%9C%E6%A0%87%E8%AE%B0">usebean动作标记</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="jsp页面的基本结构"><a href="#jsp页面的基本结构" class="headerlink" title="jsp页面的基本结构"></a>jsp页面的基本结构</h1><ul>
 <li>普通的HTML标记和jsp标记</li>
 <li>JSP标记，如指令标记、动作标记</li>
 <li>变量和方法的声明</li>
 <li>Java 程序片</li>
 <li>Java 表达式</li>
 </ul>
-<h1 id="2-声明变量和定义方法"><a href="#2-声明变量和定义方法" class="headerlink" title="2 声明变量和定义方法"></a>2 声明变量和定义方法</h1><h2 id="声明变量"><a href="#声明变量" class="headerlink" title="声明变量"></a>声明变量</h2><p>格式:<code>&lt;%!变量%&gt;</code>  </p>
+<h1 id="声明变量和定义方法"><a href="#声明变量和定义方法" class="headerlink" title="声明变量和定义方法"></a>声明变量和定义方法</h1><h2 id="声明变量"><a href="#声明变量" class="headerlink" title="声明变量"></a>声明变量</h2><p>格式:<code>&lt;%!变量%&gt;</code>  </p>
 <ul>
 <li>声明的变量在整个JSP页面内都有效</li>
 </ul>
@@ -302,32 +344,32 @@
 <ul>
 <li>可以在Java程序片中调用该方法或使用该类创造对象</li>
 </ul>
-<h1 id="3-Java程序片"><a href="#3-Java程序片" class="headerlink" title="3 Java程序片"></a>3 Java程序片</h1><p>格式:<code>&lt;%所插入的java程序片%&gt;</code></p>
+<h1 id="java程序片"><a href="#java程序片" class="headerlink" title="java程序片"></a>java程序片</h1><p>格式:<code>&lt;%所插入的java程序片%&gt;</code></p>
 <ul>
 <li>在程序片中声明的变量称作JSP页面的局部变量。局部变量的有效范围与其声明的位置有关，即局部变量在JSP页面后继的所有程序片以及表达式部分内都有效。</li>
 </ul>
-<h1 id="4-Java表达式"><a href="#4-Java表达式" class="headerlink" title="4 Java表达式"></a>4 Java表达式</h1><p>格式:<code>&lt;%=可求值得表达式%&gt;</code></p>
+<h1 id="Java表达式"><a href="#Java表达式" class="headerlink" title="Java表达式"></a>Java表达式</h1><p>格式:<code>&lt;%=可求值得表达式%&gt;</code></p>
 <ul>
 <li>注意:<code>&lt;%</code>和<code>=</code>之间不能有空格</li>
 </ul>
-<h1 id="5-JSP中的注释"><a href="#5-JSP中的注释" class="headerlink" title="5 JSP中的注释"></a>5 JSP中的注释</h1><h2 id="HTML注释"><a href="#HTML注释" class="headerlink" title="HTML注释"></a>HTML注释</h2><p>格式:<code>&lt;!--注释内容--&gt;</code></p>
+<h1 id="jsp中的注释"><a href="#jsp中的注释" class="headerlink" title="jsp中的注释"></a>jsp中的注释</h1><h2 id="html注释"><a href="#html注释" class="headerlink" title="html注释"></a>html注释</h2><p>格式:<code>&lt;!--注释内容--&gt;</code></p>
 <ul>
 <li>JSP会把HTML注释交给用户,因此用户可在查看页面源码时看到HTML注释</li>
 </ul>
-<h2 id="JSP注释"><a href="#JSP注释" class="headerlink" title="JSP注释"></a>JSP注释</h2><p>格式:<code>&lt;% --注释内容--%&gt;</code></p>
+<h2 id="jsp注释"><a href="#jsp注释" class="headerlink" title="jsp注释"></a>jsp注释</h2><p>格式:<code>&lt;% --注释内容--%&gt;</code></p>
 <ul>
 <li>在编译JSP页面时会忽略JSP注释</li>
 </ul>
-<h1 id="6-JSP指令标记"><a href="#6-JSP指令标记" class="headerlink" title="6 JSP指令标记"></a>6 JSP指令标记</h1><h2 id="page指令标记"><a href="#page指令标记" class="headerlink" title="page指令标记"></a>page指令标记</h2><p>page 指令用来定义整个JSP页面的一些属性和这些属性的值。<br>可以使用多个page指令分别为每个属性指定值:  </p>
+<h1 id="jsp指令标记"><a href="#jsp指令标记" class="headerlink" title="jsp指令标记"></a>jsp指令标记</h1><h2 id="page指令标记"><a href="#page指令标记" class="headerlink" title="page指令标记"></a>page指令标记</h2><p>page 指令用来定义整个JSP页面的一些属性和这些属性的值。<br>可以使用多个page指令分别为每个属性指定值:  </p>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page   属性<span class="hljs-number">1</span>=<span class="hljs-string">&quot;属性1的值&quot;</span>  %&gt;<br>&lt;%@ page   属性<span class="hljs-number">2</span>=<span class="hljs-string">&quot;属性2的值&quot;</span>  %&gt;<br>… …<br>&lt;%@ page   属性n=<span class="hljs-string">&quot;属性n的值&quot;</span>  %&gt;<br></code></pre></td></tr></table></figure>
 <p>也可以用一个page指令指定多个属性的值:</p>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page 属性<span class="hljs-number">1</span>=<span class="hljs-string">&quot;属性1的值&quot;</span> 属性<span class="hljs-number">2</span>=<span class="hljs-string">&quot;属性2的值&quot;</span> ...%&gt;<br></code></pre></td></tr></table></figure>
-<h3 id="page指令标记可以指定的属性"><a href="#page指令标记可以指定的属性" class="headerlink" title="page指令标记可以指定的属性"></a>page指令标记可以指定的属性</h3><h4 id="contentType属性"><a href="#contentType属性" class="headerlink" title="contentType属性"></a>contentType属性</h4><p>contentType属性值确定JSP页面响应的MIME类型。属性值的一般形式是： “MIME类型”<br>例如:</p>
+<h3 id="page指令标记可以指定的属性"><a href="#page指令标记可以指定的属性" class="headerlink" title="page指令标记可以指定的属性"></a>page指令标记可以指定的属性</h3><h4 id="contenttype属性"><a href="#contenttype属性" class="headerlink" title="contenttype属性"></a>contenttype属性</h4><p>contentType属性值确定JSP页面响应的MIME类型。属性值的一般形式是： “MIME类型”<br>例如:</p>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page contentType=<span class="hljs-string">&quot;text/html &quot;</span> %&gt;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>page指令只能为contentType指定一个值，不允许两次使用page指令给contentType属性指定不同的属性值。</li>
 </ul>
-<h4 id="pageEncoding-属性"><a href="#pageEncoding-属性" class="headerlink" title="pageEncoding 属性"></a>pageEncoding 属性</h4><p>用于保存JSP页面编码<br>例如:</p>
+<h4 id="pageencoding-属性"><a href="#pageencoding-属性" class="headerlink" title="pageencoding 属性"></a>pageencoding 属性</h4><p>用于保存JSP页面编码<br>例如:</p>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ <span class="hljs-type">page</span> <span class="hljs-variable">pageEncoding</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;utf-8&quot;</span> %&gt;    <br></code></pre></td></tr></table></figure>
 <ul>
 <li>只能为pageEncoding指定一个值，不允许两次使用page指令给pageEncoding属性指定不同的或相同的属性值。</li>
@@ -343,11 +385,11 @@
 <ul>
 <li>默认时8kb<br>例如:<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;%@ page buffer= <span class="hljs-string">&quot;24kb&quot;</span> %&gt;<br></code></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="autoFlush属性"><a href="#autoFlush属性" class="headerlink" title="autoFlush属性"></a>autoFlush属性</h4><p>autoFlush属性指定out的缓冲区被填满时，缓冲区是否会自动刷新。</p>
+<h4 id="autoflush属性"><a href="#autoflush属性" class="headerlink" title="autoflush属性"></a>autoflush属性</h4><p>autoFlush属性指定out的缓冲区被填满时，缓冲区是否会自动刷新。</p>
 <ul>
 <li>默认是true</li>
 </ul>
-<h4 id="isThreadSafe属性"><a href="#isThreadSafe属性" class="headerlink" title="isThreadSafe属性"></a>isThreadSafe属性</h4><p>isThreadSafe属性用来设置访问JSP页面是否是线程安全的</p>
+<h4 id="isthreadsafe属性"><a href="#isthreadsafe属性" class="headerlink" title="isthreadsafe属性"></a>isthreadsafe属性</h4><p>isThreadSafe属性用来设置访问JSP页面是否是线程安全的</p>
 <ul>
 <li>默认是true 指CPU的使用权在各个线程间快速切换</li>
 <li>可设置为false 指该JSP页面同一时刻只能响应一个用户的请求，其他用户须排队等待</li>
@@ -357,7 +399,7 @@
 <p>可以在jsp页面中使用方法：<code>getServletInfo();</code>来获取info属性的属性值  </p>
 <h2 id="include指令标记"><a href="#include指令标记" class="headerlink" title="include指令标记"></a>include指令标记</h2><p>include可以在JSP页面内某处静态整体嵌入一个文件,该文件的编码必须和当前JSP页面一致</p>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;% @ <span class="hljs-type">include</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span><span class="hljs-string">&quot;文件的URL&quot;</span>%&gt;<br></code></pre></td></tr></table></figure>
-<h1 id="7-JSP动作标记"><a href="#7-JSP动作标记" class="headerlink" title="7 JSP动作标记"></a>7 JSP动作标记</h1><p>动作标记时一种特殊的标记，它影响JSP运行时的功能。</p>
+<h1 id="7-jsp动作标记"><a href="#7-jsp动作标记" class="headerlink" title="7 jsp动作标记"></a>7 jsp动作标记</h1><p>动作标记时一种特殊的标记，它影响JSP运行时的功能。</p>
 <h2 id="include动作标记"><a href="#include动作标记" class="headerlink" title="include动作标记"></a>include动作标记</h2><p>格式:</p>
 <figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jsp">&lt;jsp:include page= <span class="hljs-string">&quot;文件的URL&quot;</span> /&gt;<br></code></pre></td></tr></table></figure>
 <p>或者</p>
@@ -373,7 +415,7 @@
 <ul>
 <li>浏览器地址栏中显示的仍然是转向前的JSP页面的URL地址</li>
 </ul>
-<h2 id="useBean动作标记"><a href="#useBean动作标记" class="headerlink" title="useBean动作标记"></a>useBean动作标记</h2><p>useBean标记时用来创建并使用一个JavaBean，见后续章节</p>
+<h2 id="usebean动作标记"><a href="#usebean动作标记" class="headerlink" title="usebean动作标记"></a>usebean动作标记</h2><p>useBean标记时用来创建并使用一个JavaBean，见后续章节</p>
 
                 
               </div>
